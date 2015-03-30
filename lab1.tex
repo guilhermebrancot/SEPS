@@ -15,6 +15,9 @@
 \usepackage{array}
 \usepackage{fixltx2e}
 
+
+%lslist pra por codigo no latex?
+
 \linespread{1.3}
 \usepackage{indentfirst}
 \usepackage[top=2cm, bottom=2cm, right=2.5cm, left=2.5cm]{geometry}
@@ -76,7 +79,7 @@
 \subsubsection{sine8}
 O objectivo deste projeto é representar a função sinusoidal, multiplicada por um determinado ganho, através de um conjunto de amostras que equivalem a um período da mesma, repetindo nos períodos seguintes esse mesmo conjunto. Este procedimento é realizado através da rotina de interrupção presente no programa. 
 
-Ao analisar o código deste projeto à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho G=10 predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
+Ao analisar o código deste projeto à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
 Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as amostras da sinusoide. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho G=33 obtemos um valor superior ao permitido pelo formato Q15, fazendo com que nesses pontos o valor da sinusoide "caia".     
 
@@ -91,9 +94,41 @@ Resultados do loop??
 
 \subsubsection{P1. Oscilador controlado numericamente}
 
-
+%fazer espectros e comparar!!!
 
 \subsubsection{P2. Transmissor BPSK}
+
+%Introdução Teórica
+O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
+Neste projeto foi utilizada uma frequência de amostragem $fs=16kHz$ e uma frequência portadora $f_0=4kHz$.
+%COMPLEMENTAR com alguma teoria
+
+%Pergunta 1
+Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock", cuja função vai ser criar uma sequência de bits $ b_n $ que a cada 16 ciclos gera um novo bit alternado, usando um contador com $fs/16$ para determinar quando gerar um novo bit. Para alternar o bit basta negar o bit anteriormente obtido, o que foi concretizado através de uma simples XOR:
+\begin{equation}
+b_n=b_{n-1} \oplus 1
+\end{equation}
+Após obter a fonte de bits passa-se ao segundo elemento do transmissor, o codificador diferencial e mapeador. Começando pelo codificador diferencial, este utiliza bn para aplicar a seguinte operação lógica:
+\begin{equation}
+c_n=c_{n-1} \oplus b_n
+\end{equation}
+Assim, com $c_0$ inicializado a zero codifica-se a sequência de bits $ b_n $. Ao gerar $ b_n $ e $ c_n $ obtém-se dois sinais que variam entre "0" e "1" só que $ c_n $ tem o dobro do período (figura X).
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./bn_cn}~\\
+	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
+\end{figure}
+
+\vspace{-0.4cm}
+Depois de obter $ c_n $ passa-se ao mapeamento do mesmo,
+%explicar f=500Hz
+%complementar com o que?
+
+%Pergunta 2
+
+%Pergunta 3
+
+%Explicar FFT!!!
 
 \section{Conclusão}
 -Principais resultados e conclusoes sobre eles, erros a corrigir (se houverem), o que melhorar
