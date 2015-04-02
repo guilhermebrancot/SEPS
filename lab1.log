@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.17)  2 APR 2015 06:04
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.17)  2 APR 2015 06:45
 entering extended mode
 **C:/Users/QQ/Desktop/SEPS/lab1.tex
 (C:/Users/QQ/Desktop/SEPS/lab1.tex
@@ -874,7 +874,7 @@ Here is how much of TeX's memory you used:
  17491 multiletter control sequences out of 15000+200000
  18160 words of font info for 44 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 63i,11n,75p,654b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,11n,75p,743b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTe
@@ -892,7 +892,7 @@ blic/cm-super/sfcc2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
 uper/sfrm0800.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm
 0900.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on lab1.pdf (4 pages, 1919020 bytes).
+Output written on lab1.pdf (4 pages, 1919305 bytes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
