@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  3 APR 2015 22:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  3 APR 2015 23:50
 entering extended mode
 **lab1.tex
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.tex
+(C:\Users\Joao\Documents\Tecnico\SEPS\commits\lab1.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -809,19 +809,19 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks41
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+(C:\Users\Joao\Documents\Tecnico\SEPS\commits\lab1.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -882,70 +882,73 @@ Package caption Info: End \AtBeginDocument code.
 <./logo.png, id=4, 499.8675pt x 193.4427pt>
 File: ./logo.png Graphic file (type png)
  <use ./logo.png>
-Package pdftex.def Info: ./logo.png used on input line 33.
+Package pdftex.def Info: ./logo.png used on input line 32.
 (pdftex.def)             Requested size: 141.61081pt x 54.80115pt.
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Joao/Documents/G
-itHub/SEPS/logo.png>] [1] [2] <./P1_2kHz.jpg, id=35, 3276.24pt x 2457.18pt>
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Joao/Documents/T
+ecnico/SEPS/commits/logo.png>] [1] [2] <./P1_2kHz.jpg, id=35, 3276.24pt x 2457.
+18pt>
 File: ./P1_2kHz.jpg Graphic file (type jpg)
 
 <use ./P1_2kHz.jpg>
-Package pdftex.def Info: ./P1_2kHz.jpg used on input line 164.
+Package pdftex.def Info: ./P1_2kHz.jpg used on input line 163.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
  <./P1_4kHz.jpg, id=36, 3276.24pt x 2457.18pt>
 File: ./P1_4kHz.jpg Graphic file (type jpg)
 
 <use ./P1_4kHz.jpg>
-Package pdftex.def Info: ./P1_4kHz.jpg used on input line 171.
+Package pdftex.def Info: ./P1_4kHz.jpg used on input line 170.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
- [3 <C:/Users/Joao/Documents/GitHub/SEPS/P1_2kHz.jpg>]
-<./P1_1seno.jpg, id=43, 3276.24pt x 2457.18pt>
+ [3 <C:/Users/Joao/Documents/Tecnico/SEPS/commits/P1_2kHz.jpg>] <./P1_1seno.jpg
+, id=43, 3276.24pt x 2457.18pt>
 File: ./P1_1seno.jpg Graphic file (type jpg)
  <use ./P1_1seno.jpg>
-Package pdftex.def Info: ./P1_1seno.jpg used on input line 202.
+Package pdftex.def Info: ./P1_1seno.jpg used on input line 201.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
- [4 <C:/Users/Joao/Documents/GitHub/SEPS/P1_4kHz.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 221.
+
+[4 <C:/Users/Joao/Documents/Tecnico/SEPS/commits/P1_4kHz.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 220.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 221.
- [5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 220.
+ [5 <C:/Users/Joao/Documents/Tecnico/SEPS/commits/P1_1seno.jpg>]
 
-Package caption Warning: \label without proper \caption on input line 284.
+Package caption Warning: \label without proper \caption on input line 283.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:interp' on page 6 undefined on input line 279.
+LaTeX Warning: Reference `fig:interp' on page 6 undefined on input line 278.
 
 <./P1_interp.jpg, id=50, 3276.24pt x 2457.18pt>
 File: ./P1_interp.jpg Graphic file (type jpg)
  <use ./P1_interp.jpg>
-Package pdftex.def Info: ./P1_interp.jpg used on input line 285.
+Package pdftex.def Info: ./P1_interp.jpg used on input line 284.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
  [6]
 <./bn_cn.jpg, id=55, 2527.4425pt x 1882.03125pt>
 File: ./bn_cn.jpg Graphic file (type jpg)
  <use ./bn_cn.jpg>
-Package pdftex.def Info: ./bn_cn.jpg used on input line 313.
+Package pdftex.def Info: ./bn_cn.jpg used on input line 312.
 (pdftex.def)             Requested size: 236.01561pt x 175.72206pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg>] [8 <C:/Users/Joao/Docum
-ents/GitHub/SEPS/bn_cn.jpg>] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
+[7 <C:/Users/Joao/Documents/Tecnico/SEPS/commits/P1_interp.jpg>] [8 <C:/Users/J
+oao/Documents/Tecnico/SEPS/commits/bn_cn.jpg>]
+(C:\Users\Joao\Documents\Tecnico\SEPS\commits\lab1.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
  16338 strings out of 493921
- 302128 string characters out of 3144879
+ 302191 string characters out of 3144879
  349751 words of memory out of 3000000
  19315 multiletter control sequences out of 15000+200000
  20301 words of font info for 47 fonts, out of 3000000 for 9000
@@ -975,9 +978,9 @@ lic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 fonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmsy8.pfb>
-Output written on lab1.pdf (9 pages, 13312294 bytes).
+Output written on lab1.pdf (9 pages, 13314218 bytes).
 PDF statistics:
- 453 PDF objects out of 1000 (max. 8388607)
+ 455 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
