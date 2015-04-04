@@ -311,12 +311,16 @@ Para calcular o novo bit, basta negar o bit anteriormente obtido para obter uma 
 \begin{equation}
 b_n=b_{n-1} \oplus 1
 \end{equation}
-
-Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este utiliza $b_n$ para aplicar a seguinte operação lógica:
+Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(ver figura com bn). Esta frequência ocorre devido a dividir-se  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
+\vfill
+Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
+A codificação de $b_n$ resulta também de uma operação lógica XOR, como se pode observar: 
 \begin{equation}
-c_n=c_{n-1} \oplus b_n
+c_n=c_{n-1} \oplus b_n \hspace{3 mm} ,c_0=0
 \end{equation}
-Assim, com $c_0$ inicializado a zero codifica-se a sequência de bits $ b_n $. Ao gerar $ b_n $ e $ c_n $ obtém-se dois sinais que variam entre "0" e "1" só que $ c_n $ tem o dobro do período (figura X).
+Como um bit novo só quando o contador chega ao valor $16$, o mesmo também só é codificado nessa condição, ou seja, a cada 16 ciclos é codificado um bit. 
+
+Tal como em $ b_n $ também $ c_n $ é representado por uma onda quadrada que varia entre "0" e "1" só que com o dobro do período, devido a só ter dois resultados para os quatro casos possíveis da XOR que realiza a codificação(figura X).
 
 IMAGEM bn com cn
 \vfill
@@ -327,11 +331,22 @@ IMAGEM bn com cn
 %\end{figure}
 
 %\vspace{-0.4cm} %este espaçamento dá cabo da formatação toda no meu tex.
-Depois de obter $ c_n $ passa-se ao mapeamento do mesmo,
-%explicar f=500Hz => uma vez que uma sequencia alternada de bits é o mesmo que uma onda quadrada, divide-se o bit rate 1kbps por dois pois cada meio ciclo da onda quadrada corresponde a um bit.
+Depois de obter $ c_n $ passa-se ao mapeamento do mesmo. O mapeamento baseia-se em duas condições:
+\begin{equation}
+	c_n= '1' \rightarrow d_n =+1 \hspace{5 mm} c_n='0' \rightarrow d_n=-1
+\end{equation}
+Esta lógica podia ser facilmente implementada com recurso a duas condições "if", mas optou-se por evitar essa lógica para tornar o programa mais eficiente.
+Assim recorreu-se a um shift e a uma subtração. Atenção que esta não é a maneira mais eficiente pois a subtração faz com que o programa tenha de passar pela ALU.
+Pode-se observar então o mapeamento efetuado através da seguinte expressão:
+\begin{equation}
+d_n=32767*((c_n << 1)-1)
+\end{equation}
+%Explicar expressao  
+
 %complementar com o que?
 
 %Pergunta 2
+\textbf{P2-2}
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem (16kHz).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta: %fazer tabela com valores
 
