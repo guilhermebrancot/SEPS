@@ -174,7 +174,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 \paragraph{P1-2}
 \label{para:P1-2}
 
-Foi criada uma tabela (LUT) com os valores de meio ciclo de um seno de modo a que seja possível ir retirar os seus valores para criar um sinal sinusóidal. Esta tabela teria 32 valores e foi construída pela seguinte equação:
+Foi criada uma tabela (LUT) com os valores de meio ciclo de um seno de modo a que seja possível ir retirar os seus valores para criar um sinal sinusoidal. Esta tabela teria 32 valores e foi construída pela seguinte equação:
 
 \begin{equation}
 32767*\sin \dfrac{n \pi}{32},  \quad \quad n=0,1,2,...,31
@@ -295,9 +295,11 @@ Ambos os sinais podem ser observados na imagem \ref{fig:interp}, embora a sua co
 O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
 Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência portadora $f_0=4$ kHz.
 %COMPLEMENTAR com alguma teoria
-
+\vfill
 %Pergunta 1
-Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock" cuja função vai ser criar uma sequência de bits $ b_n $ que a cada 16 ciclos gera um novo bit alternado, usando um contador com $fs$/16 para determinar quando gerar um novo bit. Para alternar o bit basta negar o bit anteriormente obtido, tendo sido concretizado através de uma simples XOR:
+Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock" cuja função vai ser criar uma sequência de bits $ b_n $ com $f_b=1$ kbps. Isto significa que, considerando $f_s$, a cada 16 ciclos é gerado um novo bit, alternado em relação ao anterior. Assim, implementou-se um contador que é incrementado em cada ciclo  e que tem uma condição para verificar quando chegar ao valor 16. Ao entrar nessa condição é implementada a lógica para cálculo do novo bit da sequência e o contador é reiniciado.
+
+Para calcular o novo bit, basta negar o bit anteriormente obtido para obter uma sequência de bits alternada, tendo sido concretizado através de uma simples XOR:
 \begin{equation}
 b_n=b_{n-1} \oplus 1
 \end{equation}
@@ -307,11 +309,14 @@ Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codi
 c_n=c_{n-1} \oplus b_n
 \end{equation}
 Assim, com $c_0$ inicializado a zero codifica-se a sequência de bits $ b_n $. Ao gerar $ b_n $ e $ c_n $ obtém-se dois sinais que variam entre "0" e "1" só que $ c_n $ tem o dobro do período (figura X).
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./bn_cn}~\\
-	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
-\end{figure}
+
+IMAGEM bn com cn
+\vfill
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.5\textwidth]{./bn_cn}~\\
+%	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
+%\end{figure}
 
 %\vspace{-0.4cm} %este espaçamento dá cabo da formatação toda no meu tex.
 Depois de obter $ c_n $ passa-se ao mapeamento do mesmo,
