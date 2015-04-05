@@ -311,6 +311,7 @@ Para calcular o novo bit, basta negar o bit anteriormente obtido para obter uma 
 \begin{equation}
 b_n=b_{n-1} \oplus 1
 \end{equation}
+Com esta operação, o bit resultante será sempre alternado em relação ao anterior.
 Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(ver figura com bn). Esta frequência ocorre devido a dividir-se  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
 \vfill
 Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
@@ -341,11 +342,14 @@ Pode-se observar então o mapeamento efetuado através da seguinte expressão:
 \begin{equation}
 d_n=32767*((c_n << 1)-1)
 \end{equation}
-%Explicar expressao  
+Antes de mais, o ganho que está a ser multiplicado é utilizado devido ao elemento modulador do transmissor, que vai ser falado a seguir. Considerando a expressão sem esse ganho, vê-se que para $ c_n=0 $, como o shift não influencia o resultado, o mesmo só depende da subtração e é sempre o pretendido, $d_n=-1$. Se $c_n=1$, o shift duplica  esse valor, e depois ao subtrair obtém-se $d_n=1$. \vfill
+Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois depende diretamente de $c_n$ e só se mapeia um novo bit depois de ele ser codificado. Concluído o mapeamento obtém-se mais uma vez uma onda quadrada mas desta vez varia entre "-1" e "1" (figura X).
 
-%complementar com o que?
+IMAGEM cn com dn
 
+%porque o shift??
 %Pergunta 2
+\vspace{2 mm}
 \textbf{P2-2}
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem (16kHz).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta: %fazer tabela com valores
