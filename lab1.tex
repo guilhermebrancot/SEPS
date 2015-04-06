@@ -353,8 +353,23 @@ IMAGEM cn com dn
 \textbf{P2-2}
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem (16kHz).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta: %fazer tabela com valores
+\begin{table}[H]
+	\centering
+	\caption{Amostras da onda portadora}
+	\label{tab:amostras}
+	\begin{tabular}[c]{|l||c|}
+		\hline \textbf{contador} & \textbf{seno}\\ 
+		\hline $ 0 $ & $ 0 $\\ 
+		\hline $ 1 $ & $ 32767 $  \\ 
+		\hline $ 2 $ & $ 0 $ \\ 
+		\hline $ 3 $ & $ -32767 $ \\
+		\hline
+	\end{tabular}
+\end{table}
 
-Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e zero-crossing da portadora. Para gerar a portadora recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
+Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e zero-crossing da portadora. Para gerar a portadora (figura X) recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
+
+IMAGEM com portadora
 
 %Isto poderia ser mencionado na parte 1
 Tem-se dois sinais Q15, ou seja o bit mais significativo para o sinal e 15 bits para a parte fracionária. Ao multiplicar-se dois sinais Q15 sabe-se que o resultado será sempre Q15
@@ -367,6 +382,9 @@ Tem-se dois sinais Q15, ou seja o bit mais significativo para o sinal e 15 bits 
 
 
 %Pergunta 3
+\textbf{P2-3}
+Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (figura Y).
+IMAGEM 
 
 %Explicar FFT!!! 
 Espectro
