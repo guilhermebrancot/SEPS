@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  7 APR 2015 00:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  7 APR 2015 23:47
 entering extended mode
 **lab1.tex
 (C:\Users\Joao\Documents\GitHub\SEPS\lab1.tex
@@ -809,11 +809,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks41
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux
-
-LaTeX Warning: Label `tab:incrementos' multiply defined.
-
-)
+(C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
@@ -826,7 +822,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count145
 \scratchdimen=\dimen185
@@ -937,20 +934,17 @@ File: ./P1_interp.jpg Graphic file (type jpg)
 Package pdftex.def Info: ./P1_interp.jpg used on input line 292.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
  [6]
-[7 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg>] [8] [9]
+[7 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg>] [8] [9] [10]
 (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 16340 strings out of 493921
- 302210 string characters out of 3144879
- 349749 words of memory out of 3000000
- 19315 multiletter control sequences out of 15000+200000
+ 16342 strings out of 493921
+ 302242 string characters out of 3144879
+ 349751 words of memory out of 3000000
+ 19317 multiletter control sequences out of 15000+200000
  20301 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  62i,11n,75p,729b,1213s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -970,16 +964,17 @@ ec\dpi600\ecbx2074.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
 jknappen\ec\dpi600\eccc2074.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\p
 k\ljfour\jknappen\ec\dpi600\eccc1440.pk><C:/Program Files (x86)/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb>
-Output written on lab1.pdf (11 pages, 11666440 bytes).
+type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb>
+Output written on lab1.pdf (12 pages, 11676316 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
+ 468 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
