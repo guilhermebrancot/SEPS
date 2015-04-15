@@ -99,7 +99,7 @@ Para compreender o limite desta sinusoide é necessário ter em conta que se usa
 Este projeto tem como objectivo fornecer-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
 %interpretar!!
-No projecto anterior observou-se os efeitos de overflow de uma variável. Neste observam-se os efeitos de aliasing(ou não, não me recordo se o DSP tem um filtro anti-aliasing à entrada)  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. Se havia anti-aliasing, a partir dos 4khz deixariamos de ver uma sinusoide com os 3.3V. Não fizemos a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente nao iamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
+No projeto anterior observou-se os efeitos de overflow de uma variável. Neste observam-se os efeitos de aliasing (ou não, não me recordo se o DSP tem um filtro anti-aliasing à entrada)  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. Se havia anti-aliasing, a partir dos 4khz deixariamos de ver uma sinusoide com os 3.3V. Não fizemos a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente nao iamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
 
 
 \subsection{BPSK}
@@ -108,7 +108,7 @@ Este projeto é constituído por duas partes, a primeira é um oscilador control
 
 \subsubsection{P1. Oscilador controlado numericamente}
 
-Usando o projecto descrito na secção \ref{sec:loop} como base para a construção de um oscilador controlado numericamente (\textit{NCO}). Um \textit{NCO} é um gerador de sinal digital que cria uma forma de onda discretamente representada no tempo e na amplitude. O nosso \textit{NCO} terá as seguintes características:
+Usa-se o projeto descrito na secção \ref{sec:loop} como base para a construção de um oscilador controlado numericamente (\textit{NCO}). Um \textit{NCO} é um gerador de sinal digital que cria uma forma de onda discretamente representada no tempo e na amplitude. O \textit{NCO} terá as seguintes características:
 
 \begin{table}[H]
 	\centering
@@ -116,31 +116,33 @@ Usando o projecto descrito na secção \ref{sec:loop} como base para a construç
 	\label{tab:NCO-car}
 \begin{tabular}[c]{|l||c|c|}
 	\hline \textbf{Parâmetro} & \textbf{Símbolo} & \textbf{Valor} \\ 
-	\hline Freqência de amostragem & $ f_{s} $ & $ 16 kHz $ \\ 
+	\hline Frequência de amostragem & $ f_{s} $ & $ 16 kHz $ \\ 
 	\hline Frequência mínima & $ f_{min} $ & $ 2 kHz $ \\ 
-	\hline Frquência máxima & $ f_{max} $ & $ 6 kHz $ \\ 
+	\hline Frequência máxima & $ f_{max} $ & $ 6 kHz $ \\ 
 	\hline
 \end{tabular}
 \end{table}
 
-O projecto de contruir o \textit{NCO} seguiu os seguintes passos que estão posteriormente desmitigados:
+O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão posteriormente desmitigados:
 
 \begin{enumerate}
-	\item Oscilador de Relaxamento (Integrador de Rampa). Secção \ref{para:P1-1}.
-	\item Look-up-table (LUT). Parágrafo \ref{para:P1-2}.
-	\item Obter sinal de seno através da LUT. Secção \ref{para:P1-3}.
-	\item Criação de duas variáveis para controlar a frequência e amplitude. Secção \ref{para:P1-4}.
-	\item Variar a frequência do sinal criado com a amplitude do sinal de entrada. Secção \ref{para:P1-5}.
-	\item Testar os oscilador com uma sinal de uma onda quadrada à entrada.  Secção \ref{para:P1-6}.
-	\item Melhorar qualidade do oscilador com interpolação linear.  Secção \ref{para:P1-7}.
-	\item Comparar os espectros.  Secção \ref{para:P1-8}.
+	\item Oscilador de Relaxamento (Integrador de Rampa). %Secção \ref{para:P1-1}.
+	\item Look-up-table (LUT). %Secção \ref{para:P1-2}.
+	\item Obtenção do sinal sinusoidal através da LUT.% Secção \ref{para:P1-3}.
+	\item Criação de duas variáveis para controlar a frequência e amplitude do sinal sinusoidal. %Secção \ref{para:P1-4}.
+	\item Utilização do sinal de entrada para controlar a frequência do sinal. %Secção \ref{para:P1-5}.
+	\item Teste do oscilador com uma onda quadrada à entrada para observar o sinal modulado.  %Secção \ref{para:P1-6}.
+	\item Melhoria da qualidade do oscilador com interpolação linear. % Secção \ref{para:P1-7}.
+	\item Comparação dos espectros com e sem interpolação.%  Secção \ref{para:P1-8}.
 \end{enumerate}
+\pagebreak
 
-\paragraph{P1-1}\label{para:P1-1}
+\textbf{P1-1}
+\label{para:P1-1}
 
-Como referido na secção \ref{sec:sine8}, quando representamos sinais sob o formato de vírgula-fixa Q15 teremos como valor máximo do sinal: $32767$. Como a placa usada no laboratório (DSK TMS320C6713), tem como amplitude máxima na saída de $1 V$, foi usado o formato Q15 para representar o sinal de saída, visto que um sinal representado em Q15 terá amplitude máxima de $2^{15}-1 = 32767 $.
+ Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
-Para construir um Oscilador de Relaxamento foi criado um programa que aumentasse constantemente o sinal à saída de modo a que este tivesse um aspecto de rampa. O incremento teria de tomar um valor, tal que $32767$ fosse seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
+Para construir um Oscilador de Relaxamento foi criado um programa que aumenta por a cada ciclo o sinal à saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante, tal que $32767$ seja seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
 
 \begin{table}[H]
@@ -177,22 +179,26 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 	\includegraphics[width=0.5\textwidth]{./P1_4kHz}~\\
 	\caption{Rampa com frequência de $ 4 kHz $}
 \end{figure}
+Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Como a mesma está representada em Q15, só pode variar dentro do intervalo compreendido nesse formato, de maneira que um incremento menor na rampa fornece mais amostras da mesma dentro do intervalo possível, o que significa um menor declive menor.
+\vspace{2 mm}
 
-\paragraph{P1-2}
+\textbf{P1-2}
 \label{para:P1-2}
 
-Foi criada uma tabela (LUT) com os valores de meio ciclo de um seno de modo a que seja possível ir retirar os seus valores para criar um sinal sinusoidal. Esta tabela teria 32 valores e foi construída pela seguinte equação:
+Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível ir retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
 
 \begin{equation}
 32767*\sin \dfrac{n \pi}{32},  \quad \quad n=0,1,2,...,31
 \end{equation}
+Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na equação, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal.
+\vspace{2 mm}
 
-\paragraph{P1-3}
+\textbf{P1-3}
 \label{para:P1-3}
 
-Usando como base as rampas criadas na secção \ref{para:P1-1} como método de indexação, foi possível criar um sinal de uma sinusóide através da tabela de LUT criada na secção \ref{para:P1-2}.
+Usando como base as rampas criadas na secção \ref{para:P1-1} como método de indexação, foi possível criar um sinal de uma sinusoide através da tabela de LUT criada na secção \ref{para:P1-2}.
 
-Para a indexação são usados os 5 bits mais significativos (excluindo o bit de sinal) do sinal da rampa, esses 5 bits irão indexar e escolher qual o valor da tabela de LUT a usar para criar a sinosóide. Este processo foi efectuado com o seguinte pedaço de código dentro do ciclo:
+Para a indexação são usados os 5 bits mais significativos (excluindo o bit de sinal) do sinal da rampa, esses 5 bits irão indexar e escolher qual o valor da tabela de LUT a usar para criar a sinusoide. Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
 \begin{lstlisting}
 	rampa=rampa+incremento;    //Criar a rampa
@@ -206,12 +212,12 @@ O resultado foi o que se pode observar na seguinte figura:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./P1_1seno}~\\
-	\caption{Sinal sinusóide criado de $ 2 kHz $.}
+	\caption{Sinal sinusoidal criado de $ 2 kHz $.}
 \end{figure}
 
-Como se pode observar na figura foi possível criar um sinal sinusóide usando uma rampa e uma tabela com valores de seno.
+Como se pode observar na figura foi possível criar um sinal sinusoide usando uma rampa e uma tabela com valores de seno.
 
-\paragraph{P1-4}
+\textbf{P1-4}
 \label{para:P1-4}
 
 Foram criadas duas variáveis para fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{incremento} e \textit{amplitude}, respectivamente.
@@ -233,7 +239,7 @@ Esta variável tem como valor máximo $ 32767 $, pois os valores afixados na tab
 
 Deste modo foi possível ter duas variáveis, \textit{incremento} e \textit{amplitude}, que modelavam a frequência e a amplitude do sinal de saída respectivamente.
 
-\paragraph{P1-5}
+\textbf{P1-5}
 \label{para:P1-5}
 
 Para que a frequência do sinal de saída seja modelado através da amplitude do sinal de entrada, o sinal de entrada terá de controlar a variável \textit{incremento}.
@@ -248,10 +254,10 @@ Um exemplo de garantir que isto era possível era receber um novo valor para a v
 
 Deste modo, quando se aumentava a amplitude do sinal de entrada, a variável \textit{incremento} aumentava, e por consequência também aumentava a frequência de entrada.
 
-\paragraph{P1-6}
+\textbf{P1-6}
 \label{para:P1-6}
 
-\paragraph{P1-7}
+\textbf{P1-7}
 \label{para:P1-7}
 
 Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método de interpolação linear descrito na seguinte equação:
@@ -292,7 +298,7 @@ Ambos os sinais podem ser observados na imagem \ref{fig:interp}, embora a sua co
 	\caption{Sinal sinusoide com interpolação e sem interpolação.}
 \end{figure}
 
-\paragraph{P1-8}
+\textbf{P1-8}
 \label{para:P1-8}
 %fazer espectros e comparar!!!
 
@@ -349,7 +355,7 @@ IMAGEM cn com dn
 %Pergunta 2
 \vspace{2 mm}
 \textbf{P2-2}
-Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem (16kHz).
+Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta: %fazer tabela com valores
 \begin{table}[H]
 	\centering
@@ -408,7 +414,7 @@ Na imagem o espectro da quadrada centrada em 4khz como se esperava. As harmónic
 
 
 \section{Conclusão}
--Principais resultados e conclusoes sobre eles, erros a corrigir (se houverem), o que melhorar
+-Principais resultados e conclusões sobre eles, erros a corrigir (se houverem), o que melhorar
 
 \section{Anexos}
 -Codigo?
