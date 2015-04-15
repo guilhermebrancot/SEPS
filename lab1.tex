@@ -98,14 +98,13 @@ Para compreender o limite desta sinusoide é necessário ter em conta que se usa
 \label{sec:loop}
 Este projeto tem como objectivo fornecer-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
-(comentario André)No projecto anterior observou-se os efeitos de overflow de uma variável. Neste observam-se os efeitos de aliasing(ou não, não me recordo se o DSP tem um filtro anti-aliasing à entrada)  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. Se havia anti-aliasing, a partir dos 4khz deixariamos de ver uma sinusoide com os 3.3V. Não fizemos a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente nao iamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
+%interpretar!!
+No projecto anterior observou-se os efeitos de overflow de uma variável. Neste observam-se os efeitos de aliasing(ou não, não me recordo se o DSP tem um filtro anti-aliasing à entrada)  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. Se havia anti-aliasing, a partir dos 4khz deixariamos de ver uma sinusoide com os 3.3V. Não fizemos a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente nao iamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
 
-Vale a pena ir ao lab tirar esta foto?
-Resultados do loop??
 
 \subsection{BPSK}
-
- Demonstração dos Resultados usando como etapas as varias perguntas do enunciado, complementar com as fotos e possiveis tabelas ou partes de codigo
+Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK.
+%desenvolver
 
 \subsubsection{P1. Oscilador controlado numericamente}
 
@@ -139,7 +138,7 @@ O projecto de contruir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \paragraph{P1-1}\label{para:P1-1}
 
-Como referido na secção \ref{sec:sine8}, quando representamos sinais sob o formato de vírgula-fixa Q15 teremos como valor máximo do sinal: $32767$. Como a placa usada no laboratório (DSK TMS320C6713), tem como amplitude máxima na saída de $1 V$, foi usado o formato Q15 para representar o sinal de saída, visto que um sinal representado em Q15 terá amplitude máxima de $ 1-2^{-15} => 32767 $.
+Como referido na secção \ref{sec:sine8}, quando representamos sinais sob o formato de vírgula-fixa Q15 teremos como valor máximo do sinal: $32767$. Como a placa usada no laboratório (DSK TMS320C6713), tem como amplitude máxima na saída de $1 V$, foi usado o formato Q15 para representar o sinal de saída, visto que um sinal representado em Q15 terá amplitude máxima de $2^{15}-1 = 32767 $.
 
 Para construir um Oscilador de Relaxamento foi criado um programa que aumentasse constantemente o sinal à saída de modo a que este tivesse um aspecto de rampa. O incremento teria de tomar um valor, tal que $32767$ fosse seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
