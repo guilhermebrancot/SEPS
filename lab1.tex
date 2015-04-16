@@ -212,13 +212,13 @@ Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 	sinusoide=LUT[index];
 \end{lstlisting}
 
-Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} \ref{tab:sen_2k}.
+Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} (Figura \ref{fig:sen2k}).
 
 \begin{figure}[H]
 	\centering
-	\label{tab:sen_2k}
 	\includegraphics[width=0.5\textwidth]{./P1_1seno}~\\
 	\caption{Sinal sinusoidal criado de $ 2 kHz $.}
+	\label{fig:sen2k}
 \end{figure}
 
 Como se pode observar na figura foi possível criar um sinal aproximadamente sinusoidal através de uma LUT indexada por uma rampa. Nesta figura não é possível notar mas quando se aproxima mais o sinal no osciloscópio verifica-se pequenos degraus ao longo do sinal, que simbolizam a aproximação obtida através das amostras.
@@ -273,9 +273,11 @@ Pode-se observar a implementação da equação explicada anteriormente, no cód
 \end{lstlisting}
 O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois evita uma passagem do programa pela ALU, também representa o efeito de K.
 Embora na equação (4) se some o efeito do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa, por isso se subtrai esse efeito.
+\vspace{2 mm}
 
 \textbf{P1-6}
 \label{para:P1-6}
+
 Para testar o funcionamento do VCO, pôs-se na entrada do DSP um sinal sinusoidal com frequência igual a 2 Hz, como sinal modulante, em vez da onda quadrada pedida no enunciado pois seria mais fácil observar a variação de frequência do sinal de saída se a variação de amplitude do primeiro fosse gradual em vez de ser constante com descontinuidades. Esperou-se que no máximo e mínimo de amplitude desta, a onda modulada tivesse máxima ou mínima frequência respetivamente, com aumento e diminuição de frequência do sinal modulado conforme o mesmo acontecesse com a amplitude do sinal modulante. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo.
 
 \textbf{P1-7}
@@ -305,13 +307,13 @@ Como se pode observar nas linhas de código, a interpolação é realizada com d
 
 Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
-Ambos os sinais (com e sem interpolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
+Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação.
 
 \begin{figure}[H]
 	\centering
-	\label{fig:interp}
 	\includegraphics[width=0.5\textwidth]{./P1_interp}~\\
 	\caption{Sinal sinusoide com interpolação e sem interpolação.}
+	\label{fig:interp}
 \end{figure}
 
 \textbf{P1-8}
@@ -321,16 +323,16 @@ Como não foi possível estabelecer uma diferença entre os sinais com interpola
 
 \begin{figure}[H]
 	\centering
-	\label{fig:espect_s_interp}
 	\includegraphics[width=0.5\textwidth]{./P1-8_espect_s_interp}~\\
 	\caption{Espectro do sinal sinusoide sem interpolação.}
+	\label{fig:espect_s_interp}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\label{fig:espect_c_interp}
 	\includegraphics[width=0.5\textwidth]{./P1-8_espect_c_interp}~\\
 	\caption{Espectro do sinal sinusoide com interpolação.}
+	\label{fig:espect_c_interp}
 \end{figure}
 
 Como se pode observar nas figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}, não existe, outra vez, diferenças observaveis entre os dois sinais, desta vez entre os seus espectros. Apresentam aparentemente a mesma amplitude para cada frequência entre eles mesmos.
