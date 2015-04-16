@@ -266,29 +266,23 @@ Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método 
 y=y_{1}+(y_{2}-y_{1})*\delta_{x}
 \end{equation}
 
-Sendo que $ \delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retira o valor \textit{index} com o propósito de indexação. O processo de recolher o valor de $ \delta_{x} $ e do cálculo da interpolação estão descrito nas seguintes linhas de código:
+Sendo que $ \delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retira o valor \textit{index} com o propósito de indexação. O processo de recolher o valor de $ \delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
 
 \begin{lstlisting}
 	rampa=rampa+delta;
 	deltaX=1023 & rampa;   //Retirar os 10 bits menos significativos
 	deltaX=deltaX<<5;      //Representar deltax em Q15
-	index=rampa>>10;
-	index=31 & index; 
-	aux=amplitude*LUT[index];
-	aux=aux<<1;
-	sinusoide=-aux>>16;
-	Y1=sinusoide;
-	aux=amplitude*LUT[index+1];
-	aux=aux<<1;
-	Y2=-aux>>16;
+	(...)
+	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i)
+	Y2=-((amplitude*LUT[index+1])<<1)>>16;	// Y2=LUT(i+1)
 	aux=(Y2-Y1)*deltaX;
-	aux=aux<<1;
+	aux=aux<<1;				//Retirar bit de sinal extra
 	Y=Y1+(aux>>16);
 \end{lstlisting}
 
-Sendo que o sinal \textit{Y} corresponde ao sinal com maior qualidade, ou seja, interpolado, e que o sinal \textit{sinusoide} corresponde ao sinal com menor qualidade.
+Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $$\textit{index}$$ e $$\textit{index}+1$$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
 
-Ambos os sinais podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada na sua observação.
+Ambos os sinais (sem e com interolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
 
 
 \begin{figure}[H]
@@ -300,7 +294,28 @@ Ambos os sinais podem ser observados na imagem \ref{fig:interp}, embora a sua co
 
 \textbf{P1-8}
 \label{para:P1-8}
-%fazer espectros e comparar!!!
+
+Como não foi possível establecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos.
+
+\begin{figure}[H]
+	\centering
+	\label{fig:espect_s_interp}
+	\includegraphics[width=0.5\textwidth]{./P1.8_espect_s_interp}~\\
+	\caption{Espectro do sinal sinusoide sem interpolação.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\label{fig:espect_c_interp}
+	\includegraphics[width=0.5\textwidth]{./P1.8_espect_c_interp}~\\
+	\caption{Espectro do sinal sinusoide com interpolação.}
+\end{figure}
+
+Como se pode observar nas figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}, não existe, outra vez, diferenças observaveis entre os dois sinais, desta vez entre os seus espectros. Apresentam aparentemente a mesma amplitude para cada frequência entre eles mesmos.
+
+A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, não apresenta uma melhoria nos resultados, sendo assim um método que apenas irá exaustar mais os recursos do processador sem obter qualquer tipo de retorno notável. Podemos então concluir que caso seja preciso usar um sinal digital de uma sinosóide podemos usar apenas o método que não usa interpolação.
+
+É de referir que não se está a excluir a hipótse da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos usados.
 
 \subsubsection{P2. Transmissor BPSK}
 
