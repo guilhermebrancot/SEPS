@@ -139,7 +139,7 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \textbf{P1-1}
 \label{para:P1-1}
-
+%labels necessarios?
  Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
 Para construir um Oscilador de Relaxamento foi criado um programa que aumenta por a cada ciclo o sinal à saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante, tal que $32767$ seja seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
@@ -204,7 +204,7 @@ Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significat
 Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
 \begin{lstlisting}
-	rampa=rampa+incremento;    //Criar a rampa
+	rampa=rampa+delta;    //Criar a rampa
 	index=rampa>>10;
 	index=31 & index;         //Usar apenas 5 bits
 	sinusoide=LUT[index];
@@ -224,29 +224,44 @@ Como se pode observar na figura foi possível criar um sinal aproximadamente sin
 \textbf{P1-4}
 \label{para:P1-4}
 
-Foram criadas duas variáveis para fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{incremento} e \textit{amplitude}, respectivamente.
+%variaveis vs sinais
+Foram criadas duas variáveis para fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
-A primeira variável foi já antes referida, nas secções \ref{para:P1-1} e \ref{para:P1-3}. Esta variável, caso alterada iria alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída, tal como se o seu valor diminuir, a frequência de saída irá diminuir também.
+A primeira variável foi já antes referida, nas secções P1-1 e P1-3. Esta variável, caso alterada irá alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída, tal como se o seu valor diminuir, a frequência de saída irá diminuir também.
 
-A segunda variável (\textit{amplitude}) foi criada com o propósito de modelar a amplitude do sinal de saída, esta causou mudanças mais significativas no código, tal como se pode verificar:
+A segunda variável (\textit{ampl}) foi criada com o propósito de modelar a amplitude do sinal de saída. Esta causou mudanças mais significativas no código, tal como se pode verificar:
 
 \begin{lstlisting}
-	rampa=rampa+incremento;
+	rampa=rampa+delta;
 	index=rampa>>10;
 	index=31 & index;        
-	aux=amplitude*LUT[index];
+	aux=ampl*LUT[index];
 	aux=aux<<1;            //Retirar bit de sinal extra
-	sinusoide=-aux>>16;    //Colocar a variavel com 16 bits em Q15
+	sinusoide=-aux>>16;    //Colocar o sinal com 16 bits em Q15
 \end{lstlisting}
 
-Esta variável tem como valor máximo $ 32767 $, pois os valores afixados na tabela LUT já apresentam um valor com a amplitude máxima de Q15, não tendo assim problemas em relação ao formato de representação nem à amplitude do sinal transmitido à placa.
+Esta variável tem como valor máximo $ 32767 $, pois os valores afixados na tabela LUT já apresentam um valor com a amplitude máxima de Q15 de maneira a não ter problemas com o formato de representação nem com a amplitude do sinal transmitido à placa.
+Como se pode ver no código a variável \textit{ampl} multiplica diretamente pela LUT. 
+\vspace{2 mm}
 
-Deste modo foi possível ter duas variáveis, \textit{incremento} e \textit{amplitude}, que modelavam a frequência e a amplitude do sinal de saída respectivamente.
+Quando se multiplica dois sinais, o sinal resultante fica com um bit sinal replicado que é eliminado através de um \textit{shift} esquerdo. Mas depois ainda é necessário ir buscar os 16 bits mais significativos através de 16 shifts para a direita pois pretende-se um sinal com 16 bits em Q15. 
+
+Na equação seguinte pode-se observar como obter o formato resultante num produto:
+\begin{equation}
+Q_{m} * Q_{k}=Q_{m+k-n+1}
+\end{equation}
+Neste caso como se multiplica dois sinais Q15 e \textit{n}$=$16 bits representa-se o resultado com formato Q15 como foi dito anteriormente. 
+\vspace{2 mm}
 
 \textbf{P1-5}
 \label{para:P1-5}
 
-Para que a frequência do sinal de saída seja modelado através da amplitude do sinal de entrada, o sinal de entrada terá de controlar a variável \textit{incremento}.
+Para que a frequência do sinal de saída seja modelado através da amplitude do sinal de entrada, é necessário criar uma relação linear entre o sinal de entrada \textit{inbuf} e o incremento da rampa \textit{delta}, pois este é que define a frequência do sinal sinusoidal com a rampa. Como tal a relação entre o \textit{inbuf} e o \textit{delta} é ilustrada pela seguinte equação:
+\begin{equation}
+	\Delta=\Delta_0+(K*inbuf)	\hspace{6 mm}\Delta_0=16384, K=\frac{1}{4}
+\end{equation}
+Tendo em conta a tabela \ref{tab:incrementos}, delta que varia entre 8192 e 24576 com $\Delta_0$ correspondente à frequência central, 4 kHz. Para restringir delta a esse intervalo foi necessário introduzir $K=\dfrac{1}{4}$.
+%introduzir codigo e comentar
 
 Um exemplo de garantir que isto era possível era receber um novo valor para a variável \textit{incremento}, sendo que este valor vinha diretamente da entrada:
 
@@ -284,7 +299,7 @@ Sendo que $ \delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 	Y=Y1+(aux>>16);
 \end{lstlisting}
 
-Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $$\textit{index}$$ e $$\textit{index}+1$$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
+Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
 
 Ambos os sinais (com e sem interpolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
 
@@ -398,9 +413,7 @@ A onda modulada é então representada pela seguinte expressão:
 	s_n= d_n \sin(2 \pi f_0T_sn) 
 \end{equation}
 Neste caso os valores do seno são os valores das amostras discutidas anteriormente.
-%Isto poderia ser mencionado na parte 1
-Tem-se dois sinais Q15, ou seja o bit mais significativo para o sinal e 15 bits para a parte fracionária. Ao multiplicar-se dois sinais Q15 sabe-se que o resultado será sempre Q15
-, contudo como o multiplicador retorna um valor em Q30, para este ser armazenado tem que se fazer shift left uma vez para eliminar o sinal repetido e shift right 16 vezes para transportar os bits mais significativos encostar os bits do resultado nos bits menos significativos para se truncar
+
 
 % proximos 3 comments foram retirados dos slides, apagar quando quiserem:
 % To store the result in a n bit word it is necessary to shift the result one bit to the left (to eliminate the replicated sign bit) and store the n MSBs of the 2n bit word
