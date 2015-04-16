@@ -181,7 +181,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 \end{figure}
 Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa.
 \vspace{2 mm}
-
+%salientar inversor por causa das imagens
 \textbf{P1-2}
 \label{para:P1-2}
 
@@ -190,7 +190,9 @@ Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de mo
 \begin{equation}
 32767*\sin \dfrac{n \pi}{32},  \quad \quad n=0,1,2,...,31
 \end{equation}
-Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na equação, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal.
+Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na expressão, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. 
+
+Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal.
 \vspace{2 mm}
 
 \textbf{P1-3}
@@ -210,10 +212,11 @@ Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 	sinusoide=LUT[index];
 \end{lstlisting}
 
-Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} (Figura 3).
+Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} \ref{tab:sen_2k}.
 
 \begin{figure}[H]
 	\centering
+	\label{tab:sen_2k}
 	\includegraphics[width=0.5\textwidth]{./P1_1seno}~\\
 	\caption{Sinal sinusoidal criado de $ 2 kHz $.}
 \end{figure}
@@ -260,18 +263,16 @@ Para que a frequência do sinal de saída seja modelado através da amplitude do
 \begin{equation}
 	\Delta=\Delta_0+(K*inbuf)	\hspace{6 mm}\Delta_0=16384, K=\frac{1}{4}
 \end{equation}
-Tendo em conta a tabela \ref{tab:incrementos}, delta que varia entre 8192 e 24576 com $\Delta_0$ correspondente à frequência central, 4 kHz. Para restringir delta a esse intervalo foi necessário introduzir $K=\dfrac{1}{4}$.
-%introduzir codigo e comentar
+Tendo em conta a tabela \ref{tab:incrementos}, delta que varia entre 8192 e 24576 com $\Delta_0$ correspondente à frequência central, 4 kHz. Para restringir delta a esse intervalo foi necessário introduzir $K=\dfrac{1}{4}$. Assim, obtém-se uma relação proporcionalmente direta entre delta e o sinal de entrada, o que significa que se aumentar ou diminuir a amplitude do sinal de entrada também aumenta ou diminui o delta.
 
-Um exemplo de garantir que isto era possível era receber um novo valor para a variável \textit{incremento}, sendo que este valor vinha diretamente da entrada:
+Pode-se observar a implementação da equação explicada anteriormente, no código seguinte:
 
 \begin{lstlisting}
-	incremento=-inbuf;
-	rampa=rampa+incremento;
-	(...)
+	delta=16384-(inbuf>>2); 
+	rampa=rampa+delta;		//rampa
 \end{lstlisting}
-
-Deste modo, quando se aumentava a amplitude do sinal de entrada, a variável \textit{incremento} aumentava, e por consequência também aumentava a frequência de entrada.
+O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois evita uma passagem do programa pela ALU, também representa o efeito de K.
+Embora na equação (4) se some o efeito do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa, por isso se subtrai esse efeito.
 
 \textbf{P1-6}
 \label{para:P1-6}
@@ -282,24 +283,26 @@ Deste modo, quando se aumentava a amplitude do sinal de entrada, a variável \te
 Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método de interpolação linear descrito na seguinte equação:
 
 \begin{equation}
-y=y_{1}+(y_{2}-y_{1})*\delta_{x}
+y=y_{1}+(y_{2}-y_{1})*\Delta_{x}
 \end{equation}
 
-Sendo que $ \delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retira o valor \textit{index} com o propósito de indexação. O processo de recolher o valor de $ \delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
+Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retirou da rampa o índice da LUT. O processo de recolher o valor de $ \delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
 
 \begin{lstlisting}
 	rampa=rampa+delta;
 	deltaX=1023 & rampa;   //Retirar os 10 bits menos significativos
-	deltaX=deltaX<<5;      //Representar deltax em Q15
+	deltaX=deltaX<<5;      //Converter deltax em Q15
 	(...)
-	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i)
-	Y2=-((amplitude*LUT[index+1])<<1)>>16;	// Y2=LUT(i+1)
-	aux=(Y2-Y1)*deltaX;
+	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i) convertido para Q15
+	Y2=-((amplitude*LUT[index+1])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
+	aux=(Y2-Y1)*deltaX;		
 	aux=aux<<1;				//Retirar bit de sinal extra
-	Y=Y1+(aux>>16);
+	Y=Y1+(aux>>16);			//interpolacao	
 \end{lstlisting}
 
 Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
+
+Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
 Ambos os sinais (com e sem interpolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
 
