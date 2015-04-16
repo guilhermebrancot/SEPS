@@ -179,7 +179,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 	\includegraphics[width=0.5\textwidth]{./P1_4kHz}~\\
 	\caption{Rampa com frequência de $ 4 kHz $}
 \end{figure}
-Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Como a mesma está representada em Q15, só pode variar dentro do intervalo compreendido nesse formato, de maneira que um incremento menor na rampa fornece mais amostras da mesma dentro do intervalo possível, o que significa um menor declive menor.
+Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa.
 \vspace{2 mm}
 
 \textbf{P1-2}
@@ -196,9 +196,12 @@ Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencen
 \textbf{P1-3}
 \label{para:P1-3}
 
-Usando como base as rampas criadas na secção \ref{para:P1-1} como método de indexação, foi possível criar um sinal de uma sinusoide através da tabela de LUT criada na secção \ref{para:P1-2}.
+Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal de uma sinusoide.
 
-Para a indexação são usados os 5 bits mais significativos (excluindo o bit de sinal) do sinal da rampa, esses 5 bits irão indexar e escolher qual o valor da tabela de LUT a usar para criar a sinusoide. Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
+De acordo com o projeto, a rampa é representada num formato Q10, com 1 bit sinal, 5 bits inteiros e 10 bits fraccionários. 
+Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa, esses 5 bits irão indexar e escolher qual o valor da tabela de LUT a usar para criar a sinusoide. 
+
+Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
 \begin{lstlisting}
 	rampa=rampa+incremento;    //Criar a rampa
@@ -207,7 +210,7 @@ Para a indexação são usados os 5 bits mais significativos (excluindo o bit de
 	sinusoide=LUT[index];
 \end{lstlisting}
 
-O resultado foi o que se pode observar na seguinte figura:
+Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} (Figura 3).
 
 \begin{figure}[H]
 	\centering
@@ -215,7 +218,8 @@ O resultado foi o que se pode observar na seguinte figura:
 	\caption{Sinal sinusoidal criado de $ 2 kHz $.}
 \end{figure}
 
-Como se pode observar na figura foi possível criar um sinal sinusoide usando uma rampa e uma tabela com valores de seno.
+Como se pode observar na figura foi possível criar um sinal aproximadamente sinusoidal através de uma LUT indexada por uma rampa. Nesta figura não é possível notar mas quando se aproxima mais o sinal no osciloscópio verifica-se pequenos degraus ao longo do sinal, que simbolizam a aproximação obtida através das amostras.
+\vspace{2 mm}
 
 \textbf{P1-4}
 \label{para:P1-4}
