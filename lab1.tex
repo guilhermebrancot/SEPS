@@ -286,8 +286,7 @@ Sendo que $ \delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 
 Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $$\textit{index}$$ e $$\textit{index}+1$$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
 
-Ambos os sinais (sem e com interolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
-
+Ambos os sinais (com e sem interpolação) podem ser observados na imagem \ref{fig:interp}, embora a sua comparação não poderá ser efetuada por mera observação.
 
 \begin{figure}[H]
 	\centering
@@ -299,19 +298,19 @@ Ambos os sinais (sem e com interolação) podem ser observados na imagem \ref{fi
 \textbf{P1-8}
 \label{para:P1-8}
 
-Como não foi possível establecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos.
+Como não foi possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos.
 
 \begin{figure}[H]
 	\centering
 	\label{fig:espect_s_interp}
-	\includegraphics[width=0.5\textwidth]{./P1.8_espect_s_interp}~\\
+	\includegraphics[width=0.5\textwidth]{./P1-8_espect_s_interp}~\\
 	\caption{Espectro do sinal sinusoide sem interpolação.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\label{fig:espect_c_interp}
-	\includegraphics[width=0.5\textwidth]{./P1.8_espect_c_interp}~\\
+	\includegraphics[width=0.5\textwidth]{./P1-8_espect_c_interp}~\\
 	\caption{Espectro do sinal sinusoide com interpolação.}
 \end{figure}
 

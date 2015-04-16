@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  16 APR 2015 15:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  16 APR 2015 15:36
 entering extended mode
 **lab1.tex
 (C:\Users\Joao\Documents\GitHub\SEPS\lab1.tex
@@ -921,32 +921,68 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 237.
- [5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>] [6]
+ [5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>]
+Overfull \hbox (24.46085pt too wide) in paragraph at lines 283--284
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
 
-Package caption Warning: \label without proper \caption on input line 300.
+[6]
+
+Package caption Warning: \label without proper \caption on input line 293.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:interp' on page 7 undefined on input line 295.
+LaTeX Warning: Reference `fig:interp' on page 7 undefined on input line 289.
 
 <./P1_interp.jpg, id=56, 2018.29031pt x 1554.55782pt>
 File: ./P1_interp.jpg Graphic file (type jpg)
  <use ./P1_interp.jpg>
-Package pdftex.def Info: ./P1_interp.jpg used on input line 301.
+Package pdftex.def Info: ./P1_interp.jpg used on input line 294.
 (pdftex.def)             Requested size: 236.01561pt x 181.77104pt.
 
-[7 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg>] [8] [9] [10]
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
+<./P1-8_espect_s_interp.jpg, id=57, 3276.24pt x 2457.18pt>
+File: ./P1-8_espect_s_interp.jpg Graphic file (type jpg)
+
+<use ./P1-8_espect_s_interp.jpg>
+Package pdftex.def Info: ./P1-8_espect_s_interp.jpg used on input line 306.
+(pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
+
+<./P1-8_espect_c_interp.jpg, id=58, 3276.24pt x 2457.18pt>
+File: ./P1-8_espect_c_interp.jpg Graphic file (type jpg)
+
+<use ./P1-8_espect_c_interp.jpg>
+Package pdftex.def Info: ./P1-8_espect_c_interp.jpg used on input line 313.
+(pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
+ [7 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg> <C:/Users/Joao/Document
+s/GitHub/SEPS/P1-8_espect_s_interp.jpg>]
+
+Package caption Warning: \label without proper \caption on input line 305.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:espect_s_interp' on page 8 undefined on input lin
+e 317.
+
+
+Package caption Warning: \label without proper \caption on input line 312.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:espect_c_interp' on page 8 undefined on input lin
+e 317.
+
+[8 <C:/Users/Joao/Documents/GitHub/SEPS/P1-8_espect_c_interp.jpg>] [9] [10]
+[11] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16343 strings out of 493921
- 302258 string characters out of 3144879
+ 16359 strings out of 493921
+ 302636 string characters out of 3144879
  351751 words of memory out of 3000000
- 19318 multiletter control sequences out of 15000+200000
- 20301 words of font info for 47 fonts, out of 3000000 for 9000
+ 19330 multiletter control sequences out of 15000+200000
+ 21674 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  62i,11n,75p,729b,1534s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\e
@@ -972,9 +1008,9 @@ lic/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb>
-Output written on lab1.pdf (12 pages, 4942752 bytes).
+Output written on lab1.pdf (13 pages, 10621463 bytes).
 PDF statistics:
- 468 PDF objects out of 1000 (max. 8388607)
+ 475 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
