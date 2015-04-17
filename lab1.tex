@@ -73,7 +73,7 @@
 
 Este trabalho consiste na primeira parte do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
 
-Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Para tal foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois mini projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
+Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Neste projeto foi utilizada a placa DSK TMS320C6713. Foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
 
 \section{Projecto}
 
@@ -453,7 +453,9 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 
 
 \section{Conclusão}
--Principais resultados e conclusões sobre eles, erros a corrigir (se houverem), o que melhorar
+No projeto do oscilador, aprendeu-se como controlar um oscilador a partir de vários parâmetros e o efeito de interpolação linear no mesmo. Como já foi afirmado, a interpolação criou um sinal com maior precisão embora não tenha sido possível observar essa melhoria devido às limitações do equipamento utilizado.
+
+ No projeto do transmissor criou-se a primeira parte do modem BPSK, aproveitando o conhecimento adquirido no projeto do oscilador, e observou-se os efeitos da modulação de uma sequência de bits codificada e mapeada, tanto no tempo como na frequência, o que deu para observar pelas inversões de fase presentes no sinal modulado e nas harmónicas do espetro.
 
 \section{Anexos}
 
