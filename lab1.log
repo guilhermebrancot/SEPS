@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  17 APR 2015 14:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.4)  17 APR 2015 14:35
 entering extended mode
 **lab1.tex
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.tex
+(C:\Users\Guilherme\Documents\GitHub\SEPS\lab1.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -809,7 +809,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks41
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
+(C:\Users\Guilherme\Documents\GitHub\SEPS\lab1.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
@@ -886,8 +886,8 @@ Package pdftex.def Info: ./logo.png used on input line 34.
 (pdftex.def)             Requested size: 141.61081pt x 54.80115pt.
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Joao/Documents/G
-itHub/SEPS/logo.png>] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.toc)
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Guilherme/Docume
+nts/GitHub/SEPS/logo.png>] (C:\Users\Guilherme\Documents\GitHub\SEPS\lab1.toc)
 \tf@toc=\write4
  [1
 
@@ -906,15 +906,15 @@ File: ./P1_4kHz.jpg Graphic file (type jpg)
 Package pdftex.def Info: ./P1_4kHz.jpg used on input line 170.
 (pdftex.def)             Requested size: 236.01561pt x 176.6592pt.
 
-[3 <C:/Users/Joao/Documents/GitHub/SEPS/P1_2kHz.jpg>] [4 <C:/Users/Joao/Documen
-ts/GitHub/SEPS/P1_4kHz.jpg>]
+[3 <C:/Users/Guilherme/Documents/GitHub/SEPS/P1_2kHz.jpg>] [4 <C:/Users/Guilher
+me/Documents/GitHub/SEPS/P1_4kHz.jpg>]
 <./P1_1seno.jpg, id=48, 1982.15532pt x 1500.35532pt>
 File: ./P1_1seno.jpg Graphic file (type jpg)
  <use ./P1_1seno.jpg>
 Package pdftex.def Info: ./P1_1seno.jpg used on input line 209.
 (pdftex.def)             Requested size: 236.01561pt x 178.63835pt.
 
-[5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>]
+[5 <C:/Users/Guilherme/Documents/GitHub/SEPS/P1_1seno.jpg>]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 230.
 
 
@@ -957,21 +957,21 @@ File: ./P1-8_espect_c_interp.jpg Graphic file (type jpg)
 <use ./P1-8_espect_c_interp.jpg>
 Package pdftex.def Info: ./P1-8_espect_c_interp.jpg used on input line 326.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
- [8 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg> <C:/Users/Joao/Document
-s/GitHub/SEPS/P1-8_espect_s_interp.jpg>]
-[9 <C:/Users/Joao/Documents/GitHub/SEPS/P1-8_espect_c_interp.jpg>]
+ [8 <C:/Users/Guilherme/Documents/GitHub/SEPS/P1_interp.jpg> <C:/Users/Guilherm
+e/Documents/GitHub/SEPS/P1-8_espect_s_interp.jpg>] [9 <C:/Users/Guilherme/Docum
+ents/GitHub/SEPS/P1-8_espect_c_interp.jpg>]
 <./bn_cn.jpg, id=69, 2527.4425pt x 1882.03125pt>
 File: ./bn_cn.jpg Graphic file (type jpg)
  <use ./bn_cn.jpg>
 Package pdftex.def Info: ./bn_cn.jpg used on input line 368.
 (pdftex.def)             Requested size: 236.01561pt x 175.72206pt.
- [10 <C:/Users/Joao/Documents/GitHub/SEPS/bn_cn.jpg>]
+ [10 <C:/Users/Guilherme/Documents/GitHub/SEPS/bn_cn.jpg>]
 <./cn_dn.jpg, id=74, 2120.6728pt x 1596.71532pt>
 File: ./cn_dn.jpg Graphic file (type jpg)
  <use ./cn_dn.jpg>
 Package pdftex.def Info: ./cn_dn.jpg used on input line 387.
 (pdftex.def)             Requested size: 236.01561pt x 177.68579pt.
- [11 <C:/Users/Joao/Documents/GitHub/SEPS/cn_dn.jpg>]
+ [11 <C:/Users/Guilherme/Documents/GitHub/SEPS/cn_dn.jpg>]
 <./port_mod.jpg, id=79, 2192.94281pt x 1620.80531pt>
 File: ./port_mod.jpg Graphic file (type jpg)
  <use ./port_mod.jpg>
@@ -983,22 +983,22 @@ File: ./dn_mod.jpg Graphic file (type jpg)
  <use ./dn_mod.jpg>
 Package pdftex.def Info: ./dn_mod.jpg used on input line 436.
 (pdftex.def)             Requested size: 236.01561pt x 178.7819pt.
- [12 <C:/Users/Joao/Documents/GitHub/SEPS/port_mod.jpg>]
+ [12 <C:/Users/Guilherme/Documents/GitHub/SEPS/port_mod.jpg>]
 <./espetro.jpg, id=84, 2247.14531pt x 1693.07532pt>
 File: ./espetro.jpg Graphic file (type jpg)
  <use ./espetro.jpg>
 Package pdftex.def Info: ./espetro.jpg used on input line 446.
 (pdftex.def)             Requested size: 236.01561pt x 177.81691pt.
 
-[13 <C:/Users/Joao/Documents/GitHub/SEPS/dn_mod.jpg> <C:/Users/Joao/Documents/G
-itHub/SEPS/espetro.jpg>]
+[13 <C:/Users/Guilherme/Documents/GitHub/SEPS/dn_mod.jpg> <C:/Users/Guilherme/D
+ocuments/GitHub/SEPS/espetro.jpg>]
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
-(C:\Users\Joao\Documents\GitHub\SEPS\bpsk.c [14]
+(C:\Users\Guilherme\Documents\GitHub\SEPS\bpsk.c [14]
 Overfull \hbox (1023.97794pt too wide) in paragraph at lines 32--33
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][] 
@@ -1031,7 +1031,7 @@ Overfull \hbox (24.46088pt too wide) in paragraph at lines 71--72
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) (C:\Users\Joao\Documents\GitHub\SEPS\transmissor.c [16]
+) (C:\Users\Guilherme\Documents\GitHub\SEPS\transmissor.c [16]
 Overfull \hbox (70.19038pt too wide) in paragraph at lines 35--36
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1046,39 +1046,40 @@ Overfull \hbox (24.46088pt too wide) in paragraph at lines 50--51
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [17] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux) ) 
+) [17] (C:\Users\Guilherme\Documents\GitHub\SEPS\lab1.aux) ) 
 Here is how much of TeX's memory you used:
  16592 strings out of 493921
- 305774 string characters out of 3144879
+ 305839 string characters out of 3144865
  376215 words of memory out of 3000000
  19545 multiletter control sequences out of 15000+200000
  21674 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  62i,11n,75p,745b,1704s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Joao\AppData\
-Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\Users\Joao
-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\U
-sers\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0900.
-pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecrm0900.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
-c\dpi600\ecrm0600.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
-knappen\ec\dpi600\ecbx1095.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk
-\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9
-\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Joao\AppData\Local\M
-iKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\Joao\AppDat
-a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Jo
-ao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:
-\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc207
-4.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\eccc1440.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
-8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.p
-fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+ <C:\Users\Guilherm
+e\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\
+Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecb
+x1200.pk> <C:\Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
+\ec\dpi600\ecti0900.pk> <C:\Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\l
+jfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Guilherme\AppData\Local\MiKTeX\
+2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0600.pk> <C:\Users\Guilherme\AppData
+\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Gui
+lherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk>
+ <C:\Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
+0\ecrm1200.pk> <C:\Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
+appen\ec\dpi600\ecrm0800.pk> <C:\Users\Guilherme\AppData\Local\MiKTeX\2.9\fonts
+\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Guilherme\AppData\Local\Mi
+KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\Guilherme\Ap
+pData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk> <C:\User
+s\Guilherme\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc144
+0.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.p
+fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 Output written on lab1.pdf (19 pages, 17641453 bytes).
 PDF statistics:
  565 PDF objects out of 1000 (max. 8388607)

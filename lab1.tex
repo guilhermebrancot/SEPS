@@ -176,7 +176,7 @@ Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa
 
 \textbf{P1-2}
 
-Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível ir retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
+Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
 
 \begin{equation}
 32767*\sin \dfrac{n \pi}{32},  \quad \quad n=0,1,2,...,31
@@ -184,6 +184,9 @@ Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de mo
 Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na expressão, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. 
 
 Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal.
+
+Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
+
 \vspace{2 mm}
 
 \textbf{P1-3}
