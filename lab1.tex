@@ -295,7 +295,7 @@ Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 	Y=Y1+(aux>>16);			//interpolacao	
 \end{lstlisting}
 
-Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \delta_{x} $ que será usada na equação da interpolação.
+Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \Delta_{x} $ que será usada na equação da interpolação.
 
 Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
