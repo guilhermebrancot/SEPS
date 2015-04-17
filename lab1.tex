@@ -123,7 +123,7 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 	\item Obtenção do sinal sinusoidal através da LUT.
 	\item Criação de duas variáveis para controlar a frequência e amplitude do sinal sinusoidal.
 	\item Utilização do sinal de entrada para controlar a frequência do sinal.
-	\item Teste do oscilador com uma onda quadrada à entrada para observar o sinal modulado.
+	\item Teste do oscilador com uma onda sinusoidal à entrada para observar o sinal modulado.
 	\item Melhoria da qualidade do oscilador com interpolação linear.  
 	\item Comparação dos espectros com e sem interpolação.
 \end{enumerate}
@@ -222,7 +222,7 @@ Como se pode observar na figura foi possível criar um sinal aproximadamente sin
 %variaveis vs sinais
 Foram criadas duas variáveis para fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
-A primeira variável foi já antes referida, nas secções P1-1 e P1-3. Esta, caso alterada irá alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída, tal como se o seu valor diminuir, a frequência de saída irá diminuir também.
+A primeira variável foi já antes referida, nas secções P1-1 e P1-3. Esta variável, caso alterada iria alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída e também se o seu valor diminuir, a frequência de saída irá diminuir.
 
 A segunda variável (\textit{ampl}) foi criada com o propósito de modelar a amplitude do sinal de saída. Esta causou mudanças mais significativas no código, tal como se pode verificar:
 
@@ -263,8 +263,8 @@ Pode-se observar a implementação da equação explicada anteriormente, no cód
 	delta=16384-(inbuf>>2); 
 	rampa=rampa+delta;		//rampa
 \end{lstlisting}
-O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois evita uma passagem do programa pela ALU, também representa o efeito de K.
-Embora na equação (4) se some o efeito do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa, por isso se subtrai esse efeito.
+O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois, uma vez que o DSP não possui divisor, evita uma passagem do programa pela ALU, também representando o efeito de K.
+Embora na equação (4) se some o valor do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa e por isso efectua-se uma subtração.
 
 \textbf{P1-6}
 \label{para:P1-6}
@@ -354,7 +354,7 @@ Para calcular o novo bit basta negar o bit anteriormente obtido de modo a obter 
 b_n=b_{n-1} \oplus 1
 \end{equation}
 Com esta operação, o bit resultante será sempre alternado em relação ao anterior.
-Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(Figura \ref{bn_cn}). Esta frequência deve-se ao fato de dividir-se  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
+Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(Figura \ref{bn_cn}). Esta frequência deve-se ao fato de se dividir  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
 \vspace{2 mm}
 
 Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
