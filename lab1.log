@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  16 APR 2015 23:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.26)  17 APR 2015 02:11
 entering extended mode
 **lab1.tex
 (C:\Users\Joao\Documents\GitHub\SEPS\lab1.tex
-=======
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.17)  16 APR 2015 22:06
-entering extended mode
-**lab1.tex
-(C:\Users\QQ\Desktop\SEPS\lab1.tex
->>>>>>> origin/master
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -805,7 +798,6 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@cnth=\count142
 \Gm@cntv=\count143
 \c@Gm@tempcnt=\count144
-<<<<<<< HEAD
 \Gm@bindingoffset=\dimen177
 \Gm@wd@mp=\dimen178
 \Gm@odd@mp=\dimen179
@@ -818,31 +810,6 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
 (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-=======
-\Gm@bindingoffset=\dimen174
-\Gm@wd@mp=\dimen175
-\Gm@odd@mp=\dimen176
-\Gm@even@mp=\dimen177
-\Gm@layoutwidth=\dimen178
-\Gm@layoutheight=\dimen179
-\Gm@layouthoffset=\dimen180
-\Gm@layoutvoffset=\dimen181
-\Gm@dimlist=\toks38
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\QQ\Desktop\SEPS\lab1.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
@@ -855,7 +822,6 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
->>>>>>> origin/master
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -913,10 +879,10 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<logo.png, id=4, 499.8675pt x 193.4427pt>
-File: logo.png Graphic file (type png)
- <use logo.png>
-Package pdftex.def Info: logo.png used on input line 35.
+<./logo.png, id=4, 499.8675pt x 193.4427pt>
+File: ./logo.png Graphic file (type png)
+ <use ./logo.png>
+Package pdftex.def Info: ./logo.png used on input line 34.
 (pdftex.def)             Requested size: 141.61081pt x 54.80115pt.
  [1
 
@@ -925,223 +891,162 @@ itHub/SEPS/logo.png>] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.toc)
 \tf@toc=\write4
  [1
 
-] [1
+]
+Overfull \hbox (3.05087pt too wide) in paragraph at lines 97--97
+[][][][]\T1/cmr/m/n/10.95 ALTERAR  
+ []
 
-] [2]
-<./P1_2kHz.jpg, id=38, 2132.71782pt x 1608.76031pt>
+
+Overfull \hbox (3.05087pt too wide) in paragraph at lines 97--97
+[][][][]\T1/cmr/m/n/10.95 ALTERAR  
+ []
+
+
+Overfull \hbox (3.05087pt too wide) in paragraph at lines 97--97
+[][][][]\T1/cmr/m/n/10.95 ALTERAR  
+ []
+
+
+Overfull \hbox (3.05087pt too wide) in paragraph at lines 97--97
+[][][][]\T1/cmr/m/n/10.95 ALTERAR  
+ []
+
+[1
+
+] [2] <./P1_2kHz.jpg, id=38, 2132.71782pt x 1608.76031pt>
 File: ./P1_2kHz.jpg Graphic file (type jpg)
- <use ./P1_2kHz.jpg>
-Package pdftex.def Info: ./P1_2kHz.jpg used on input line 175.
+
+<use ./P1_2kHz.jpg>
+Package pdftex.def Info: ./P1_2kHz.jpg used on input line 169.
 (pdftex.def)             Requested size: 236.01561pt x 178.01973pt.
-
-<./P1_4kHz.jpg, id=39, 1988.17781pt x 1488.31032pt>
+ <./P1_4kHz.jpg, id=39, 1988.17781pt x 1488.31032pt>
 File: ./P1_4kHz.jpg Graphic file (type jpg)
- <use ./P1_4kHz.jpg>
-Package pdftex.def Info: ./P1_4kHz.jpg used on input line 182.
-(pdftex.def)             Requested size: 236.01561pt x 176.6592pt.
 
-<<<<<<< HEAD
-[3 <C:/Users/Joao/Documents/GitHub/SEPS/P1_2kHz.jpg>] [4 <C:/Users/Joao/Documen
-ts/GitHub/SEPS/P1_4kHz.jpg>]
+<use ./P1_4kHz.jpg>
+Package pdftex.def Info: ./P1_4kHz.jpg used on input line 176.
+(pdftex.def)             Requested size: 236.01561pt x 176.6592pt.
+ [3 <C:/Users/Joao/Documents/GitHub/SEPS/P1_2kHz.jpg>]
+[4 <C:/Users/Joao/Documents/GitHub/SEPS/P1_4kHz.jpg>]
 <./P1_1seno.jpg, id=48, 1982.15532pt x 1500.35532pt>
 File: ./P1_1seno.jpg Graphic file (type jpg)
  <use ./P1_1seno.jpg>
-Package pdftex.def Info: ./P1_1seno.jpg used on input line 219.
-=======
-[3 <C:/Users/QQ/Desktop/SEPS/P1_2kHz.jpg>]
-
-Package caption Warning: \label without proper \caption on input line 222.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `tab:sen_2k' on page 4 undefined on input line 218.
-
-<./P1_1seno.jpg, id=45, 1982.15532pt x 1500.35532pt>
-File: ./P1_1seno.jpg Graphic file (type jpg)
- <use ./P1_1seno.jpg>
-Package pdftex.def Info: ./P1_1seno.jpg used on input line 223.
->>>>>>> origin/master
+Package pdftex.def Info: ./P1_1seno.jpg used on input line 214.
 (pdftex.def)             Requested size: 236.01561pt x 178.63835pt.
 
-<<<<<<< HEAD
+[5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 235.
+
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 241.
- [5 <C:/Users/Joao/Documents/GitHub/SEPS/P1_1seno.jpg>] [6]
-Overfull \hbox (50.59204pt too wide) in paragraph at lines 299--300
-=======
-[4 <C:/Users/QQ/Desktop/SEPS/P1_4kHz.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 244.
-
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 244.
- [5 <C:/Users/QQ/Desktop/SEPS/P1_1seno.jpg>]
-Overfull \hbox (50.59204pt too wide) in paragraph at lines 300--301
->>>>>>> origin/master
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 235.
+ [6]
+Overfull \hbox (50.59204pt too wide) in paragraph at lines 296--297
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-<<<<<<< HEAD
-Overfull \hbox (63.65762pt too wide) in paragraph at lines 300--301
-=======
-Overfull \hbox (63.65762pt too wide) in paragraph at lines 301--302
->>>>>>> origin/master
+Overfull \hbox (63.65762pt too wide) in paragraph at lines 297--298
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-<<<<<<< HEAD
-Overfull \hbox (24.46085pt too wide) in paragraph at lines 302--303
+Overfull \hbox (24.46085pt too wide) in paragraph at lines 299--300
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 <./P1_interp.jpg, id=57, 2018.29031pt x 1554.55782pt>
 File: ./P1_interp.jpg Graphic file (type jpg)
  <use ./P1_interp.jpg>
-Package pdftex.def Info: ./P1_interp.jpg used on input line 314.
-=======
-Overfull \hbox (24.46085pt too wide) in paragraph at lines 303--304
-[][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[6]
-
-Package caption Warning: \label without proper \caption on input line 315.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:interp' on page 7 undefined on input line 311.
-
-<./P1_interp.jpg, id=57, 2018.29031pt x 1554.55782pt>
-File: ./P1_interp.jpg Graphic file (type jpg)
- <use ./P1_interp.jpg>
-Package pdftex.def Info: ./P1_interp.jpg used on input line 316.
->>>>>>> origin/master
+Package pdftex.def Info: ./P1_interp.jpg used on input line 311.
 (pdftex.def)             Requested size: 236.01561pt x 181.77104pt.
 
-<./P1-8_espect_s_interp.jpg, id=58, 3276.24pt x 2457.18pt>
+[7] <./P1-8_espect_s_interp.jpg, id=61, 3276.24pt x 2457.18pt>
 File: ./P1-8_espect_s_interp.jpg Graphic file (type jpg)
 
 <use ./P1-8_espect_s_interp.jpg>
-<<<<<<< HEAD
-Package pdftex.def Info: ./P1-8_espect_s_interp.jpg used on input line 326.
-=======
-Package pdftex.def Info: ./P1-8_espect_s_interp.jpg used on input line 328.
->>>>>>> origin/master
+Package pdftex.def Info: ./P1-8_espect_s_interp.jpg used on input line 324.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
 
-<./P1-8_espect_c_interp.jpg, id=59, 3276.24pt x 2457.18pt>
+<./P1-8_espect_c_interp.jpg, id=62, 3276.24pt x 2457.18pt>
 File: ./P1-8_espect_c_interp.jpg Graphic file (type jpg)
 
 <use ./P1-8_espect_c_interp.jpg>
-<<<<<<< HEAD
-Package pdftex.def Info: ./P1-8_espect_c_interp.jpg used on input line 333.
+Package pdftex.def Info: ./P1-8_espect_c_interp.jpg used on input line 331.
 (pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
  [8 <C:/Users/Joao/Documents/GitHub/SEPS/P1_interp.jpg> <C:/Users/Joao/Document
 s/GitHub/SEPS/P1-8_espect_s_interp.jpg>]
-[9 <C:/Users/Joao/Documents/GitHub/SEPS/P1-8_espect_c_interp.jpg>] [10]
-[11] [12] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux) ) 
+[9 <C:/Users/Joao/Documents/GitHub/SEPS/P1-8_espect_c_interp.jpg>]
+<./bn_cn.jpg, id=69, 2527.4425pt x 1882.03125pt>
+File: ./bn_cn.jpg Graphic file (type jpg)
+ <use ./bn_cn.jpg>
+Package pdftex.def Info: ./bn_cn.jpg used on input line 373.
+(pdftex.def)             Requested size: 236.01561pt x 175.72206pt.
+ [10 <C:/Users/Joao/Documents/GitHub/SEPS/bn_cn.jpg>]
+<./cn_dn.jpg, id=74, 2120.6728pt x 1596.71532pt>
+File: ./cn_dn.jpg Graphic file (type jpg)
+ <use ./cn_dn.jpg>
+Package pdftex.def Info: ./cn_dn.jpg used on input line 393.
+(pdftex.def)             Requested size: 236.01561pt x 177.68579pt.
+ [11 <C:/Users/Joao/Documents/GitHub/SEPS/cn_dn.jpg>]
+<./port_mod.jpg, id=79, 2192.94281pt x 1620.80531pt>
+File: ./port_mod.jpg Graphic file (type jpg)
+ <use ./port_mod.jpg>
+Package pdftex.def Info: ./port_mod.jpg used on input line 430.
+(pdftex.def)             Requested size: 236.01561pt x 174.43102pt.
+
+<./dn_mod.jpg, id=80, 2211.01031pt x 1675.00781pt>
+File: ./dn_mod.jpg Graphic file (type jpg)
+ <use ./dn_mod.jpg>
+Package pdftex.def Info: ./dn_mod.jpg used on input line 439.
+(pdftex.def)             Requested size: 236.01561pt x 178.7819pt.
+ [12 <C:/Users/Joao/Documents/GitHub/SEPS/port_mod.jpg>]
+<./espetro.jpg, id=84, 2247.14531pt x 1693.07532pt>
+File: ./espetro.jpg Graphic file (type jpg)
+ <use ./espetro.jpg>
+Package pdftex.def Info: ./espetro.jpg used on input line 451.
+(pdftex.def)             Requested size: 236.01561pt x 177.81691pt.
+
+[13 <C:/Users/Joao/Documents/GitHub/SEPS/dn_mod.jpg> <C:/Users/Joao/Documents/G
+itHub/SEPS/espetro.jpg>] [14] (C:\Users\Joao\Documents\GitHub\SEPS\lab1.aux) ) 
 Here is how much of TeX's memory you used:
- 16360 strings out of 493921
- 302647 string characters out of 3144879
- 348751 words of memory out of 3000000
- 19331 multiletter control sequences out of 15000+200000
+ 16447 strings out of 493921
+ 304490 string characters out of 3144879
+ 350750 words of memory out of 3000000
+ 19413 multiletter control sequences out of 15000+200000
  21674 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,11n,75p,798b,1534s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Joao\AppDa
-ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\Users\J
-oao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C
-:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti09
-00.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
-00\ecrm0900.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecrm0600.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
-r\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Joao\AppData\Local\MiKTeX\
-2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Joao\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\Joao\App
-Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users
-\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> 
-<C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc
-2074.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
-i600\eccc1440.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on lab1.pdf (14 pages, 10623666 bytes).
+ 62i,11n,76p,744b,1534s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 
+<C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti
+1095.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
+i600\ecbx1200.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ecti0900.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecrm0600.pk> <C:\Users\Joao\AppData\Local\MiKTe
+X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Joao\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Joao\A
+ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Use
+rs\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk
+> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
+rm1095.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
+dpi600\ecbx2074.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
+appen\ec\dpi600\eccc2074.pk> <C:\Users\Joao\AppData\Local\MiKTeX\2.9\fonts\pk\l
+jfour\jknappen\ec\dpi600\eccc1440.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmmi9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb>
+Output written on lab1.pdf (16 pages, 17612668 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
-=======
-Package pdftex.def Info: ./P1-8_espect_c_interp.jpg used on input line 335.
-(pdftex.def)             Requested size: 236.01561pt x 177.0068pt.
- [7 <C:/Users/QQ/Desktop/SEPS/P1_interp.jpg> <C:/Users/QQ/Desktop/SEPS/P1-8_esp
-ect_s_interp.jpg>]
-
-Package caption Warning: \label without proper \caption on input line 327.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:espect_s_interp' on page 8 undefined on input lin
-e 339.
-
-
-Package caption Warning: \label without proper \caption on input line 334.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:espect_c_interp' on page 8 undefined on input lin
-e 339.
-
-[8 <C:/Users/QQ/Desktop/SEPS/P1-8_espect_c_interp.jpg>] [9] [10]
-(C:\Users\QQ\Desktop\SEPS\lab1.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
-Here is how much of TeX's memory you used:
- 14831 strings out of 493921
- 258203 string characters out of 3147290
- 317347 words of memory out of 3000000
- 17815 multiletter control sequences out of 15000+200000
- 21674 words of font info for 49 fonts, out of 3000000 for 9000
- 841 hyphenation exceptions out of 8191
- 63i,11n,75p,798b,1215s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/cm-super/sfbx2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/cm-super/sfcc1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/cm-super/sfcc2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-sup
-er/sfrm0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm08
-00.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/cm-super/sfti0900.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on lab1.pdf (12 pages, 10721316 bytes).
-PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
->>>>>>> origin/master
+ 496 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
