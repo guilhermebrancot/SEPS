@@ -73,7 +73,7 @@
 
 Este trabalho consiste na primeira parte do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
 
-Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Para tal foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois mini projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK.
+Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Para tal foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois mini projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
 
 \section{Projecto}
 
@@ -347,12 +347,12 @@ Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma fre
 
 Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock" cuja função vai ser criar uma sequência de bits $ b_n $ com $f_b=1$ kbps. Isto significa que, considerando $f_s$, a cada 16 ciclos é gerado um novo bit, alternado em relação ao anterior. Assim, implementou-se um contador que é incrementado em cada ciclo  e que tem uma condição para verificar quando chegar ao valor 16. Ao entrar nessa condição é implementada a lógica para cálculo do novo bit da sequência e o contador é reiniciado.
 
-Para calcular o novo bit, basta negar o bit anteriormente obtido para obter uma sequência de bits alternada, tendo sido concretizado através de uma simples XOR:
+Para calcular o novo bit basta negar o bit anteriormente obtido de modo a obter uma sequência de bits alternada, tendo sido concretizado este raciocínio com recurso uma simples XOR:
 \begin{equation}
 b_n=b_{n-1} \oplus 1
 \end{equation}
 Com esta operação, o bit resultante será sempre alternado em relação ao anterior.
-Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(ver figura com bn). Esta frequência ocorre devido a dividir-se  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
+Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(Figura \ref{bn_cn}). Esta frequência deve-se ao fato de dividir-se  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
 \vspace{2 mm}
 
 Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
@@ -456,6 +456,13 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 -Principais resultados e conclusões sobre eles, erros a corrigir (se houverem), o que melhorar
 
 \section{Anexos}
--Codigo?
 
+\subsection{Anexo A}
+Oscilador Controlado Numericamente:
+\lstinputlisting[language=C]{bpsk.c}
+
+\subsection{Anexo B}
+Transmissor BPSK:
+\lstinputlisting[language=C]{transmissor.c}
+	
 \end{document}
