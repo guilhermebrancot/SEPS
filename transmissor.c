@@ -8,7 +8,7 @@ short cont2= 0;
 short bn= 1;
 short cn= 0;
 short dn = -32767;
-short sin[4]={0,32767,0, -32767};
+short sin[4]={0,32767,0, -32767};	//portadora
 short mod = 0;
 short sn = 0;
 char	intflag = FALSE;
@@ -24,32 +24,28 @@ interrupt void c_int11()         	//interrupt service routine
 
 void main()
 {
-  //short 	inbuf;
   comm_intr();                   	//init DSK, codec, McBSP
-
-  //inbuf=0;
 
   while(1){                	   	//infinite loop
     if(intflag != FALSE){
       intflag = FALSE;
-      if(cont==16){				//condicao para criacao de novo bit
-    	  cn=bn^cn;				//codificacao de bn
-    	  bn=bn^1;				//calculo de novo bit
-    	  cont=0;				//reset de contador
+      if(cont==16){			//condicao para criacao de novo bit
+    	  cn=bn^cn;			//codificacao de bn
+    	  bn=bn^1;			//calculo de novo bit
+    	  cont=0;			//reset de contador
     	dn=32767*((cn<<1)-1);	//mapeamento do bit codificado
       }
       cont=cont+1;
 
-      mod = sin[cont2];
+      mod = sin[cont2];			//sinal da portadora
       cont2= cont2+1;
-      sn=((dn*mod)<<1)>>16;     //Q15 virgula fixa
+      sn=((dn*mod)<<1)>>16;     //calculo do sinal modulado
        cont2=cont2&3;
 
-      //LUT[bn]= AIC_buffer.channel[LEFT];		// faz loop do canal esquerdo
+      //LUT[bn]= AIC_buffer.channel[LEFT];	// faz loop do canal esquerdo
       AIC_buffer.channel[LEFT] =dn;
       //inbuf = AIC_buffer.channel[RIGHT];	// faz loop do canal direito
       AIC_buffer.channel[RIGHT] = sn;
     }
   }
 }
- 
