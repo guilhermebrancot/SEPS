@@ -74,7 +74,7 @@
 
 Este trabalho consiste na primeira parte do projecto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
 
-Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Para tal correram-se dois projectos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois mini projectos: um oscilador sinusoidal controlado numericamente e o modulador do modem BPSK.
+Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Para tal foram estudados dois projectos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois mini projectos: um oscilador sinusoidal controlado numericamente e o modulador do modem BPSK.
 
 %objectivo do laboratorio
 %
@@ -95,14 +95,14 @@ O objectivo deste projeto é representar a função sinusoidal, multiplicada por
 
 Ao analisar o código deste projeto à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
-Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as amostras da sinusoide. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho G=33 obtemos um valor superior ao permitido pelo formato Q15, fazendo com que nesses pontos o valor da sinusoide "caia".     
+Para compreender o limite desta sinusóide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusóide, se multiplicarmos a mesma por um ganho G=33 obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}), fazendo com que nesses pontos o valor da sinusóide "caia".     
 
 \subsubsection{loop\_intr}
 \label{sec:loop}
-Este projeto tem como objectivo fornecer-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
+Este projeto fornece-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
 %interpretar!!
-No projeto anterior observou-se os efeitos de overflow de uma variável. Neste observam-se os efeitos de aliasing (ou não, não me recordo se o DSP tem um filtro anti-aliasing à entrada)  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. Se havia anti-aliasing, a partir dos 4khz deixariamos de ver uma sinusoide com os 3.3V. Não fizemos a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente nao iamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
+No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4khz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não iriamos ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
 
 
 \subsection{BPSK}
@@ -111,7 +111,7 @@ Este projeto é constituído por duas partes, a primeira é um oscilador control
 
 \subsubsection{P1. Oscilador controlado numericamente}
 
-Usa-se o projeto descrito na secção \ref{sec:loop} como base para a construção de um oscilador controlado numericamente (\textit{NCO}). Um \textit{NCO} é um gerador de sinal digital que cria uma forma de onda discretamente representada no tempo e na amplitude. O \textit{NCO} terá as seguintes características:
+Usou-se o projeto descrito na secção \ref{sec:loop} como base para a construção de um oscilador controlado numericamente (\textit{NCO}). Um \textit{NCO} é um gerador de sinal digital que cria uma forma de onda discretamente representada no tempo e na amplitude. O \textit{NCO} terá as seguintes características:
 
 \begin{table}[H]
 	\centering
@@ -145,7 +145,7 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 %labels necessarios?
  Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
-Para construir um Oscilador de Relaxamento foi criado um programa que aumenta por a cada ciclo o sinal à saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante, tal que $32767$ seja seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
+Para construir um Oscilador de Relaxamento foi criado uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante, tal que $32767$ seja seu múltiplo. Ao verificar a tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
 
 \begin{table}[H]
@@ -182,7 +182,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 	\includegraphics[width=0.5\textwidth]{./P1_4kHz}~\\
 	\caption{Rampa com frequência de $ 4 kHz $}
 \end{figure}
-Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa.
+Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor (figura 1), a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa.
 \vspace{2 mm}
 %salientar inversor por causa das imagens
 \textbf{P1-2}
@@ -201,10 +201,10 @@ Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para
 \textbf{P1-3}
 \label{para:P1-3}
 
-Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal de uma sinusoide.
+Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.
 
 De acordo com o projeto, a rampa é representada num formato Q10, com 1 bit sinal, 5 bits inteiros e 10 bits fraccionários. 
-Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa, esses 5 bits irão indexar e escolher qual o valor da tabela de LUT a usar para criar a sinusoide. 
+Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa. Esses 5 bits irão apontar para o valor da tabela de LUT a usar para criar a sinusóide. 
 
 Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
@@ -215,7 +215,7 @@ Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 	sinusoide=LUT[index];
 \end{lstlisting}
 
-Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} direitos de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} (Figura \ref{fig:sen2k}).
+Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts} para a direita de maneira a ter um sinal apenas com zeros, o bit sinal e esses 5 bits encostados à direita. A seguir aplicou-se uma máscara constituída por uma AND com 31 bits, de maneira a retirar o bit sinal e finalmente isolar num sinal o índice pretendido da LUT. Com o índice é uma questão de aceder à tabela e obter \textit{y1}, neste caso representado pelo sinal \textit{sinusoide} (Figura \ref{fig:sen2k}).
 
 \begin{figure}[H]
 	\centering
@@ -342,7 +342,7 @@ Como se pode observar nas figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_
 
 A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, não apresenta uma melhoria nos resultados, sendo assim um método que apenas irá exaustar mais os recursos do processador sem obter qualquer tipo de retorno notável. Podemos então concluir que caso seja preciso usar um sinal digital de uma sinosóide podemos usar apenas o método que não usa interpolação.
 
-É de referir que não se está a excluir a hipótse da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos usados.
+É de referir que não se está a excluir a hipótese da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos usados.
 
 \subsubsection{P2. Transmissor BPSK}
 
@@ -368,17 +368,14 @@ c_n=c_{n-1} \oplus b_n \hspace{3 mm} ,c_0=0
 \end{equation}
 Como um bit novo só quando o contador chega ao valor $16$, o mesmo também só é codificado nessa condição, ou seja, a cada 16 ciclos é codificado um bit. 
 
-Tal como em $ b_n $ também $ c_n $ é representado por uma onda quadrada que varia entre "0" e "1" só que com o dobro do período, devido a só ter dois resultados para os quatro casos possíveis da XOR que realiza a codificação(figura X).
+Tal como em $ b_n $ também $ c_n $ é representado por uma onda quadrada que varia entre "0" e "1" só que com o dobro do período, devido a só ter dois resultados para os quatro casos possíveis da XOR que realiza a codificação(figura 7).
 
-IMAGEM bn com cn
-\vfill
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[width=0.5\textwidth]{./bn_cn}~\\
-%	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
-%\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./bn_cn}~\\
+	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
+\end{figure}
 
-%\vspace{-0.4cm} %este espaçamento dá cabo da formatação toda no meu tex.
 Depois de obter $ c_n $ passa-se ao mapeamento do mesmo. O mapeamento baseia-se em duas condições:
 \begin{equation}
 	c_n= '1' \rightarrow d_n =+1 \hspace{5 mm} c_n='0' \rightarrow d_n=-1
@@ -389,10 +386,14 @@ Pode-se observar então o mapeamento efetuado através da seguinte expressão:
 \begin{equation}
 d_n=32767*((c_n << 1)-1)
 \end{equation}
-Antes de mais, o ganho que está a ser multiplicado é utilizado devido ao elemento modulador do transmissor, que vai ser falado a seguir. Considerando a expressão sem esse ganho, vê-se que para $ c_n=0 $, como o shift não influencia o resultado, o mesmo só depende da subtração e é sempre o pretendido, $d_n=-1$. Se $c_n=1$, o shift duplica  esse valor, e depois ao subtrair obtém-se $d_n=1$. \vfill
-Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois depende diretamente de $c_n$ e só se mapeia um novo bit depois de ele ser codificado. Concluído o mapeamento obtém-se mais uma vez uma onda quadrada mas desta vez varia entre "-1" e "1" (figura X).
+Antes de mais, o ganho que está a ser multiplicado é utilizado devido ao elemento modulador do transmissor, que vai ser falado a seguir. Considerando a expressão sem esse ganho, vê-se que para $ c_n=0 $, como o shift não influencia o resultado, o mesmo só depende da subtração e é sempre o pretendido, $d_n=-1$. Se $c_n=1$, o shift duplica  esse valor, e depois ao subtrair obtém-se $d_n=1$.
+Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois depende diretamente de $c_n$ e só se mapeia um novo bit depois de ele ser codificado. Concluído o mapeamento obtém-se mais uma vez uma onda quadrada mas desta vez varia entre "-1" e "1" (figura 8).
 
-IMAGEM cn com dn
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./dn_cn}~\\
+	\caption{Formas de onda de $d_n$ (amarelo) e $c_n$ (verde).}
+\end{figure}
 
 %Pergunta 2
 \vspace{2 mm}
@@ -413,9 +414,9 @@ Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoi
 	\end{tabular}
 \end{table}
 
-Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e zero-crossing da portadora. Para gerar a portadora (figura X) recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
+Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e zero-crossing da portadora. Para gerar a portadora recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
 
-IMAGEM com portadora
+%IMAGEM com portadora -- na dropbox nao havia imagem da portadora
 
 A onda modulada é então representada pela seguinte expressão:
 \begin{equation}
@@ -423,34 +424,44 @@ A onda modulada é então representada pela seguinte expressão:
 \end{equation}
 Neste caso os valores do seno são os valores das amostras discutidas anteriormente.
 
-
-% proximos 3 comments foram retirados dos slides, apagar quando quiserem:
-% To store the result in a n bit word it is necessary to shift the result one bit to the left (to eliminate the replicated sign bit) and store the n MSBs of the 2n bit word
-% It is possible to use a more accurate format provided the multiplication result is representable in this format (this must be known beforehand)
-% Qn-1×Qn-1  can always be stored in Qn-1 because |x ·y| ≤ 1%)
 \vspace{2 mm}
 
 %Pergunta 3
 \textbf{P2-3}
-Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (figura Y).
+Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (figura 9).
 
-IMAGEM portadora com modulada 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./port_sn}~\\
+	\caption{Onda portadora (verde) e $s_n$ (amarelo).}
+\end{figure}
+
 \vspace{2 mm}
 
-Como se pode observar pela imagem e considerando a expressão (8), a onda portadora começa em oposição de fase com a onda modulada. Isto ocorre quando $d_n=-1$, o que significa que quando $d_n=1$ a onda modulada é igual à portadora. É possível observar quando $d_n$ muda de valor pois é exatamente quando a onda modulada inverte a sua direção (figura Z). 
+Como se pode observar pela imagem e considerando a expressão (8), a onda portadora começa em oposição de fase com a onda modulada. Isto ocorre quando $d_n=-1$, o que significa que quando $d_n=1$ a onda modulada é igual à portadora. É possível observar quando $d_n$ muda de valor pois é exatamente quando a onda modulada inverte a sua amplitude (figura 10). 
 
-("a sua direção" é uma boa maneira de explicar?) 
 
-IMAGEM com dn e onda modulada
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./dn_sn}~\\
+	\caption{Formas de onda de $d_n$ (amarelo) e $s_n$ (verde).}
+\end{figure}
 
-Este fenómeno acontece a cada 8 ciclos pois como já foi explicado anteriormente tem-se um bit-rate dividido por dois que acaba por influenciar $d_n$ e que... 
-%Explicar FFT!!! 
+Este fenómeno acontece a cada 8 ciclos pois, como já foi explicado anteriormente, a frequência da onda correspondente à fonte de bits é o bit-rate dividido por dois e uma vez que a codificação divide esta frequência por dois, ou seja, a frequência de $d_n$ é 250 Hz e por isso cabem oito ciclos da portadora num meio ciclo de $d_n$.
+
 \vspace{2 mm}
 
-Espectro
 
-Modulação=> tempo: é multiplicação da onda quadrada com a sinusoide. Na frequência: as harmónicas ímpares (espectro quadrada) convoluídas com dirac a 4kHz(espectro portadora).
-Na imagem o espectro da quadrada centrada em 4khz como se esperava. As harmónicas estão espaçadas 500Hz pois o sinal $d_n$ consiste numa onda quadrada de frequência fundamental 250 Hz.
+A onda modulada no tempo consiste na multiplicação de uma onda quadrada com uma onda sinusoidal, na frequência isto consiste na convulação do espetro da primeira (impulsos nos múltiplos ímpares da frequência fundamental) com o espetro da segunda (um impulso à frequência $f_0$). Isto resultaria numa translação do espetro da onda quadrada, ficando centrado na frequência da onda sinusoidal.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./espetro_P2}~\\
+	\caption{Espectro do sinal $s_n$.}
+\end{figure}
+
+Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como se pode observar, as harmónicas de maior amplitude estão espaçadas 250 Hz em relação a $f_0$ indicando que a frequência fundamental da onda quadrada é 250 Hz, como esperado.
 
 
 \section{Conclusão}
