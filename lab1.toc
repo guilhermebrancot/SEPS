@@ -1,13 +1,5 @@
 \select@language {portuguese}
 \contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}
 \contentsline {section}{\numberline {2}Projecto}{1}
-\contentsline {subsection}{\numberline {2.1}Projectos de Demonstra\IeC {\c c}\IeC {\~a}o}{1}
-\contentsline {subsubsection}{\numberline {2.1.1}sine8\_buf}{1}
-\contentsline {subsubsection}{\numberline {2.1.2}loop\_intr}{1}
-\contentsline {subsection}{\numberline {2.2}BPSK}{2}
-\contentsline {subsubsection}{\numberline {2.2.1}P1. Oscilador controlado numericamente}{2}
-\contentsline {subsubsection}{\numberline {2.2.2}P2. Transmissor BPSK}{9}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{14}
-\contentsline {section}{\numberline {4}Anexos}{14}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{14}
-\contentsline {subsection}{\numberline {4.2}Anexo B}{16}
+\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{1}
+\contentsline {section}{\numberline {4}Anexos}{1}
