@@ -14,7 +14,7 @@
 \usepackage{xcolor,colortbl}
 \usepackage{array}
 \usepackage{fixltx2e}
-\setcounter{secnumdepth}{4}
+\setcounter{secnumdepth}{3}
 
 \linespread{1.3}
 \usepackage{indentfirst}
@@ -31,14 +31,14 @@
 		\hfill \break
 		\hfill \break
 		
-		\includegraphics[width=0.3\textwidth]{./logo}~\\[1cm]
+		\includegraphics[width=0.4\textwidth]{./logo}~\\[1cm]
 		
 		\textsc{\Large Mestrado Integrado em Engenharia Electrotécnica e de Computadores}\\[1.5cm]
-		\textsc{\huge Sistemas Electrónicos de Processamento de Sinal}\\[0.25cm]
+		\textsc{\huge Sistemas Electrónicos de Processamento de Sinal}\\[0.4cm]
 		
-		{\huge \bfseries BPSK Modem \\[1.2cm]}
+		{\huge \bfseries Desenvolvimento de um Modulador BPSK com uso de \textit{Costas Loop} \\[1.2cm]}
 		
-		Grupo n.º 2/3 \vspace{0.3cm}
+		Grupo n.º 3 \vspace{0.3cm}
 		
 		\begin{tabular}{l r}
 			André Filipe Barroso Cerqueira \hspace{1mm} & n.º 65144 \\
@@ -54,7 +54,7 @@
 	
 		\vfill
 		
-		{\large Lisboa, 17 de Abril de 2015} 
+		{\large Lisboa, 1 de Junho de 2015} 
 		
 	\end{center}
 \end{titlepage}
@@ -70,7 +70,7 @@
 \pagenumbering{arabic}
 
 \section{Introdução}
-
+\todo{mudar introdução}
 Este trabalho consiste na primeira parte do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
 
 Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Neste projeto foi utilizada a placa DSK TMS320C6713. Foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
@@ -97,7 +97,7 @@ Este projeto fornece-nos um template para os próximos projetos, em termos de co
 No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
 \todo{porque nao foi feita?}
 
-\subsection{BPSK}
+\subsection{BPSK Modem}
 Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK. Devido à existência de um inversor na placa utilizada deu-se, ao longo deste projeto, atenção ao efeito do inversor nos sinais, como se poderá observar nas próximas secções.
 
 \subsubsection{P1. Oscilador controlado numericamente}
@@ -120,18 +120,18 @@ Usou-se o projeto descrito na secção \ref{sec:loop} como base para a construç
 O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão posteriormente explicados:
 
 \begin{enumerate}
-	\item Oscilador de Relaxamento (Integrador de Rampa). 
+	\item Oscilador de Relaxação (Integrador de Rampa). 
 	\item Look-up-table (LUT). 
-	\item Obtenção do sinal sinusoidal através da LUT.
-	\item Criação de duas variáveis para controlar a frequência e amplitude do sinal sinusoidal.
+	\item Obtenção de um sinal sinusoidal através da LUT.
+	\item Criação de variáveis para controlo da frequência e amplitude do sinal sinusoidal.
 	\item Utilização do sinal de entrada para controlar a frequência do sinal.
-	\item Teste do oscilador com uma onda sinusoidal à entrada para observar o sinal modulado.
+	\item Teste do oscilador com uma onda sinusoidal à entrada.
 	\item Melhoria da qualidade do oscilador com interpolação linear.  
 	\item Comparação dos espectros com e sem interpolação.
 \end{enumerate}
-\pagebreak
+%\pagebreak
 
-\textbf{P1-1}
+\paragraph{Oscilador de Relaxação} \hspace{0pt}
 
  Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ \todo{asneira a dizer 1V}de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
@@ -174,9 +174,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 \end{figure}
 
 Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa. É de salientar que devido à presença do inversor da placa foi introduzido o simétrico da rampa calculada no canal de modo a observar esta no sentido correto.
-\vspace{2 mm}
-
-\textbf{P1-2}
+\paragraph{\textit{Look-up-table}} \hspace{0pt}
 
 Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
 
@@ -189,9 +187,7 @@ Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para
 
 Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
 
-\vspace{2 mm}
-
-\textbf{P1-3}
+\paragraph{Obtenção de um sinal sinusoidal através da LUT} \hspace{0pt}
 
 Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.
 
@@ -217,11 +213,9 @@ Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts}
 \end{figure}
 
 Como se pode observar na figura foi possível criar um sinal aproximadamente sinusoidal através de uma LUT indexada por uma rampa. Nesta figura não é possível notar mas quando se aproxima mais o sinal no osciloscópio verifica-se pequenos degraus ao longo do sinal, que simbolizam a aproximação obtida através das amostras.
-\vspace{2 mm}
 
-\textbf{P1-4}
+\paragraph{Criação de variáveis para controlo da frequência e amplitude do sinal sinusoidal} \hspace{0pt}
 
-%variaveis vs sinais
 Foram criadas duas variáveis para que fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
 A primeira variável foi já antes referida, nas secções P1-1 e P1-3. Esta variável, caso alterada iria alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída e também se o seu valor diminuir, a frequência de saída irá diminuir.
@@ -249,9 +243,8 @@ Q_{m} * Q_{k}=Q_{m+k-n+1}
 \end{equation}
 Neste caso como se multiplica dois sinais Q15 e \textit{n}$=$16 bits representa-se o resultado com formato Q15 como foi dito anteriormente.
 Com a criação destas variáveis passou-se a ter um oscilador numericamente controlado.
-\vspace{2 mm}
 
-\textbf{P1-5}
+\paragraph{Utilização do sinal de entrada para controlar a frequência do sinal} \hspace{0pt}
 
 Para que a frequência do sinal de saída seja modulada através da amplitude do sinal de entrada, é necessário criar uma relação linear entre o sinal de entrada \textit{inbuf} e o incremento da rampa \textit{delta}, pois este é que define a frequência do sinal sinusoidal com a rampa. Como tal a relação entre o \textit{inbuf} e o \textit{delta} é ilustrada pela seguinte equação:
 \begin{equation}
@@ -268,16 +261,14 @@ Pode-se observar a implementação da equação explicada anteriormente, no cód
 O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois, uma vez que o DSP não possui divisor, evita uma passagem do programa pela ALU, também representando o efeito de K.
 Embora na equação (4) se some o valor do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa e por isso efectua-se uma subtração.
 
-\textbf{P1-6}
-\label{para:P1-6}
+\paragraph{Teste do oscilador com uma onda sinusoidal à entrada} \label{para:P1-6} \hspace{0pt}
 
 Para testar o funcionamento do NCO, pôs-se na entrada do DSP um sinal sinusoidal com frequência igual a 2 Hz, como sinal modulante, em vez da onda quadrada pedida no enunciado pois seria mais fácil observar a variação de frequência do sinal de saída se a variação de amplitude do sinal de entrada fosse gradual em vez de ser constante com descontinuidades. 
 \vspace{1 mm}
 
 Esperou-se que, no máximo e mínimo de amplitude da sinusoide de entrada, a onda modulada tivesse máxima e mínima frequência respetivamente, e que uma variação na amplitude do sinal modulante provocasse um efeito linear na frequência do sinal modulado. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo para poder observar a variação pretendida. Para ser possível era necessário usar a tal onda quadrada como sinal de entrada.
-\vspace{2 mm}
 
-\textbf{P1-7}
+\paragraph{Melhoria da qualidade do oscilador com interpolação linear} \hspace{0pt}
 
 Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método de interpolação linear descrito na seguinte equação:
 
@@ -312,10 +303,9 @@ Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{f
 	\label{fig:interp}
 \end{figure} \todo{qual canal é qual sinal na imagem?}
 Nesta figura é possível observar os "degraus" mencionados anteriormente, tanto na onda interpolada como na onda não interpolada.
-\vspace{2 mm}
 
+\paragraph{Comparação dos espectros com e sem interpolação} \hspace{0pt}
 
-\textbf{P1-8}
 \todo{salientar q se fez pra um delta diferente de 16384}
 Não sendo possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos (Figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}).
 
@@ -346,9 +336,7 @@ A conclusão que se pode tirar com estas observações é que o método de inter
 O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
 Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência da portadora $f_0=4$ kHz.
 
-\vspace{2 mm}
-
-\textbf{P2-1}
+\paragraph{Fonte de Bits} \hspace{0pt}
 
 Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock" cuja função vai ser criar uma sequência de bits $ b_n $ com $f_b=1$ kbps. Isto significa que, considerando $f_s$, a cada 16 ciclos é gerado um novo bit, alternado em relação ao anterior. Assim, implementou-se um contador que é incrementado em cada ciclo  e que tem uma condição para verificar quando chegar ao valor 16. Ao entrar nessa condição é implementada a lógica para cálculo do novo bit da sequência e o contador é reiniciado.
 
@@ -358,7 +346,8 @@ b_n=b_{n-1} \oplus 1
 \end{equation}
 Com esta operação, o bit resultante será sempre alternado em relação ao anterior.
 Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(Figura \ref{bn_cn}). Esta frequência deve-se ao fato de se dividir  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
-\vspace{2 mm}
+
+\paragraph{Codificador Diferencial} \hspace{0pt}
 
 Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
 A codificação de $b_n$ resulta também de uma operação lógica XOR, como se pode observar: 
@@ -374,6 +363,9 @@ Tal como em $ b_n $ também $ c_n $ é representado por uma onda quadrada que va
 	\caption{$ b_n $(verde) e $ c_n $(amarelo)}
 	\label{bn_cn}
 \end{figure}
+
+\paragraph{Mapeador} \hspace{0pt}
+
 Depois de obter $ c_n $ passa-se ao mapeamento do mesmo. O mapeamento baseia-se em duas condições:
 \begin{equation}
 	c_n= '1' \rightarrow d_n =+1 \hspace{5 mm} c_n='0' \rightarrow d_n=-1
@@ -393,7 +385,8 @@ Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois
 	\caption{Formas de onda de $d_n$ (amarelo) e $c_n$ (verde).}
 	\label{cn_dn}
 \end{figure}
-\textbf{P2-2}
+
+\paragraph{Implementação do Modulador} \hspace{0pt}
 
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é contante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta:
@@ -412,7 +405,7 @@ Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoi
 \end{table}
 
 
-Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e zero-crossing da portadora. Para gerar a portadora (Figura \ref{port_mod}) recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
+Escolheram-se estes valores uma vez que o período de amostragem coincide com os instantes de máximo, mínimo e \textit{zero-crossing} da portadora. Para gerar a portadora (Figura \ref{port_mod}) recorreu-se a um contador que, em cada interrupção (ocorrendo em cada instante de amostragem, como explicado no enunciado), aponta para cada entrada da tabela e põe a amostra numa variável que, após se incrementar o contador, irá ser multiplicada por $d_n$. Esta tabela não gera uma onda triangular pois das harmónicas destas, abaixo da frequência de amostragem ( $f_0$=4kHz e 3$f_0$=12kHz) apenas a primeira harmónica se encontra na banda de passagem do filtro de reconstrução do DAC, que terá frequência de corte Fs/2.
 
 A onda modulada é então representada pela seguinte expressão:
 \begin{equation}
@@ -421,7 +414,7 @@ A onda modulada é então representada pela seguinte expressão:
 Neste caso os valores do seno são os valores das amostras discutidas anteriormente.
 \vspace{2 mm}
 
-\textbf{P2-3}
+\paragraph{Teste do Modulador BPSK} \hspace{0pt}
 
 Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (Figura \ref{port_mod}).
 \todo{trocar imagem pela q tem mais transições}
@@ -444,6 +437,8 @@ Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-
  \end{figure}
  Este fenómeno acontece a cada 8 ciclos pois, como já foi explicado anteriormente, a frequência da onda correspondente à fonte de bits é o bit-rate dividido por dois e uma vez que a codificação divide esta frequência por dois, ou seja, a frequência de $d_n$ é 250 Hz e por isso cabem oito ciclos da portadora num meio ciclo de $d_n$.
  \vspace{2 mm}
+
+\paragraph{Espectro do Sinal Modulado} \hspace{0pt}
  
 Para compreender melhor o sinal modulado, observou-se o espetro do mesmo (Figura \ref{espetro}).
 \begin{figure}[H]
@@ -456,14 +451,52 @@ A onda modulada no tempo consiste na multiplicação de uma onda quadrada com um
 
 Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como se pode observar, as harmónicas de maior amplitude estão espaçadas 250 Hz em relação a $f_0$ indicando que a frequência fundamental da onda quadrada é 250 Hz, como esperado.
 
+\subsection{\textit{Costas Loop}}
+\todo{introdução teorica}
+
+\textbf{Introdução do \textit{Scrambler}:}
+
+\todo{guilherme}
+
+\textbf{Implementação de NCO controlado pelo erro:}
+
+\todo{joao}
+
+
+\textbf{Implementação dos Filtros:}
+
+\todo{guilherme}
+
+\textbf{\textit{Loop} desmodulador:}
+
+\todo{andre}
+
+\textbf{Testes do \textit{Costas Loop} com onda sinusoidal}
+
+\todo{joao}
+
+\textbf{Testes do \textit{Costas Loop} com BPSK sem zero}
+
+\todo{Joao}
+
+\textbf{Testes do \textit{Costas Loop} com BPSK com zero}
+
+\todo{andre}
+
+\textbf{Transient}
+
+\todo{andre}
 
 \section{Conclusão}
+
+\todo{alterar conclusao}
+
 No projeto do oscilador, aprendeu-se como controlar um oscilador a partir de vários parâmetros e o efeito de interpolação linear no mesmo. Como já foi afirmado, a interpolação criou um sinal com maior precisão embora não tenha sido possível observar essa melhoria devido às limitações do equipamento utilizado.
 
  No projeto do transmissor criou-se a primeira parte do modem BPSK, aproveitando o conhecimento adquirido no projeto do oscilador, e observou-se os efeitos da modulação de uma sequência de bits codificada e mapeada, tanto no tempo como na frequência, o que deu para observar pelas inversões de fase presentes no sinal modulado e nas harmónicas do espetro.
 
 \section{Anexos}
-
+\todo{acrescentar codigo da parte 2}
 \subsection{Anexo A}
 Oscilador Controlado Numericamente:
 \lstinputlisting[language=C]{bpsk.c}
