@@ -18,7 +18,7 @@
 
 \linespread{1.3}
 \usepackage{indentfirst}
-\usepackage[top=2cm, bottom=2cm, right=2.5cm, left=2.5cm]{geometry}
+\usepackage[top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm]{geometry}
 
 
 
@@ -86,14 +86,16 @@ O objectivo deste projeto é representar a função sinusoidal, multiplicada por
 
 Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
-Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}), fazendo com que nesses pontos o valor da sinusoide "caia".     
-
+Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}), fazendo com que nesses pontos o valor da sinusoide "caia". 
+ \todo{ultimo paragrafo mal explicado}   
+%nao gostou da expressao "caia"
 \subsubsection{loop\_intr}
 \label{sec:loop}
 Este projeto fornece-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
 %interpretar!!
-No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4khz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter.
+No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
+\todo{porque nao foi feita?}
 
 \subsection{BPSK}
 Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK. Devido à existência de um inversor na placa utilizada deu-se, ao longo deste projeto, atenção ao efeito do inversor nos sinais, como se poderá observar nas próximas secções.
@@ -131,9 +133,9 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \textbf{P1-1}
 
- Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
+ Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ \todo{asneira a dizer 1V}de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
-Para construir um Oscilador de Relaxamento foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante, tal que $32767$ seja seu múltiplo. Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
+Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante\todo{frase do multiplo mal}, tal que $32767$ seja seu múltiplo. Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
 
 \begin{table}[H]
@@ -150,7 +152,7 @@ Para construir um Oscilador de Relaxamento foi criada uma rotina que, em cada ci
 \end{table}
 
 Os valores na tabela \ref{tab:incrementos} foram calculados através da seguinte fórmula:
-
+\todo{explicar equação}
 \begin{equation}
  f_{0}= \frac{\Delta}{2A}f_{s} \Leftrightarrow \Delta= 2A\frac{f_{0}}{f_{s}} \hspace{3 mm}, A=32767
 \end{equation}
@@ -179,11 +181,11 @@ Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa
 Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
 
 \begin{equation}
-32767*\sin \dfrac{n \pi}{32},  \quad \quad n=0,1,2,...,31
+round \left(32767*\sin \dfrac{n \pi}{32} \right),  \quad \quad n=0,1,2,...,31
 \end{equation}
 Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na expressão, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. 
 
-Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal.
+Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal. \todo{nao gosta da palavra corte}
 
 Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
 
@@ -220,7 +222,7 @@ Como se pode observar na figura foi possível criar um sinal aproximadamente sin
 \textbf{P1-4}
 
 %variaveis vs sinais
-Foram criadas duas variáveis para fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
+Foram criadas duas variáveis para que fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
 A primeira variável foi já antes referida, nas secções P1-1 e P1-3. Esta variável, caso alterada iria alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída e também se o seu valor diminuir, a frequência de saída irá diminuir.
 
@@ -251,7 +253,7 @@ Com a criação destas variáveis passou-se a ter um oscilador numericamente con
 
 \textbf{P1-5}
 
-Para que a frequência do sinal de saída seja modelado através da amplitude do sinal de entrada, é necessário criar uma relação linear entre o sinal de entrada \textit{inbuf} e o incremento da rampa \textit{delta}, pois este é que define a frequência do sinal sinusoidal com a rampa. Como tal a relação entre o \textit{inbuf} e o \textit{delta} é ilustrada pela seguinte equação:
+Para que a frequência do sinal de saída seja modulada através da amplitude do sinal de entrada, é necessário criar uma relação linear entre o sinal de entrada \textit{inbuf} e o incremento da rampa \textit{delta}, pois este é que define a frequência do sinal sinusoidal com a rampa. Como tal a relação entre o \textit{inbuf} e o \textit{delta} é ilustrada pela seguinte equação:
 \begin{equation}
 	\Delta=\Delta_0+(K*inbuf)	\hspace{6 mm}\Delta_0=16384, K=\frac{1}{4}
 \end{equation}
@@ -272,7 +274,7 @@ Embora na equação (4) se some o valor do \textit{inbuf}, no programa tem que s
 Para testar o funcionamento do NCO, pôs-se na entrada do DSP um sinal sinusoidal com frequência igual a 2 Hz, como sinal modulante, em vez da onda quadrada pedida no enunciado pois seria mais fácil observar a variação de frequência do sinal de saída se a variação de amplitude do sinal de entrada fosse gradual em vez de ser constante com descontinuidades. 
 \vspace{1 mm}
 
-Esperou-se que, no máximo e mínimo de amplitude da sinusoide de entrada, a onda modulada tivesse máxima e mínima frequência respetivamente, e que uma variação na amplitude do sinal modulante provocasse um efeito linear na frequência do sinal modulado. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo para poder observar a variação pretendida.
+Esperou-se que, no máximo e mínimo de amplitude da sinusoide de entrada, a onda modulada tivesse máxima e mínima frequência respetivamente, e que uma variação na amplitude do sinal modulante provocasse um efeito linear na frequência do sinal modulado. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo para poder observar a variação pretendida. Para ser possível era necessário usar a tal onda quadrada como sinal de entrada.
 \vspace{2 mm}
 
 \textbf{P1-7}
@@ -284,14 +286,14 @@ y=y_{1}+(y_{2}-y_{1})*\Delta_{x}
 \end{equation}
 
 Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retirou da rampa o índice da LUT. O processo de recolher o valor de $ \Delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
-
+\todo{explicar aritmética do código!!}
 \begin{lstlisting}
 	rampa=rampa+delta;
 	deltaX=1023 & rampa;   //Retirar os 10 bits menos significativos
 	deltaX=deltaX<<5;      //Converter deltax em Q15
 	(...)
 	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i) convertido para Q15
-	Y2=-((amplitude*LUT[index+1])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
+	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
 	aux=(Y2-Y1)*deltaX;		
 	aux=aux<<1;				//Retirar bit de sinal extra
 	Y=Y1+(aux>>16);			//interpolacao	
@@ -302,18 +304,19 @@ Como se pode observar nas linhas de código, a interpolação é realizada com d
 Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
 Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação.
-
+\todo{qual a frequencia e o delta utilizados}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./P1_interp}~\\
 	\caption{Sinal sinusoide com interpolação e sem interpolação.}
 	\label{fig:interp}
-\end{figure}
+\end{figure} \todo{qual canal é qual sinal na imagem?}
 Nesta figura é possível observar os "degraus" mencionados anteriormente, tanto na onda interpolada como na onda não interpolada.
 \vspace{2 mm}
 
-\textbf{P1-8}
 
+\textbf{P1-8}
+\todo{salientar q se fez pra um delta diferente de 16384}
 Não sendo possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos (Figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}).
 
 \begin{figure}[H]
@@ -331,7 +334,7 @@ Não sendo possível estabelecer uma diferença entre os sinais com interpolaç�
 \end{figure}
 
 De novo não foi possível observar nas figuras diferenças visíveis entre os dois sinais, desta vez entre os seus espectros. Apresentam aparentemente a mesma amplitude para cada frequência entre eles mesmos.
-
+\todo{conclusao errada, sem interp. é pior mas nao se consegue observar}
 A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, não apresenta uma melhoria nos resultados, sendo assim um método que apenas irá exaustar mais os recursos do processador sem obter qualquer tipo de retorno notável. Podemos então concluir que caso seja preciso usar um sinal digital de uma sinusoide podemos usar apenas o método que não usa interpolação.
 
 
@@ -341,7 +344,7 @@ A conclusão que se pode tirar com estas observações é que o método de inter
 
 %Introdução Teórica
 O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
-Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência portadora $f_0=4$ kHz.
+Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência da portadora $f_0=4$ kHz.
 
 \vspace{2 mm}
 
@@ -392,7 +395,7 @@ Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois
 \end{figure}
 \textbf{P2-2}
 
-Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é estática (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
+Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é contante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta:
 \begin{table}[H]
 	\centering
@@ -421,7 +424,7 @@ Neste caso os valores do seno são os valores das amostras discutidas anteriorme
 \textbf{P2-3}
 
 Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (Figura \ref{port_mod}).
-
+\todo{trocar imagem pela q tem mais transições}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./port_mod}~\\
