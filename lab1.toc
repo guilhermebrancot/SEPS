@@ -29,8 +29,8 @@
 \contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{18}
 \contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{18}
 \contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{18}
-\contentsline {paragraph}{8.Transient}{19}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{19}
-\contentsline {section}{\numberline {4}Anexos}{20}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{20}
-\contentsline {subsection}{\numberline {4.2}Anexo B}{22}
+\contentsline {paragraph}{8.Transient}{21}
+\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{22}
+\contentsline {section}{\numberline {4}Anexos}{22}
+\contentsline {subsection}{\numberline {4.1}Anexo A}{22}
+\contentsline {subsection}{\numberline {4.2}Anexo B}{25}

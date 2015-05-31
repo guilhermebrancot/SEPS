@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.17)  31 MAY 2015 20:08
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.17)  31 MAY 2015 21:37
 entering extended mode
 **lab1.tex
 (C:\Users\QQ\Desktop\SEPS\SEPS\lab1.tex
@@ -777,7 +777,14 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks38
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\QQ\Desktop\SEPS\SEPS\lab1.aux)
+(C:\Users\QQ\Desktop\SEPS\SEPS\lab1.aux
+
+LaTeX Warning: Label `s1_s2' multiply defined.
+
+
+LaTeX Warning: Label `espetro' multiply defined.
+
+)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
@@ -790,8 +797,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
-
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+ ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count145
 \scratchdimen=\dimen182
@@ -955,36 +961,84 @@ File: ./dn_mod.jpg Graphic file (type jpg)
 Package pdftex.def Info: ./dn_mod.jpg used on input line 439.
 (pdftex.def)             Requested size: 236.01561pt x 178.7819pt.
 
-<./espetro.jpg, id=91, 2247.14531pt x 1693.07532pt>
-File: ./espetro.jpg Graphic file (type jpg)
- <use ./espetro.jpg>
-Package pdftex.def Info: ./espetro.jpg used on input line 451.
-(pdftex.def)             Requested size: 236.01561pt x 177.81691pt.
+<./spectrum_sn_0-16k.png, id=91, 803.0pt x 504.88625pt>
+File: ./spectrum_sn_0-16k.png Graphic file (type png)
 
-[14 <C:/Users/QQ/Desktop/SEPS/SEPS/dn_mod.jpg> <C:/Users/QQ/Desktop/SEPS/SEPS/e
-spetro.jpg>] [15] [16] <./quadratura.png, id=103, 803.0pt x 504.88625pt>
+<use ./spectrum_sn_0-16k.png>
+Package pdftex.def Info: ./spectrum_sn_0-16k.png used on input line 451.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+ [14 <C:/Users/QQ/Desktop/SEPS/SEPS/dn_mod.jpg> <C:/Users/QQ/Desktop/SEPS/SEPS/
+spectrum_sn_0-16k.png (PNG copy)>] [15] [16]
+<./quadratura.png, id=103, 803.0pt x 504.88625pt>
 File: ./quadratura.png Graphic file (type png)
-
-<use ./quadratura.png>
+ <use ./quadratura.png>
 Package pdftex.def Info: ./quadratura.png used on input line 534.
 (pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
- [17 <C:/Users/QQ/Desktop/SEPS/SEPS/quadratura.png (PNG copy)>] [18] [19]
-Overfull \hbox (2.5339pt too wide) in paragraph at lines 625--625
+
+[17 <C:/Users/QQ/Desktop/SEPS/SEPS/quadratura.png (PNG copy)>] [18]
+<./dn_y1.png, id=111, 803.0pt x 504.88625pt>
+File: ./dn_y1.png Graphic file (type png)
+ <use ./dn_y1.png>
+Package pdftex.def Info: ./dn_y1.png used on input line 617.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+
+<./s1_s2n.png, id=112, 803.0pt x 504.88625pt>
+File: ./s1_s2n.png Graphic file (type png)
+ <use ./s1_s2n.png>
+Package pdftex.def Info: ./s1_s2n.png used on input line 626.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+ [19 <C:/Users/QQ/Desktop/SEPS/SEPS/dn_y1.png (PNG copy)>]
+<./erro_y1n.png, id=116, 803.0pt x 504.88625pt>
+File: ./erro_y1n.png Graphic file (type png)
+ <use ./erro_y1n.png>
+Package pdftex.def Info: ./erro_y1n.png used on input line 635.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+
+<./y1_y2n.png, id=117, 803.0pt x 504.88625pt>
+File: ./y1_y2n.png Graphic file (type png)
+ <use ./y1_y2n.png>
+Package pdftex.def Info: ./y1_y2n.png used on input line 644.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+
+<./espetro.png, id=118, 803.0pt x 504.88625pt>
+File: ./espetro.png Graphic file (type png)
+ <use ./espetro.png>
+Package pdftex.def Info: ./espetro.png used on input line 651.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+ [20 <C:/Users/QQ/Desktop/SEPS/SEPS/s1_s2n.png (PNG copy)> <C:/Users/QQ/Desktop
+/SEPS/SEPS/erro_y1n.png (PNG copy)> <C:/Users/QQ/Desktop/SEPS/SEPS/y1_y2n.png (
+PNG copy)>]
+<./transient10Hz.png, id=122, 803.0pt x 504.88625pt>
+File: ./transient10Hz.png Graphic file (type png)
+ <use ./transient10Hz.png>
+Package pdftex.def Info: ./transient10Hz.png used on input line 664.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+
+[21 <C:/Users/QQ/Desktop/SEPS/SEPS/espetro.png (PNG copy)> <C:/Users/QQ/Desktop
+/SEPS/SEPS/transient10Hz.png (PNG copy)>]
+<./transient100Hz.png, id=126, 803.0pt x 504.88625pt>
+File: ./transient100Hz.png Graphic file (type png)
+
+<use ./transient100Hz.png>
+Package pdftex.def Info: ./transient100Hz.png used on input line 674.
+(pdftex.def)             Requested size: 236.01561pt x 148.39316pt.
+
+Overfull \hbox (2.5339pt too wide) in paragraph at lines 689--689
 [][][][]\T1/cmr/m/n/10.95 acrescentar 
  []
 
 
-Overfull \hbox (2.5339pt too wide) in paragraph at lines 625--625
+Overfull \hbox (2.5339pt too wide) in paragraph at lines 689--689
 [][][][]\T1/cmr/m/n/10.95 acrescentar 
  []
 
 
-Overfull \hbox (2.5339pt too wide) in paragraph at lines 625--625
+Overfull \hbox (2.5339pt too wide) in paragraph at lines 689--689
 [][][][]\T1/cmr/m/n/10.95 acrescentar 
  []
 
 
-Overfull \hbox (2.5339pt too wide) in paragraph at lines 625--625
+Overfull \hbox (2.5339pt too wide) in paragraph at lines 689--689
 [][][][]\T1/cmr/m/n/10.95 acrescentar 
  []
 
@@ -994,15 +1048,16 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
-(C:\Users\QQ\Desktop\SEPS\SEPS\bpsk.c [20]
+(C:\Users\QQ\Desktop\SEPS\SEPS\bpsk.c [22 <C:/Users/QQ/Desktop/SEPS/SEPS/transi
+ent100Hz.png (PNG copy)>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
-
+ [23]
 Overfull \hbox (4.86247pt too wide) in paragraph at lines 54--55
 [][][][][][][][][][][][][][][][][] 
  []
 
-[21]
+
 Overfull \hbox (11.39528pt too wide) in paragraph at lines 65--66
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1022,12 +1077,12 @@ Overfull \hbox (24.46088pt too wide) in paragraph at lines 74--75
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) (C:\Users\QQ\Desktop\SEPS\SEPS\transmissor.c [22]
+) [24] (C:\Users\QQ\Desktop\SEPS\SEPS\transmissor.c
 Overfull \hbox (17.92807pt too wide) in paragraph at lines 32--33
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
+[25]
 Overfull \hbox (30.99367pt too wide) in paragraph at lines 45--46
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1037,45 +1092,48 @@ Overfull \hbox (24.46088pt too wide) in paragraph at lines 47--48
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [23] (C:\Users\QQ\Desktop\SEPS\SEPS\lab1.aux) ) 
+) [26] (C:\Users\QQ\Desktop\SEPS\SEPS\lab1.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 15253 strings out of 493921
- 266004 string characters out of 3147290
- 364989 words of memory out of 3000000
- 18214 multiletter control sequences out of 15000+200000
+ 15282 strings out of 493921
+ 266416 string characters out of 3147290
+ 367025 words of memory out of 3000000
+ 18236 multiletter control sequences out of 15000+200000
  24552 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  63i,11n,76p,795b,1704s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/f
-onts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
-8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sf
-bi1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbi1200.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbi2074.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx0800.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/cm-super/sfbx1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/cm-super/sfbx2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
-uper/sfcc1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc
-2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0600.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0800.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/cm-super/sfti0900.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/cm-super/sfti1095.pfb>
-Output written on lab1.pdf (25 pages, 17897974 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/cm-super/sfbi1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/cm-super/sfbi1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/cm-super/sfbi2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-sup
+er/sfbx0800.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx10
+95.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1200.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx2074.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/cm-super/sfcc1440.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/cm-super/sfcc2074.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/cm-super/sfrm0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/cm-super/sfrm0800.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super
+/sfrm0900.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti0900.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1095.pfb>
+Output written on lab1.pdf (28 pages, 16557211 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
+ 230 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 78 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 
