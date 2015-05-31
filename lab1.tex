@@ -16,6 +16,8 @@
 \usepackage{fixltx2e}
 \setcounter{secnumdepth}{3}
 
+\numberwithin{equation}{section}
+
 \linespread{1.3}
 \usepackage{indentfirst}
 \usepackage[top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm]{geometry}
@@ -454,11 +456,11 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 \subsection{\textit{Costas Loop}}
 \todo{introdução teorica}
 
-\textbf{Introdução do \textit{Scrambler}:}
+\paragraph{Introdução do \textit{Scrambler}:} \hspace{0pt}
 
 \todo{guilherme}
 
-\textbf{Implementação de NCO controlado pelo erro:}
+\paragraph{Implementação de NCO controlado pelo erro:} \hspace{0pt}
 
 \todo{joao}
 
@@ -466,40 +468,44 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 %especificacao do sinal erro pra controlar delta
 %como obter quadratura
 %explicacao das quatro zonas consideradas para obter o coseno com offset de 16 amostras
-\textbf{Implementação dos Filtros:}
+\paragraph{Implementação dos Filtros:} \hspace{0pt}
 
 \todo{guilherme}
 
-\textbf{\textit{Loop} desmodulador:}
+\paragraph{\textit{Loop} desmodulador:} \hspace{0pt}
  \todo{apenas um rascunho, falta meter as equações e rever a linguagem}
+ 
+%misturado?
+Nesta fase do projeto têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi misturado, $e_n$, codificado, mapeado e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK,$s_n$. Este após a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
 
-Nesta fase do projeto têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi codificado, mapeado e misturado,$e_n$, e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK,$s_n$. Este após a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
-
-$s_n=e_nsin(2\pi f_1t+ \phi_1$).
-
+\begin{equation}
+	s_n=d_nsin(2\pi f_1t+ \phi_1)
+\end{equation}
  Para o desmodular é necessário sincronizar o oscilador local com a frequência da portadora, estimando $\Delta\phi$ e $\Delta f$.
 
-Para tal usa-se o \textit{Costas Loop}, um tipo de PLL. Em semelhança aos seus familiares é composto por um detetor de fase, um "loop filter" e um oscilador local(NCO), excepto nos dois filtros adicionais em cada ramo exterior. No braço inferior o sinal BPSK é multiplicado com o sinal $cos(2\pi f_0t+\phi_0)$ e no superior com $sin(2\pi f_0t+ \phi_0)$ obtendo-se a componente em quadratura e fase, respectivamente, do sinal $s_n$ os sinais 
+Como tal usa-se o \textit{Costas Loop}, um tipo de PLL. Em semelhança aos seus familiares é composto por um detetor de fase, um "loop filter" e um oscilador local(NCO), excepto nos dois filtros adicionais em cada ramo exterior. No braço inferior o sinal BPSK é multiplicado com o sinal $cos(2\pi f_0t+\phi_0)$ e no superior com $sin(2\pi f_0t+ \phi_0)$ obtendo-se a componente em quadratura e fase, respectivamente, do sinal $s_n$ os sinais 
+\begin{equation}
+	s_1=\frac{d_n}{2}[cos(4\pi f_0t+\Delta f+\phi_1+\phi_0)+cos(\Delta f+\phi_0-\phi_1)]
+\end{equation}
+\begin{equation}
+	s_2=\frac{d_n}{2}[sin(4\pi f_0t+\Delta f+\phi_1+\phi_0)+cos(\Delta f+\phi_0-\phi_1)]
+\end{equation} 
 
-$s_1=e_n(1/2)[cos(4\pi f_0t+\Delta f+\phi_1+\phi_0)+cos(\Delta f+\phi_0-\phi_1)]$ 
-
-$s_1=e_n(1/2)[sin(4\pi f_0t+\Delta f+\phi_1+\phi_0)+cos(\Delta f+\phi_0-\phi_1)$. 
-
-Nestes dois multiplicadores ocorre a deteção de fase uma vez que os termos de baixa frequência têm como componentes $\Delta\phi$ e $\Delta f$, os indicadores dos erros de fase e frequência que se usará no NCO. Filtrando-se esses sinais nos \textit{Data filters}, multiplicando-os ambos e passando no \textit{Loop filter} obtém-se 
-
-$\epsilon(t)=\frac{1}{8}sin(2\Delta\phi)~=\frac{1}{4}\Delta\phi$, 
+Nestes dois multiplicadores ocorre a detecção de fase uma vez que os termos de baixa frequência têm como componentes $\Delta\phi$ e $\Delta f$, os indicadores dos erros de fase e frequência que se usará no NCO. Filtrando-se esses sinais nos \textit{Data filters}, multiplicando-os entre si e passando no \textit{Loop filter} obtém-se 
+\begin{equation}
+	\epsilon(t)=\frac{1}{8}sin(2\Delta\phi)~=\frac{1}{4}\Delta\phi
+\end{equation}
+ 
 
 para valores pequenos de $\Delta\phi$. Este sinal estático entra no NCO e aumenta ou diminui a frequência do oscilador reduzindo por consequência o $\Delta f$, desde que a frequência da portadora se encontre na banda de captura do dispositivo descrito.
 
 Uma vez capturada a frequência da portadora (diferente da frequência central) o oscilador local encontra-se sincronizado à frequência da portadora ($f_1 = f_0+\Delta f$) e em fase com a mesma ($\Delta\phi=0$) tendo-se os sinais
+\begin{equation}
+	\frac{1}{2}d_ncos(\Delta\phi)~= \dfrac{d_n}{2} \quad , \hspace{1mm} \frac{1}{2}d_nsin(\Delta\phi)~= 0
+\end{equation}
+ à saída do filtro da componente em quadratura e do filtro da componente em fase, respetivamente, tornando-se o braço do primeiro num detetor coerente. Como já mencionado, o espetro do sinal BPSK é o espetro do sinal de informação centrado à frequência da portadora e quando se multiplica pelo sinal local sincronizado obtêm-se réplicas do espetro do sinal de informação a $f=0$ e $f=2f_1$, que ao passar no \textit{Data filter} filtra as componentes superiores a 1kHz obtendo o sinal de informação.
 
- $\frac{1}{2}e_ncos(\Delta\phi)~= 1/2 e_n$
- 
- $\frac{1}{2}e_nsin(\Delta\phi)~= 0$
- 
- à saída do filtro da componente em quadratura e do filtro da componente em fase, respetivamente, tornando-se o braço do 1º num detetor coerente. Como já mencionado, o espetro do sinal BPSK é o espetro do sinal de informação centrado à frequência da portadora e quando se multiplica pelo sinal local sincronizado obtêm-se réplicas do espetro do sinal de informação a $f=0$ e $f=2f_1$, que ao passar no \textit{Data filter} filtra as componentes superiores a 1kHz obtendo o sinal de informação.
-
-\textbf{Testes do \textit{Costas Loop} com onda sinusoidal}
+\paragraph{Testes do \textit{Costas Loop} com onda sinusoidal} \hspace{0pt}
 
 \todo{joao}
 %ondas sinusoidais usadas no gerador do osciloscopio
@@ -508,30 +514,30 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 %bandas de captura e seguimento Costas Loop
 %complementar com codigo relacionado
 
-\textbf{Testes do \textit{Costas Loop} com BPSK sem zero}
+\paragraph{Testes do \textit{Costas Loop} com BPSK sem zero}
 %sinal modulado na entrada
 %diferenças no codigo
 %resultado do sinal desmodulado, o q melhorar e como o fazer
 %comparaçao com dn, aleatoridade devido a en
 \todo{Joao}
 
-\textbf{Testes do \textit{Costas Loop} com BPSK com zero}
+\paragraph{Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt}
 
  \todo{apenas um rascunho, falta meter as expressões dos apontamentos, mudar formatação das funções}
 O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos Data filters à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
-$H(z) = \gamma\frac{1-\alpha}{1-\beta}\dfrac{1-\beta z^{-1}}{1-\alpha z^{-1}}$
-
+\begin{equation}
+H(z) = \gamma\frac{1-\alpha}{1-\beta}\dfrac{1-\beta z^{-1}}{1-\alpha z^{-1}}
+\end{equation}
 O ganho estático ($\gamma$) foi obtido igualando a função a 1 à frequência $\omega=0 => z=1$. O valor de $\alpha$ foi determinado na alínea P.3 e o valor de $\beta$ foi determinado igualando a função transferência a 0 à frequência $z=e^{j\omega T_s}|_{\omega=2\pi8000}$. Desta maneira insere-se um \textit{Notch} para os 8kHz obtendo-se um \textit{Lowpass Notch filter} com a frequência de corte de 1kHz na mesma contudo com uma atenuação muito maior à frequência do sinal ruído.
 
 No programa alterou-se apenas os valores dos coeficientes da equação às diferenças dos \textit{data filters}.
 Observa-se na figura abaixo o sinal desmodulado sem o ruído a amarelo.
 
-
-
-\textbf{Transient}
+FIGURA COM demod sem ruido
+\paragraph{Transient} \hspace{0pt}
 
 \todo{falta inserir as imagens e se calhar melhorar a explicação do objetivo do teste}
-De forma a poder-se observar o transitório de aquisição do sinal desmodulado com a finalidade de poder analisar características adicionais do Costas Loop, nomeadamente o tempo de sincronismo, fez-se uma análise transient. Esta consiste em induzir no circuito um erro de fase elevado, uma vez que é mais simples a alterar a frequência do sinal BPSK, saturando a cada 4000 amostras o valor da variável do erro ( erro = 32767). 
+De forma a poder-se observar o transitório de aquisição do sinal desmodulado com a finalidade de poder analisar características adicionais do \textit{Costas Loop}, nomeadamente o tempo de sincronismo, fez-se uma análise \textit{transient}. Esta consiste em induzir no circuito um erro de fase elevado, uma vez que é mais simples a alterar a frequência do sinal BPSK, saturando a cada 4000 amostras o valor da variável do erro ( $\epsilon=$ 32767). 
 
 Observa-se o comportamento esperado do erro com algum overshoot, um curto tempo de estabelecimento e convergindo para 0. Ao mesmo tempo a forma de onda torna-se cada vez mais semelhante com o \textbf{funcionamento normal}.%melhorar linguagem
 

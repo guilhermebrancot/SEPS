@@ -22,7 +22,15 @@
 \contentsline {paragraph}{Teste do Modulador BPSK}{13}
 \contentsline {paragraph}{Espectro do Sinal Modulado}{14}
 \contentsline {subsection}{\numberline {2.3}\textit {Costas Loop}}{14}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{16}
+\contentsline {paragraph}{Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{14}
+\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{14}
+\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{14}
+\contentsline {paragraph}{\textit {Loop} desmodulador:}{15}
+\contentsline {paragraph}{Testes do \textit {Costas Loop} com onda sinusoidal}{16}
+\contentsline {paragraph}{Testes do \textit {Costas Loop} com BPSK sem zero}{16}
+\contentsline {paragraph}{Testes do \textit {Costas Loop} com BPSK com zero}{16}
+\contentsline {paragraph}{Transient}{16}
+\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{17}
 \contentsline {section}{\numberline {4}Anexos}{17}
 \contentsline {subsection}{\numberline {4.1}Anexo A}{17}
 \contentsline {subsection}{\numberline {4.2}Anexo B}{19}
