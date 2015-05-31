@@ -90,7 +90,7 @@ O objectivo desta fase é representar a função sinusoidal, multiplicada por um
 
 Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusóide. Depois de observar a sinusóide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
-Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}) fazendo com que nesses pontos o valor da sinusoide seja o inverso do que deveria ser, ou seja ocorre \textit{wraparound} na variável da sinusóide (como se poderia esperar dado que se programa em C). 
+Para compreender o limite desta sinusóide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusóide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}) fazendo com que nesses pontos o valor da sinusóide seja o inverso do que deveria ser, ou seja ocorre \textit{wraparound} na variável da sinusóide (como se poderia esperar dado que se programa em C). 
  \todo{alterei a expressão "caia" para uma tirada da wikipedia}   
 
 \subsubsection{loop\_intr}
@@ -98,8 +98,8 @@ Para compreender o limite desta sinusoide é necessário ter em conta que se usa
 Este projeto fornece-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
 %interpretar!!
-No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
-\todo{porque nao foi feita?}
+No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusóide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
+\todo{Não me lembro do resultado do sinal quadrado, mas se a sinusóide desapareceu é porque tem filtro anti-aliasing... O que meto aqui?}
 
 \subsection{BPSK Modem}
 Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK. Devido à existência de um inversor na placa utilizada deu-se, ao longo deste projeto, atenção ao efeito do inversor nos sinais, como se poderá observar nas próximas secções.
@@ -137,9 +137,9 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \paragraph{1.Oscilador de Relaxação} \hspace{0pt}
 
- Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ \todo{asneira a dizer 1V}de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
-
-Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante\todo{frase do multiplo mal}, tal que $32767$ seja seu múltiplo. Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
+Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Para que esta tenha precisão máxima e amplitude máxima de 1 V foi usado o formato Q15 para representar o sinal de saída, pois este formato tem amplitude máxima de $2^{15}-1 = 32767 $. \todo{corrigi o parágrafo}
+ 
+\todo{eliminei a frase do múltiplo}Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
 
 \begin{table}[H]
@@ -156,11 +156,13 @@ Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ci
 \end{table}
 
 Os valores na tabela \ref{tab:incrementos} foram calculados através da seguinte fórmula:
-\todo{explicar equação}
+
 \begin{equation}
  f_{0}= \frac{\Delta}{2A}f_{s} \Leftrightarrow \Delta= 2A\frac{f_{0}}{f_{s}} \hspace{3 mm}, A=32767
 \end{equation}
 
+Esta equação trata-se de determinar quantos incrementos se faz de -32767 a 32767 ($2A$), de modo a que ocorra wraparound, sabendo que em cada ciclo da frequência de amostragem $T_s=\frac{1}{f_s}$ se faz um incremento $\Delta$ para se ter um período de rampa $T_0=\frac{1}{f_0}$.
+\todo{ja expliquei a expressão}
 Foi então possível obter as seguintes rampas com diferentes frequências:
 
 
@@ -187,16 +189,16 @@ round \left(32767*\sin \dfrac{n \pi}{32} \right),  \quad \quad n=0,1,2,...,31
 \end{equation}
 Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na expressão, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. 
 
-Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal. \todo{nao gosta da palavra corte}
+Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria overflow nessa amostra do sinal resultando num sinal incorreto. \todo{alterei corte para overflow}
 
-Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
+Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusóide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
 
 \paragraph{3.Obtenção de um sinal sinusoidal através da LUT} \hspace{0pt}
 
 Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.
 
 De acordo com o projeto, a rampa é representada num formato Q10, com 1 bit sinal, 5 bits inteiros e 10 bits fraccionários. 
-Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa. Esses 5 bits irão apontar para o valor da tabela de LUT a usar para criar a sinusoide. 
+Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa. Esses 5 bits irão apontar para o valor da tabela de LUT a usar para criar a sinusóide. 
 
 Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
@@ -282,14 +284,15 @@ y=y_{1}+(y_{2}-y_{1})*\Delta_{x}
 \end{equation}
 
 Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retirou da rampa o índice da LUT. O processo de recolher o valor de $ \Delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
-\todo{explicar aritmética do código!!}
+\todo{explicar aritmética do código!! Não entendo o que queres dizer com isso}
 \begin{lstlisting}
 	rampa=rampa+delta;
 	deltaX=1023 & rampa;   //Retirar os 10 bits menos significativos
 	deltaX=deltaX<<5;      //Converter deltax em Q15
 	(...)
 	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i) convertido para Q15
-	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
+	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido 
+para Q15
 	aux=(Y2-Y1)*deltaX;		
 	aux=aux<<1;				//Retirar bit de sinal extra
 	Y=Y1+(aux>>16);			//interpolacao	
@@ -299,21 +302,19 @@ Como se pode observar nas linhas de código, a interpolação é realizada com d
 
 Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
-Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação.
-\todo{qual a frequencia e o delta utilizados}
+Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação. Para estes sinais utilizou-se $\Delta_0=20479$ correspondente a $f_0=5kHz$.
+\todo{frequência e delta posto}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./P1_interp}~\\
-	\caption{Sinal sinusoide com interpolação e sem interpolação.}
+	\caption{Sinal sinusoide com interpolação(amarelo) e sem interpolação(verde).}
 	\label{fig:interp}
-\end{figure} \todo{qual canal é qual sinal na imagem?}
+\end{figure} \todo{pus os canais}
 Nesta figura é possível observar os "degraus" mencionados anteriormente, tanto na onda interpolada como na onda não interpolada.
 
 \paragraph{8.Comparação dos espectros com e sem interpolação} \hspace{0pt}
 
-\todo{salientar q se fez pra um delta diferente de 16384}
 Não sendo possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos (Figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}).
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./P1-8_espect_s_interp}~\\
@@ -329,11 +330,10 @@ Não sendo possível estabelecer uma diferença entre os sinais com interpolaç�
 \end{figure}
 
 De novo não foi possível observar nas figuras diferenças visíveis entre os dois sinais, desta vez entre os seus espectros. Apresentam aparentemente a mesma amplitude para cada frequência entre eles mesmos.
-\todo{conclusao errada, sem interp. é pior mas nao se consegue observar}
 A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, não apresenta uma melhoria nos resultados, sendo assim um método que apenas irá exaustar mais os recursos do processador sem obter qualquer tipo de retorno notável. Podemos então concluir que caso seja preciso usar um sinal digital de uma sinusoide podemos usar apenas o método que não usa interpolação.
 
 
-É de referir que não se está a excluir a hipótese da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos e equipamentos usados.
+É importante referir que não se está a excluir a hipótese da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos e equipamentos usados.
 
 \subsubsection{P2. Transmissor BPSK}
 
@@ -394,7 +394,7 @@ Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois
 \paragraph{4.Implementação do Modulador} \hspace{0pt}
 
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é contante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
-Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta:
+Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusóide, sendo esta:
 \begin{table}[H]
 	\centering
 	\caption{Amostras da onda portadora}
