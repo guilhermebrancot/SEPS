@@ -105,7 +105,7 @@ No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável
 Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK. Devido à existência de um inversor na placa utilizada deu-se, ao longo deste projeto, atenção ao efeito do inversor nos sinais, como se poderá observar nas próximas secções.
 
 \subsubsection{P1. Oscilador controlado numericamente}
-
+\label{NCO}
 Usou-se o projeto descrito na secção \ref{sec:loop} como base para a construção de um oscilador controlado numericamente (\textit{NCO}). Um \textit{NCO} é um gerador de sinal digital que cria uma forma de onda discretamente representada no tempo e na amplitude. O \textit{NCO} tem as seguintes características:
 
 \begin{table}[H]
@@ -135,7 +135,7 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 \end{enumerate}
 %\pagebreak
 
-\paragraph{Oscilador de Relaxação} \hspace{0pt}
+\paragraph{1.Oscilador de Relaxação} \hspace{0pt}
 
  Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ \todo{asneira a dizer 1V}de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
 
@@ -178,7 +178,7 @@ Foi então possível obter as seguintes rampas com diferentes frequências:
 \end{figure}
 
 Ao observar as duas rampas pode-se constatar que para uma frequência mais baixa, ou seja, um incremento menor, a rampa apresenta mais "degraus" e um menor declive. Um incremento menor na rampa significa um maior número de amostras da mesma dentro do intervalo possível, o que reduz o declive da rampa. É de salientar que devido à presença do inversor da placa foi introduzido o simétrico da rampa calculada no canal de modo a observar esta no sentido correto.
-\paragraph{\textit{Look-up-table}} \hspace{0pt}
+\paragraph{2.\textit{Look-up-table}} \hspace{0pt}
 
 Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de modo a que seja possível retirar os seus valores para criar um sinal sinusoidal. Esta tabela tem 32 valores e foi construída com a seguinte equação:
 
@@ -191,7 +191,7 @@ Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para
 
 Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
 
-\paragraph{Obtenção de um sinal sinusoidal através da LUT} \hspace{0pt}
+\paragraph{3.Obtenção de um sinal sinusoidal através da LUT} \hspace{0pt}
 
 Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.
 
@@ -218,7 +218,7 @@ Como se pode observar, para isolar os 5 bits inteiros fez-se dez \textit{shifts}
 
 Como se pode observar na figura foi possível criar um sinal aproximadamente sinusoidal através de uma LUT indexada por uma rampa. Nesta figura não é possível notar mas quando se aproxima mais o sinal no osciloscópio verifica-se pequenos degraus ao longo do sinal, que simbolizam a aproximação obtida através das amostras.
 
-\paragraph{Criação de variáveis para controlo da frequência e amplitude do sinal sinusoidal} \hspace{0pt}
+\paragraph{4.Criação de variáveis para controlo da frequência e amplitude do sinal sinusoidal} \hspace{0pt}
 
 Foram criadas duas variáveis para que fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
@@ -248,11 +248,12 @@ Q_{m} * Q_{k}=Q_{m+k-n+1}
 Neste caso como se multiplica dois sinais Q15 e \textit{n}$=$16 bits representa-se o resultado com formato Q15 como foi dito anteriormente.
 Com a criação destas variáveis passou-se a ter um oscilador numericamente controlado.
 
-\paragraph{Utilização do sinal de entrada para controlar a frequência do sinal} \hspace{0pt}
+\paragraph{5.Utilização do sinal de entrada para controlar a frequência do sinal} \hspace{0pt}
 
 Para que a frequência do sinal de saída seja modulada através da amplitude do sinal de entrada, é necessário criar uma relação linear entre o sinal de entrada \textit{inbuf} e o incremento da rampa \textit{delta}, pois este é que define a frequência do sinal sinusoidal com a rampa. Como tal a relação entre o \textit{inbuf} e o \textit{delta} é ilustrada pela seguinte equação:
 \begin{equation}
 	\Delta=\Delta_0+(K*inbuf)	\hspace{6 mm}\Delta_0=16384, K=\frac{1}{4}
+	\label{delta}
 \end{equation}
 Tendo em conta a tabela \ref{tab:incrementos}, delta varia entre 8192 e 24576 com $\Delta_0$ correspondente à frequência central, 4 kHz. Para restringir delta a esse intervalo foi necessário introduzir $K=\dfrac{1}{4}$. Assim, obtém-se uma relação proporcionalmente direta entre delta e o sinal de entrada, o que significa que se aumentar ou diminuir a amplitude do sinal de entrada também aumenta ou diminui o delta.
 
@@ -265,14 +266,14 @@ Pode-se observar a implementação da equação explicada anteriormente, no cód
 O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois, uma vez que o DSP não possui divisor, evita uma passagem do programa pela ALU, também representando o efeito de K.
 Embora na equação (4) se some o valor do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa e por isso efectua-se uma subtração.
 
-\paragraph{Teste do oscilador com uma onda sinusoidal à entrada} \label{para:P1-6} \hspace{0pt}
+\paragraph{6.Teste do oscilador com uma onda sinusoidal à entrada} \label{para:P1-6} \hspace{0pt}
 
 Para testar o funcionamento do NCO, pôs-se na entrada do DSP um sinal sinusoidal com frequência igual a 2 Hz, como sinal modulante, em vez da onda quadrada pedida no enunciado pois seria mais fácil observar a variação de frequência do sinal de saída se a variação de amplitude do sinal de entrada fosse gradual em vez de ser constante com descontinuidades. 
 \vspace{1 mm}
 
-Esperou-se que, no máximo e mínimo de amplitude da sinusoide de entrada, a onda modulada tivesse máxima e mínima frequência respetivamente, e que uma variação na amplitude do sinal modulante provocasse um efeito linear na frequência do sinal modulado. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo para poder observar a variação pretendida. Para ser possível era necessário usar a tal onda quadrada como sinal de entrada.
+Esperou-se que, no máximo e mínimo de amplitude da sinusoide de entrada, a onda modulada tivesse máxima e mínima frequência respetivamente, e que uma variação na amplitude do sinal modulante provocasse um efeito linear na frequência do sinal modulado. Tal observou-se no osciloscópio, contudo não é possível representar numa figura para referência uma vez que seria necessário uma gravação de vídeo do processo para poder observar a variação pretendida. Para isso ser possível era necessário usar a tal onda quadrada como sinal de entrada.
 
-\paragraph{Melhoria da qualidade do oscilador com interpolação linear} \hspace{0pt}
+\paragraph{7.Melhoria da qualidade do oscilador com interpolação linear} \hspace{0pt}
 
 Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método de interpolação linear descrito na seguinte equação:
 
@@ -308,7 +309,7 @@ Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{f
 \end{figure} \todo{qual canal é qual sinal na imagem?}
 Nesta figura é possível observar os "degraus" mencionados anteriormente, tanto na onda interpolada como na onda não interpolada.
 
-\paragraph{Comparação dos espectros com e sem interpolação} \hspace{0pt}
+\paragraph{8.Comparação dos espectros com e sem interpolação} \hspace{0pt}
 
 \todo{salientar q se fez pra um delta diferente de 16384}
 Não sendo possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos (Figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}).
@@ -340,7 +341,7 @@ A conclusão que se pode tirar com estas observações é que o método de inter
 O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
 Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência da portadora $f_0=4$ kHz.
 
-\paragraph{Fonte de Bits} \hspace{0pt}
+\paragraph{1.Fonte de Bits} \hspace{0pt}
 
 Para ter uma fonte de bits no transmissor usa-se um "bit-rate clock" cuja função vai ser criar uma sequência de bits $ b_n $ com $f_b=1$ kbps. Isto significa que, considerando $f_s$, a cada 16 ciclos é gerado um novo bit, alternado em relação ao anterior. Assim, implementou-se um contador que é incrementado em cada ciclo  e que tem uma condição para verificar quando chegar ao valor 16. Ao entrar nessa condição é implementada a lógica para cálculo do novo bit da sequência e o contador é reiniciado.
 
@@ -351,7 +352,7 @@ b_n=b_{n-1} \oplus 1
 Com esta operação, o bit resultante será sempre alternado em relação ao anterior.
 Assim, obtém-se uma onda quadrada, observada no osciloscópio, que varia entre "0" e "1" e representa $ b_n $  com uma frequência de $500$ Hz(Figura \ref{bn_cn}). Esta frequência deve-se ao fato de se dividir  $f_b$ por dois pois cada meio ciclo da onda quadrada corresponde a um bit.  
 
-\paragraph{Codificador Diferencial} \hspace{0pt}
+\paragraph{2.Codificador Diferencial} \hspace{0pt}
 
 Após obter a fonte de bits passou-se ao segundo elemento do transmissor: o codificador diferencial e mapeador. Começando pelo codificador diferencial, este serve para evitar ambiguidades na fase de maneira a poder sempre recuperar uma sequência de bits num canal que tenha sofrido uma variação na fase.
 A codificação de $b_n$ resulta também de uma operação lógica XOR, como se pode observar: 
@@ -368,7 +369,7 @@ Tal como em $ b_n $ também $ c_n $ é representado por uma onda quadrada que va
 	\label{bn_cn}
 \end{figure}
 
-\paragraph{Mapeador} \hspace{0pt}
+\paragraph{3.Mapeador} \hspace{0pt}
 
 Depois de obter $ c_n $ passa-se ao mapeamento do mesmo. O mapeamento baseia-se em duas condições:
 \begin{equation}
@@ -390,7 +391,7 @@ Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois
 	\label{cn_dn}
 \end{figure}
 
-\paragraph{Implementação do Modulador} \hspace{0pt}
+\paragraph{4.Implementação do Modulador} \hspace{0pt}
 
 Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é contante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
 Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta:
@@ -418,7 +419,7 @@ A onda modulada é então representada pela seguinte expressão:
 Neste caso os valores do seno são os valores das amostras discutidas anteriormente.
 \vspace{2 mm}
 
-\paragraph{Teste do Modulador BPSK} \hspace{0pt}
+\paragraph{5.Teste do Modulador BPSK} \hspace{0pt}
 
 Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (Figura \ref{port_mod}).
 \todo{trocar imagem pela q tem mais transições}
@@ -442,7 +443,7 @@ Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-
  Este fenómeno acontece a cada 8 ciclos pois, como já foi explicado anteriormente, a frequência da onda correspondente à fonte de bits é o bit-rate dividido por dois e uma vez que a codificação divide esta frequência por dois, ou seja, a frequência de $d_n$ é 250 Hz e por isso cabem oito ciclos da portadora num meio ciclo de $d_n$.
  \vspace{2 mm}
 
-\paragraph{Espectro do Sinal Modulado} \hspace{0pt}
+\paragraph{6.Espectro do Sinal Modulado} \hspace{0pt}
  
 Para compreender melhor o sinal modulado, observou-se o espetro do mesmo (Figura \ref{espetro}).
 \begin{figure}[H]
@@ -458,23 +459,88 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 \subsection{\textit{Costas Loop}}
 \todo{introdução teorica}
 
-\paragraph{Introdução do \textit{Scrambler}:} \hspace{0pt}
+\paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
 
-\todo{guilherme}
+\todo{guilherme}%Quem vai fazer o guilherme?
 
-\paragraph{Implementação de NCO controlado pelo erro:} \hspace{0pt}
+\paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt}
 
 \todo{joao}
+Para implementar o NCO controlado pelo erro, recorreu-se ao NCO implementado na secção \ref{NCO}, com a mesma rampa, LUT e indexação da mesma como se pode ver no código seguinte.
+\begin{lstlisting}
+	rampa=rampa+delta;
+	index=rampa>>10;
+	index=31 & index;
+	aux=ampl*LUT[index];aux=aux<<1;
+\end{lstlisting}
+Mas agora falta a parte de controlar o NCO com o erro. Este controlo da frequência é feito da mesma maneira que na secção \ref{NCO}, através da variável delta (equação \ref{delta}), este controlo observa-se na linha de código a seguir.
+\begin{lstlisting}
+  delta=16384+(erro>>2);
+\end{lstlisting}
+Assim, como o erro controla delta e este controla a rampa que indexa a LUT obtém-se um NCO controlado pelo erro.
+A seguir prosseguiu-se à obtenção das componentes em fase e em quadratura do sinal pretendido. A componente em fase já tinha sido obtida anteriormente na secção \ref{NCO} pois corresponde ao sinal sinusoidal (figura \ref{quad}). Como a LUT corresponde a meio ciclo do seno foi necessário implementar uma pequena lógica para criar a outra metade do ciclo, enunciada no código a seguir.
+\begin{lstlisting}
+	if(rampa<0)  seno=-aux>>16;
+	else seno=aux>>16;
+\end{lstlisting}
+Assim, tem-se duas zonas identificadas pelo sinal da rampa, o meio ciclo positivo e o meio ciclo negativo do seno.
+No caso da componente em quadratura, devido ao \textit{offset} de 16 amostras obtém-se um sinal coseno. Este não é tão fácil de representar como o seno, desta vez é necessário ter em conta 4 situações, 4 zonas diferentes num ciclo. Nestas zonas o que varia é a secção da LUT que é indexada e o sinal do coseno, que dependem do sinal da rampa e da secção da LUT que estiver a ser indexada para o seno. Estas zonas estão enunciadas nos códigos seguintes.
+\vspace{1mm}
 
-%uso do NCO da primeira parte para explicar obtencao do seno
-%especificacao do sinal erro pra controlar delta
-%como obter quadratura
-%explicacao das quatro zonas consideradas para obter o coseno com offset de 16 amostras
-\paragraph{Implementação dos Filtros:} \hspace{0pt}
+\textbf{1ª zona}
+\begin{lstlisting}
+	if(rampa<0){
+	  if(index<=15){
+	    aux=ampl*(-LUT[(index+16) & 31]);aux=aux<<1;
+	  }coseno=aux>>16;
+	}
+\end{lstlisting}
+A primeira zona do ciclo do coseno corresponde quando a rampa é negativa e o seno está a descer do zero ao seu mínimo (-32767), ou seja, quando se indexa a primeira metade da LUT com o sinal invertido. Assim, quando o seno tem esse comportamento, o coseno está a subir do seu mínimo ao zero, sendo necessário aplicar um \textit{offset} positivo de 16 amostras, ou seja, indexar a segunda metade da LUT, também com o sinal invertido. Foi aplicada uma máscara com 31 de modo ao \textit{offset} nunca causar um índice superior ao permitido na LUT, 31.
+\vspace{1mm}
 
-\todo{guilherme}
+\textbf{2ª zona}
 
-\paragraph{\textit{Loop} desmodulador:} \hspace{0pt}
+Esta zona também só existe quando a rampa é negativa. No código seguinte pode-se observar o raciocínio implementado para a mesma.
+\begin{lstlisting}
+	else{
+	  aux=ampl*(LUT[(index-16) & 31]); aux=(aux<<1);
+	}coseno=aux>>16;
+\end{lstlisting}
+Continuando o comportamento do seno, este vai subir do mínimo ao zero,ou seja, indexa a segunda metade da LUT mais uma vez com o sinal invertido. Logo, o coseno sobe do zero ao máximo (32767) o que implica um \textit{offset} negativo de 16 amostras para indexar a primeira metade da LUT, sem inverter o sinal.
+
+Para a terceira e quartas zonas efetua-se o mesmo raciocínio de indexação só que só se inverte o sinal da LUT na quarta zona pois nestas a rampa é positiva.
+\vspace{1mm}
+
+\textbf{3ª zona}
+\begin{lstlisting}
+	if(index<=15){
+	  aux=ampl*LUT[(index+16) & 31];aux=aux<<1;
+	}coseno=aux>>16;
+\end{lstlisting}
+Aqui, o seno vai subir do zero ao máximo, ou seja, primeira metade da LUT, logo, como o coseno vai descer do máximo ao zero, interessa aceder à segunda metade da LUT, aplicando um \textit{offset} positivo de 16 amostras.
+\vspace{1mm}
+
+\textbf{4ª zona}
+\begin{lstlisting}
+	else{
+	  aux=-ampl*LUT[(index-16) & 31];aux=aux<<1;
+	}coseno=aux>>16;
+\end{lstlisting}
+Por fim, chega-se à última zona do ciclo, onde o seno volta ao zero a partir do máximo, ou seja, segunda metade da LUT. Como o coseno volta ao mínimo a partir do zero, aplicando um \textit{offset} negativo de 16 amostras e uma inversão de sinal nas posições indexadas pela LUT.
+
+Assim obteve-se o sinal em quadratura (figura \ref{quad}).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./quadratura}~\\
+	\caption{Componentes e fase(verde) e em quadratura do sinal(amarelo).}
+	\label{quad}
+\end{figure}
+Como se pode observar ao comparar as duas componentes verifica-se qu estão desfasados por um quarto de ciclo, o que significa um offset de 16 amostras.
+\paragraph{3.Implementação dos Filtros:} \hspace{0pt}
+
+\todo{guilherme}%Não estou a achar piada a estes todo
+
+\paragraph{4.\textit{Loop} desmodulador:} \hspace{0pt}
  \todo{apenas um rascunho, falta meter as equações e rever a linguagem}
  
 %misturado? Queria dizer "passar pelo scrambler", pensei scrambled => misturado. Mas se nao ficar claro muda-se
@@ -507,7 +573,7 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 \end{equation}
  à saída do filtro da componente em quadratura e do filtro da componente em fase, respetivamente, tornando-se o braço do primeiro num detetor coerente. Como já mencionado, o espetro do sinal BPSK é o espetro do sinal de informação centrado à frequência da portadora e quando se multiplica pelo sinal local sincronizado obtêm-se réplicas do espetro do sinal de informação a $f=0$ e $f=2f_1$, que ao passar no \textit{Data filter} filtra as componentes superiores a 1kHz obtendo o sinal de informação.
 
-\paragraph{Testes do \textit{Costas Loop} com onda sinusoidal} \hspace{0pt}
+\paragraph{5.Testes do \textit{Costas Loop} com onda sinusoidal} \hspace{0pt}
 
 \todo{joao}
 %ondas sinusoidais usadas no gerador do osciloscopio
@@ -516,14 +582,14 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 %bandas de captura e seguimento Costas Loop
 %complementar com codigo relacionado
 
-\paragraph{Testes do \textit{Costas Loop} com BPSK sem zero}
+\paragraph{6.Testes do \textit{Costas Loop} com BPSK sem zero}
 %sinal modulado na entrada
 %diferenças no codigo
 %resultado do sinal desmodulado, o q melhorar e como o fazer
 %comparaçao com dn, aleatoridade devido a en
 \todo{Joao}
 
-\paragraph{Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt}
+\paragraph{7.Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt}
 
  \todo{falta equação às diferenças, valor de beta e excerto de código alterado}
 O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos Data filters à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
@@ -536,7 +602,7 @@ No programa alterou-se apenas os valores dos coeficientes da equação às difer
 Observa-se na figura abaixo o sinal desmodulado sem o ruído a amarelo.
 
 FIGURA COM demod sem ruido
-\paragraph{Transient} \hspace{0pt}
+\paragraph{8.Transient} \hspace{0pt}
 
 \todo{falta inserir as imagens e se calhar melhorar a explicação do objetivo do teste}
 De forma a poder-se observar o transitório de aquisição do sinal desmodulado com a finalidade de poder analisar características adicionais do \textit{Costas Loop}, nomeadamente o tempo de sincronismo, fez-se uma análise \textit{transient}. Esta consiste em induzir no circuito um erro de fase elevado, uma vez que é mais simples a alterar a frequência do sinal BPSK, saturando a cada 4000 amostras o valor da variável do erro ( $\epsilon=$ 32767). 
