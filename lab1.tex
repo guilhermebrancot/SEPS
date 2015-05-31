@@ -72,10 +72,12 @@
 \pagenumbering{arabic}
 
 \section{Introdução}
-\todo{mudar introdução}
-Este trabalho consiste na primeira parte do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
+\todo{ja alterei a intro, corrigir gralhas e ajustar a numeração dos anexos na ultima frase}
+O presente trabalho trata-se do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK) usando um \textit{Costas Loop}. 
 
-Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Neste projeto foi utilizada a placa DSK TMS320C6713. Foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
+Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$, e na implementação de alguns dos blocos de um modem BPSK, nomeadamente o \textit{Scrambler},  \textit{Differential coder and mapper}, \textit{Modulator} e \textit{Demodulator(Costas Loop)}.
+
+No projeto foi utilizada a placa DSK TMS320C6713. Inicialmente, na primeira parte do projeto, foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Na segunda parte do projeto foram incluídos os dois blocos mencionados no desenvolvimento dos restantes, dimensionaram-se filtros e testou-se e analisou-se o dispositivo desenvolvido. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
 
 \section{Projecto}
 
@@ -84,13 +86,13 @@ Foram analisados dois projetos de demonstração com o intuito de familiarizar c
 
 \subsubsection{sine8\_buf}
 \label{sec:sine8}
-O objectivo deste projeto é representar a função sinusoidal, multiplicada por um determinado ganho, através de um conjunto de amostras que equivalem a um período da mesma, repetindo nos períodos seguintes esse mesmo conjunto. Este procedimento é realizado através da rotina de interrupção presente no programa. 
+O objectivo desta fase é representar a função sinusoidal, multiplicada por um determinado ganho, através de um conjunto de amostras que equivalem a um período da mesma, repetindo nos períodos seguintes esse mesmo conjunto. Este procedimento é realizado através da rotina de interrupção presente no programa. 
 
-Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
+Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusóide. Depois de observar a sinusóide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
-Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}), fazendo com que nesses pontos o valor da sinusoide "caia". 
- \todo{ultimo paragrafo mal explicado}   
-%nao gostou da expressao "caia"
+Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}) fazendo com que nesses pontos o valor da sinusoide seja o inverso do que deveria ser, ou seja ocorre \textit{wraparound} na variável da sinusóide (como se poderia esperar dado que se programa em C). 
+ \todo{alterei a expressão "caia" para uma tirada da wikipedia}   
+
 \subsubsection{loop\_intr}
 \label{sec:loop}
 Este projeto fornece-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
@@ -475,8 +477,8 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 \paragraph{\textit{Loop} desmodulador:} \hspace{0pt}
  \todo{apenas um rascunho, falta meter as equações e rever a linguagem}
  
-%misturado?
-Nesta fase do projeto têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi misturado, $e_n$, codificado, mapeado e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK,$s_n$. Este após a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
+%misturado? Queria dizer "passar pelo scrambler", pensei scrambled => misturado. Mas se nao ficar claro muda-se
+Nesta fase do projeto têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi misturado, $e_n$, codificado, mapeado, $d_n$, e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK,$s_n$. Este durante a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
 
 \begin{equation}
 	s_n=d_nsin(2\pi f_1t+ \phi_1)
@@ -523,7 +525,7 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 
 \paragraph{Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt}
 
- \todo{apenas um rascunho, falta meter as expressões dos apontamentos, mudar formatação das funções}
+ \todo{falta equação às diferenças, valor de beta e excerto de código alterado}
 O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos Data filters à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
 \begin{equation}
 H(z) = \gamma\frac{1-\alpha}{1-\beta}\dfrac{1-\beta z^{-1}}{1-\alpha z^{-1}}

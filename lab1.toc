@@ -8,29 +8,29 @@
 \contentsline {subsubsection}{\numberline {2.2.1}P1. Oscilador controlado numericamente}{2}
 \contentsline {paragraph}{Oscilador de Relaxa\IeC {\c c}\IeC {\~a}o}{3}
 \contentsline {paragraph}{\textit {Look-up-table}}{4}
-\contentsline {paragraph}{Obten\IeC {\c c}\IeC {\~a}o de um sinal sinusoidal atrav\IeC {\'e}s da LUT}{4}
-\contentsline {paragraph}{Cria\IeC {\c c}\IeC {\~a}o de vari\IeC {\'a}veis para controlo da frequ\IeC {\^e}ncia e amplitude do sinal sinusoidal}{5}
-\contentsline {paragraph}{Utiliza\IeC {\c c}\IeC {\~a}o do sinal de entrada para controlar a frequ\IeC {\^e}ncia do sinal}{6}
+\contentsline {paragraph}{Obten\IeC {\c c}\IeC {\~a}o de um sinal sinusoidal atrav\IeC {\'e}s da LUT}{5}
+\contentsline {paragraph}{Cria\IeC {\c c}\IeC {\~a}o de vari\IeC {\'a}veis para controlo da frequ\IeC {\^e}ncia e amplitude do sinal sinusoidal}{6}
+\contentsline {paragraph}{Utiliza\IeC {\c c}\IeC {\~a}o do sinal de entrada para controlar a frequ\IeC {\^e}ncia do sinal}{7}
 \contentsline {paragraph}{Teste do oscilador com uma onda sinusoidal \IeC {\`a} entrada}{7}
-\contentsline {paragraph}{Melhoria da qualidade do oscilador com interpola\IeC {\c c}\IeC {\~a}o linear}{7}
-\contentsline {paragraph}{Compara\IeC {\c c}\IeC {\~a}o dos espectros com e sem interpola\IeC {\c c}\IeC {\~a}o}{8}
+\contentsline {paragraph}{Melhoria da qualidade do oscilador com interpola\IeC {\c c}\IeC {\~a}o linear}{8}
+\contentsline {paragraph}{Compara\IeC {\c c}\IeC {\~a}o dos espectros com e sem interpola\IeC {\c c}\IeC {\~a}o}{9}
 \contentsline {subsubsection}{\numberline {2.2.2}P2. Transmissor BPSK}{10}
 \contentsline {paragraph}{Fonte de Bits}{10}
-\contentsline {paragraph}{Codificador Diferencial}{10}
+\contentsline {paragraph}{Codificador Diferencial}{11}
 \contentsline {paragraph}{Mapeador}{11}
 \contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o do Modulador}{12}
 \contentsline {paragraph}{Teste do Modulador BPSK}{13}
 \contentsline {paragraph}{Espectro do Sinal Modulado}{14}
-\contentsline {subsection}{\numberline {2.3}\textit {Costas Loop}}{14}
-\contentsline {paragraph}{Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{14}
-\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{14}
-\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{14}
+\contentsline {subsection}{\numberline {2.3}\textit {Costas Loop}}{15}
+\contentsline {paragraph}{Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{15}
+\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{15}
+\contentsline {paragraph}{Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{15}
 \contentsline {paragraph}{\textit {Loop} desmodulador:}{15}
 \contentsline {paragraph}{Testes do \textit {Costas Loop} com onda sinusoidal}{16}
 \contentsline {paragraph}{Testes do \textit {Costas Loop} com BPSK sem zero}{16}
 \contentsline {paragraph}{Testes do \textit {Costas Loop} com BPSK com zero}{16}
-\contentsline {paragraph}{Transient}{16}
+\contentsline {paragraph}{Transient}{17}
 \contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{17}
 \contentsline {section}{\numberline {4}Anexos}{17}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{17}
-\contentsline {subsection}{\numberline {4.2}Anexo B}{19}
+\contentsline {subsection}{\numberline {4.1}Anexo A}{18}
+\contentsline {subsection}{\numberline {4.2}Anexo B}{20}
