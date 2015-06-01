@@ -456,7 +456,7 @@ A onda modulada no tempo consiste na multiplicação de uma onda quadrada com um
 
 Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. O espetro tem o \textit{SPAN} [0-16KHz] e apresenta a forma descrita acima, exceto a falta de réplica a 16kHz, contudo isso é explicado pelo filtro anti-aliasing do analisador de espetros.
 
-\subsection{\textit{Costas Loop}}
+\subsubsection{Receptor \textit{Costas Loop}}
 \todo{introdução teorica}
 
 \paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
@@ -469,7 +469,6 @@ Para um bom funcionamento do bloco total é necessário um \textit{scrambler} cu
 
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt}
 
-\todo{joao}
 Para implementar o NCO controlado pelo erro, recorreu-se ao NCO implementado na secção \ref{NCO}, com a mesma rampa, LUT e indexação da mesma como se pode ver no código seguinte.
 \begin{lstlisting}
 	rampa=rampa+delta;
@@ -533,9 +532,9 @@ Aqui, o seno vai subir do zero ao máximo, ou seja, primeira metade da LUT, logo
 Por fim, chega-se à última zona do ciclo, onde o seno volta ao zero a partir do máximo, ou seja, segunda metade da LUT. Como o coseno volta ao mínimo a partir do zero, aplicando um \textit{offset} negativo de 16 amostras e uma inversão de sinal nas posições indexadas pela LUT.
 
 Assim obteve-se o sinal em quadratura (figura \ref{quad}).
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./quadratura}~\\
+	\includegraphics[width=0.6\textwidth]{./quadratura}~\\
 	\caption{Componentes e fase(verde) e em quadratura do sinal(amarelo).}
 	\label{quad}
 \end{figure}
