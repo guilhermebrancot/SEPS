@@ -274,7 +274,7 @@ y=y_{1}+(y_{2}-y_{1})*\Delta_{x}
 \end{equation}                       
 
 Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retirou da rampa o índice da LUT. O processo de recolher o valor de $ \Delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
-\todo{explicar aritmética do código!!}
+
 %como e calculado y1 e y2 no codigo e dps y
 \begin{lstlisting}
 	rampa=rampa+delta;
@@ -292,8 +292,8 @@ Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 \end{lstlisting}
 
 Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \Delta_{x} $ que será usada na equação da interpolação.
-                                            
-Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
+\todo{completei este paragrafo a explicar a aritmetica, acho...}                                            
+Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15. De seguida multiplica-se $\Delta_x$ com a subtração de dois valores em Q15, que resultam em Q15, pois não ultrapassam 1. Feito isto faz-se um shift para a esquerda para retirar o sinal duplicado e shift 16 para a direita para converter o resultado do multiplicador, variável $aux$, no formato Q31 para Q15 para se somar de seguida com a variável $y1$ também em Q15 e guardar na variável $y$ que será o sinal de interpolação, também em Q15 pois a soma não excede 1.
 
 Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação. Para estes sinais utilizou-se $\Delta_0=20479$ correspondente a $f_0=5kHz$.              
 \begin{figure}[H]
