@@ -601,8 +601,62 @@ Assim obteve-se o sinal em quadratura (figura \ref{quad}).
 \end{figure}
 
 Como se pode observar ao comparar as duas componentes verifica-se qu estão desfasados por um quarto de ciclo, o que significa um offset de 16 amostras.
-\paragraph{3.Implementação dos Filtros:} \hspace{0pt}   \label{para:P3-3}       durante
+\paragraph{3.Implementação dos Filtros:} \hspace{0pt}   \label{para:P3-3}       
 \todo{guilherme}
+
+O Costas Loop necessita de três filtros passa baixo para o seu correcto funcionamento, sendo dois deles denominados Data Filter e o terceiro Loop Filter.
+
+Os três filtros terão as suas equações às diferenças baseadas na Equação \ref{eq:dif_geral}.
+
+\begin{equation}
+y(n)=\alpha y(n-1) + \gamma \frac{1-\alpha}{1-\beta}[x(n)-\beta x(n-1)]
+\label{eq:dif_geral}
+\end{equation}
+
+Numa primeira fase o valor de $ \beta $ foi considerado '0', ou seja, os filtros teriam apenas um polo. Originando a função de transferência da Equação \ref{eq:tran_geral}.
+
+\begin{equation}
+H(z)=\gamma\frac{(1-\alpha)}{1-\alpha z^{-1}}
+\label{eq:tran_geral}
+\end{equation}
+
+Como queremos filtros com ganho de $ 0dB $ a variável $ \gamma $ das Equações \ref{eq:dif_geral} e \ref{eq:tran_geral} é dimensionada com o valor de '1'. 
+
+Sendo que a equação geral para uma equação às diferenças com o objectivo de implementação está representada na Figura \ref{eq:dif_impl}, podemos concluir que os valores dos coeficientes são os seguintes: $ b_{11}=\alpha $, $ a_{01}=1-\alpha $ e $ a_{11}=0 $.
+
+\begin{equation}
+y(n)=b_{11} y(n-1) + a_{01}x(n)-a_{11}x(n-1)
+\label{eq:dif_impl}
+\end{equation}
+
+Podemos desde já concluir que a representação da saída do filtro pode ser representada no formato dos coeficientes, visto que $ a_{01}+b_{11}=1 $.
+
+Falta apenas calcular a variável $ \alpha $, variável esta que depende da frequência de corte. São então calculados dois valores de $ \alpha $, pois os Data Filter têm um valor de frequência de corte de $ 1kHz $ e o Loop Filter tem um de valor frequência de corte de $ 10Hz $.
+
+Devido à dificuldade do cálculo dos coeficientes caso não aceitássemos aproximações foi decidido utilizar métodos de aproximação. A Equação \ref{eq:alpha} demonstra a fórmula utilizada para calcular uma aproximação de $ \alpha $ em função da frequência de corte.
+
+\begin{equation}
+f_{c}=f_{s}\frac{1}{2 \pi}\frac{1-\alpha}{\alpha} \implies \alpha=\frac{f_{s} + 2 \pi f_{c}}{f_{c}}
+\label{eq:alpha}
+\end{equation}
+
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Filtro & $ f_{c} $ & $ a_{01} $ &  $ b_{11} $ & $ a_{01}|_{Q_{15}} $& $ a_{01}|_{Q_{15}} $ \\ 
+			\hline
+			\hline Data Filter & $ 1kHz $ &  &  & & \\ 
+			\hline Loop Filter & $ 10Hz $ &  &  & & \\ 
+			\hline
+		\end{tabular}
+		\caption{Coeficientes dos filtros e as suas respectivas representações em $ Q_{15} $.}
+		\label{tab:filter_coef} 
+	\end{table}
+	
+Os coeficientes da Tabela \ref{tab:filter_coef} podem ser representados em $ Q_{15} $ visto que o módulo de nenhum deles excede '1'.
+
+De seguida segue um excerto de pseudo código que exemplifica a implementação do Loop Filter, visto que a implementação dos Data Filter é igual apenas com valores de coeficientes diferentes.
+
 
 \paragraph{4.\textit{Loop} desmodulador:} \hspace{0pt}
   \todo{rever a linguagem} \label{para:P3-4}
