@@ -72,12 +72,10 @@
 \pagenumbering{arabic}
 
 \section{Introdução}
-\todo{ja alterei a intro, corrigir gralhas e ajustar a numeração dos anexos na ultima frase}
-O presente trabalho trata-se do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK) usando um \textit{Costas Loop}. 
+\todo{mudar introdução}
+Este trabalho consiste na primeira parte do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK). 
 
-Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$, e na implementação de alguns dos blocos de um modem BPSK, nomeadamente o \textit{Scrambler},  \textit{Differential coder and mapper}, \textit{Modulator} e \textit{Demodulator(Costas Loop)}.
-
-No projeto foi utilizada a placa DSK TMS320C6713. Inicialmente, na primeira parte do projeto, foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Na segunda parte do projeto foram incluídos os dois blocos mencionados no desenvolvimento dos restantes, dimensionaram-se filtros e testou-se e analisou-se o dispositivo desenvolvido. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
+Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$. Neste projeto foi utilizada a placa DSK TMS320C6713. Foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
 
 \section{Projecto}
 
@@ -86,20 +84,21 @@ Foram analisados dois projetos de demonstração com o intuito de familiarizar c
 
 \subsubsection{sine8\_buf}
 \label{sec:sine8}
-O objectivo desta fase é representar a função sinusoidal, multiplicada por um determinado ganho, através de um conjunto de amostras que equivalem a um período da mesma, repetindo nos períodos seguintes esse mesmo conjunto. Este procedimento é realizado através da rotina de interrupção presente no programa. 
+O objectivo deste projeto é representar a função sinusoidal, multiplicada por um determinado ganho, através de um conjunto de amostras que equivalem a um período da mesma, repetindo nos períodos seguintes esse mesmo conjunto. Este procedimento é realizado através da rotina de interrupção presente no programa. 
 
-Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusóide. Depois de observar a sinusóide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
+Ao analisar o código deste projeto, à primeira vista podemos concluir logo que este usa uma frequência de amostragem de 8 kHz , tem um ganho $G=10$ predefinido e usa 8 amostras para representar a sinusoide. Depois de observar a sinusoide no osciloscópio variou-se o ganho a fim de perceber a sua influência e também o seu limite.
  
-Para compreender o limite desta sinusóide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusóide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}) fazendo com que nesses pontos o valor da sinusóide seja o inverso do que deveria ser, ou seja ocorre \textit{wraparound} na variável da sinusóide (como se poderia esperar dado que se programa em C). 
- \todo{alterei a expressão "caia" para uma tirada da wikipedia}   
+Para compreender o limite desta sinusoide é necessário ter em conta que se usa o formato de vírgula fixa Q15 para as suas amostras. Este formato tem como limite o valor $(2^{15}-1) = 32767$. Considerando o valor máximo da sinusoide, se multiplicarmos a mesma por um ganho $G=33$ obtemos um valor superior ao permitido pelo formato Q15 (\textit{overflow}), fazendo com que nesses pontos o valor da sinusoóde "caia". 
+ \todo{ultimo paragrafo mal explicado}   
+%nao gostou da expressao "caia" para uma tirada da wikipedia}   
 
 \subsubsection{loop\_intr}
 \label{sec:loop}
 Este projeto fornece-nos um template para os próximos projetos, em termos de comunicação com a placa e rotina de interrupção. Pode-se observar nas últimas linhas de código como se liga os sinais de entrada e saída aos canais da placa.
 
-%interpretar!!
-No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusóide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
-\todo{Não me lembro do resultado do sinal quadrado, mas se a sinusóide desapareceu é porque tem filtro anti-aliasing... O que meto aqui?}
+%interpretar!!                                                                                                                                                                                                                                           
+No projeto anterior observou-se os efeitos de \textit{overflow} de uma variável. Neste observam-se os efeitos de aliasing  devido ao sinal de line-in ter a mesma frequência que a frequência de amostragem. A partir dos 4kHz deixamos de ver uma sinusoide com os 3.3V. Não foi feita a experiência de mudar para sinal quadrado e variar a frequência, mas provavelmente não se iria ver um sinal quadrado pois o espectro (infinito) deste teria que ser filtrado pelo anti-aliasing filter. 
+\todo{porque nao foi feita?}
 
 \subsection{BPSK Modem}
 Este projeto é constituído por duas partes, a primeira é um oscilador controlado numericamente e a segunda é um transmissor BPSK. Devido à existência de um inversor na placa utilizada deu-se, ao longo deste projeto, atenção ao efeito do inversor nos sinais, como se poderá observar nas próximas secções.
@@ -137,9 +136,9 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \paragraph{1.Oscilador de Relaxação} \hspace{0pt}
 
-Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Para que esta tenha precisão máxima e amplitude máxima de 1 V foi usado o formato Q15 para representar o sinal de saída, pois este formato tem amplitude máxima de $2^{15}-1 = 32767 $. \todo{corrigi o parágrafo}
- 
-\todo{eliminei a frase do múltiplo}Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
+ Visto que a placa usada no laboratório (DSK TMS320C6713) tem $1 V$ \todo{asneira a dizer 1V}de amplitude máxima na saída, foi usado o formato Q15 para representar o sinal de saída, pois um sinal representado em Q15 tem amplitude máxima de $2^{15}-1 = 32767 $.
+                                                                                                                                                                                                                                                                                                                                                
+Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Este incremento tem de tomar um valor, que por agora se vai considerar constante\todo{frase do multiplo mal}, tal que $32767$ seja seu múltiplo. Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes:
 
 
 \begin{table}[H]
@@ -156,13 +155,12 @@ Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ci
 \end{table}
 
 Os valores na tabela \ref{tab:incrementos} foram calculados através da seguinte fórmula:
-
+\todo{explicar equação}
 \begin{equation}
  f_{0}= \frac{\Delta}{2A}f_{s} \Leftrightarrow \Delta= 2A\frac{f_{0}}{f_{s}} \hspace{3 mm}, A=32767
 \end{equation}
-
 Esta equação trata-se de determinar quantos incrementos se faz de -32767 a 32767 ($2A$), de modo a que ocorra wraparound, sabendo que em cada ciclo da frequência de amostragem $T_s=\frac{1}{f_s}$ se faz um incremento $\Delta$ para se ter um período de rampa $T_0=\frac{1}{f_0}$.
-\todo{ja expliquei a expressão}
+
 Foi então possível obter as seguintes rampas com diferentes frequências:
 
 
@@ -186,19 +184,19 @@ Foi criada uma tabela (LUT) com os valores em Q15 de meio ciclo de um seno de mo
 
 \begin{equation}
 round \left(32767*\sin \dfrac{n \pi}{32} \right),  \quad \quad n=0,1,2,...,31
-\end{equation}
+\end{equation}                                                                                                                                                                                                                                             
 Para calcular apenas meio ciclo do seno, é necessário ter 32 valores pertencentes ao intervalo $[0,\pi]$ na fase. Assim, é necessário restringir a fase a esse intervalo através da divisão observada na expressão, $\frac{n \pi}{32}$. O produto do seno pelo valor 32767 é a conversão do seno para Q15. 
+                                                                     
+Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria o corte dessa amostra no sinal. \todo{nao gosta da palavra corte}
 
-Não se multiplica por $2 ^{15}=32768$ pois os sinais estão em complemento para dois, o que significa que para o máximo do seno, esta LUT ultrapassaria o limite do formato, o que causaria overflow nessa amostra do sinal resultando num sinal incorreto. \todo{alterei corte para overflow}
-
-Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusóide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
+Como a tabela LUT inclui apenas meio ciclo de seno, ao criar a sinusoide é necessário negar os valores adquiridos ao criar o segundo meio ciclo do seno.
 
 \paragraph{3.Obtenção de um sinal sinusoidal através da LUT} \hspace{0pt}
 
-Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.
+Usando como base a rampa criada na secção P1-1 para indexação da LUT criada na secção P1-2, foi possível criar um sinal  sinusoidal.                                                                              
 
 De acordo com o projeto, a rampa é representada num formato Q10, com 1 bit sinal, 5 bits inteiros e 10 bits fraccionários. 
-Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa. Esses 5 bits irão apontar para o valor da tabela de LUT a usar para criar a sinusóide. 
+Para a indexação são usados os 5 bits inteiros, ou seja, os 5 mais significativos (excluindo o bit de sinal) do sinal da rampa. Esses 5 bits irão apontar para o valor da tabela de LUT a usar para criar a sinusoide. 
 
 Este processo foi efetuado com o seguinte pedaço de código dentro do ciclo:
 
@@ -281,40 +279,42 @@ Com o objectivo de melhorar a qualidade do sinal criado vai ser usado o método 
 
 \begin{equation}
 y=y_{1}+(y_{2}-y_{1})*\Delta_{x}
-\end{equation}
+\end{equation}                       
 
 Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na altura em que se retirou da rampa o índice da LUT. O processo de recolher o valor de $ \Delta_{x} $ e do cálculo da interpolação estão descritos nas seguintes linhas de código:
-\todo{explicar aritmética do código!! Não entendo o que queres dizer com isso}
+\todo{explicar aritmética do código!!}
 \begin{lstlisting}
 	rampa=rampa+delta;
 	deltaX=1023 & rampa;   //Retirar os 10 bits menos significativos
 	deltaX=deltaX<<5;      //Converter deltax em Q15
+
 	(...)
 	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i) convertido para Q15
-	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido 
-para Q15
+	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
 	aux=(Y2-Y1)*deltaX;		
 	aux=aux<<1;				//Retirar bit de sinal extra
 	Y=Y1+(aux>>16);			//interpolacao	
 \end{lstlisting}
 
 Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \Delta_{x} $ que será usada na equação da interpolação.
-
+                                            
 Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15.
 
-Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação. Para estes sinais utilizou-se $\Delta_0=20479$ correspondente a $f_0=5kHz$.
-\todo{frequência e delta posto}
+Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação.
+\todo{qual a frequencia e o delta utilizados}                
 \begin{figure}[H]
-	\centering
+	\centering                                          
 	\includegraphics[width=0.5\textwidth]{./P1_interp}~\\
-	\caption{Sinal sinusoide com interpolação(amarelo) e sem interpolação(verde).}
+	\caption{Sinal sinusoide com interpolação e sem interpolação.}
 	\label{fig:interp}
-\end{figure} \todo{pus os canais}
+\end{figure} \todo{qual canal é qual sinal na imagem?}
 Nesta figura é possível observar os "degraus" mencionados anteriormente, tanto na onda interpolada como na onda não interpolada.
 
 \paragraph{8.Comparação dos espectros com e sem interpolação} \hspace{0pt}
 
+\todo{salientar q se fez pra um delta diferente de 16384}
 Não sendo possível estabelecer uma diferença entre os sinais com interpolação e sem interpolação foi necessário recorrer à observação dos espectros deles mesmos (Figuras \ref{fig:espect_s_interp} e \ref{fig:espect_c_interp}).
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./P1-8_espect_s_interp}~\\
@@ -330,10 +330,11 @@ Não sendo possível estabelecer uma diferença entre os sinais com interpolaç�
 \end{figure}
 
 De novo não foi possível observar nas figuras diferenças visíveis entre os dois sinais, desta vez entre os seus espectros. Apresentam aparentemente a mesma amplitude para cada frequência entre eles mesmos.
+\todo{conclusao errada, sem interp. é pior mas nao se consegue observar}
 A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, não apresenta uma melhoria nos resultados, sendo assim um método que apenas irá exaustar mais os recursos do processador sem obter qualquer tipo de retorno notável. Podemos então concluir que caso seja preciso usar um sinal digital de uma sinusoide podemos usar apenas o método que não usa interpolação.
 
 
-É importante referir que não se está a excluir a hipótese da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos e equipamentos usados.
+É de referir que não se está a excluir a hipótese da interpolação melhorar o sinal. É afirmado que os pontos têm uma melhor precisão, mas as melhorias não são observáveis pelos métodos e equipamentos usados.
 
 \subsubsection{P2. Transmissor BPSK}
 
@@ -389,12 +390,12 @@ Tal como em $b_n$ e $c_n$ esta operação só é executada a cada 16 ciclos pois
 	\includegraphics[width=0.5\textwidth]{./cn_dn}~\\
 	\caption{Formas de onda de $d_n$ (amarelo) e $c_n$ (verde).}
 	\label{cn_dn}
-\end{figure}
-
+\end{figure}                                                                                                                                     
+                                                                              
 \paragraph{4.Implementação do Modulador} \hspace{0pt}
 
-Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é constante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
-Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusóide, sendo esta:
+Falta agora gerar a onda portadora a modular. Esta foi implementada de forma mais simples face ao projeto anterior uma vez que a frequência é contante (4 kHz) e este valor consiste numa fração inteira da frequência de amostragem ($16 kHz$).
+Em primeiro lugar criou-se uma tabela com quatro valores dum período da sinusoide, sendo esta:
 \begin{table}[H]
 	\centering
 	\caption{Amostras da onda portadora}
@@ -418,11 +419,11 @@ A onda modulada é então representada pela seguinte expressão:
 \end{equation}
 Neste caso os valores do seno são os valores das amostras discutidas anteriormente.
 \vspace{2 mm}
-
+                                              
 \paragraph{5.Teste do Modulador BPSK} \hspace{0pt}
 
 Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (Figura \ref{port_mod}).
-\todo{não há outra imagem}
+\todo{trocar imagem pela q tem mais transições}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./port_mod}~\\
@@ -444,28 +445,25 @@ Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-
  \vspace{2 mm}
 
 \paragraph{6.Espectro do Sinal Modulado} \hspace{0pt}
- 
+                                                
 Para compreender melhor o sinal modulado, observou-se o espetro do mesmo (Figura \ref{espetro}).
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./spectrum_sn_0-16k}~\\
-	\caption{Espectro do sinal $s_n$.}
-	\label{espetrosn}
-\end{figure}
-A onda modulada no tempo consiste na multiplicação de uma onda quadrada com uma onda sinusoidal, na frequência isto consiste na convolução do espetro da primeira, um $sinc$, com o espetro da segunda, um impulso em $f_0$. Isto resultaria numa translação do espetro da onda quadrada, ficando centrado na frequência da onda sinusoidal.
+	\includegraphics[width=0.5\textwidth]{./espetro}~\\                                                                                                                                                                                                                          em          spectro do sinal $s_n$.}
+	\label{espetro}                                                                                                                                                                                                                                           tros                                                                                                                              consiste na convolução do espetro da primeira (impulsos nos múltiplos ímpares da frequência fundamental) com o espetro da segunda (um impulso à frequência $f_0$). Isto resultaria numa translação do espetro da onda quadrada, ficando centrado na frequência da onda sinusoidal.
 
-Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. O espetro tem o \textit{SPAN} [0-16KHz] e apresenta a forma descrita acima, exceto a falta de réplica a 16kHz, contudo isso é explicado pelo filtro anti-aliasing do analisador de espetros.
+Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como se pode observar, as harmónicas de maior amplitude estão espaçadas 250 Hz em relação a $f_0$ indicando que a frequência fundamental da onda quadrada é 250 Hz, como esperado.
 
 \subsubsection{Receptor \textit{Costas Loop}}
-\todo{introdução teorica}
-
-\paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
-
-\todo{guilherme}%Quem vai fazer o guilherme?
+\todo{introdução%Quem vai fazer o guilherme?
 
 Para um bom funcionamento do bloco total é necessário um \textit{scrambler} cuja função é
 
-%Nome melhor para bloco total
+%Nome melhor para bloco total teorica}
+
+\paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
+
+\todo{guilherme}
 
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt}
 
@@ -533,28 +531,26 @@ Por fim, chega-se à última zona do ciclo, onde o seno volta ao zero a partir d
 
 Assim obteve-se o sinal em quadratura (figura \ref{quad}).
 \begin{figure}[h]
-	\centering
+	\centering     
 	\includegraphics[width=0.6\textwidth]{./quadratura}~\\
 	\caption{Componentes e fase(verde) e em quadratura do sinal(amarelo).}
 	\label{quad}
 \end{figure}
 Como se pode observar ao comparar as duas componentes verifica-se qu estão desfasados por um quarto de ciclo, o que significa um offset de 16 amostras.
-\paragraph{3.Implementação dos Filtros:} \hspace{0pt}
-
-\todo{guilherme}%Não estou a achar piada a estes todo
+\paragraph{3.Implementação dos Filtros:} \hspace{0pt}                                                                                                                                                                                                              durante
+\todo{guilherme}
 
 \paragraph{4.\textit{Loop} desmodulador:} \hspace{0pt}
- \todo{rever a linguagem}
+ \todo{apenas um rascunho, falta meter as equações e rever a linguagem}
  
-%misturado? Queria dizer "passar pelo scrambler", pensei scrambled => misturado. Mas se nao ficar claro muda-se
-Nesta fase do projeto têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi misturado, $e_n$, codificado, mapeado, $d_n$, e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK, $s_n$. Este durante a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
+%misturado?                                                                                                                                  }                                                                                                                                                                                                                                                                                                           do sinal $s_n$, respe têm-se todos os blocos necessários do modem BPSK. O sinal de informação $b_n$ foi misturado, $e_n$, codificado, mapeado e posteriormente multiplicado à portadora com frequência $f_0 = 4kHz$, obtendo o sinal modulado BPSK,$s_n$. Este após a transmissão pode sofrer variações de fase ($\Delta\phi=\phi_0-\phi_1$) e de frequência ($\Delta f = f_1-f_0$) tomando a forma 
 
 \begin{equation}
 	s_n=d_nsin(2\pi f_1t+ \phi_1)
 \end{equation}
  Para o desmodular é necessário sincronizar o oscilador local com a frequência da portadora, estimando $\Delta\phi$ e $\Delta f$.
 
-Usa-se, então, o \textit{Costas Loop}, um tipo de PLL. Em semelhança aos seus familiares é composto por um detetor de fase, um \textit{loop filter} e um oscilador local(NCO), excepto nos dois filtros adicionais em cada ramo exterior. No braço inferior o sinal BPSK é multiplicado com o sinal $cos(2\pi f_0t+\phi_0)$ e no superior com $sin(2\pi f_0t+ \phi_0)$ obtendo-se a componente em quadratura e fase do sinal $s_n$, respectivamente: 
+Como tal usa-se o \textit{Costas Loop}, um tipo de PLL. Em semelhança aos seus familiares é composto por um detetor de fase, um "loop filter" e um oscilador local(NCO), excepto nos dois filtros adicionais em cada ramo exterior. No braço inferior o sinal BPSK é multiplicado com o sinal $cos(2\pi f_0t+\phi_0)$ e no superior com $sin(2\pi f_0t+ \phi_0)$ obtendo-se a componente em quadratura e fase, respectivamente, do sinal $s_n$ os sinais 
 \begin{equation}
 	s_1=\frac{d_n}{2}[cos(4\pi f_0t+\Delta f+\phi_1+\phi_0)+cos(\Delta f+\phi_0-\phi_1)]
 \end{equation}
@@ -564,22 +560,22 @@ Usa-se, então, o \textit{Costas Loop}, um tipo de PLL. Em semelhança aos seus 
 
 Nestes dois multiplicadores ocorre a detecção de fase uma vez que os termos de baixa frequência têm como componentes $\Delta\phi$ e $\Delta f$, os indicadores dos erros de fase e frequência que se usará no NCO. Filtrando-se esses sinais nos \textit{Data filters}, multiplicando-os entre si e passando no \textit{Loop filter} obtém-se 
 \begin{equation}
-	\epsilon(t)=\frac{1}{8}sin(2\Delta\phi)\approx\frac{1}{4}\Delta\phi
+	\epsilon(t)=\frac{1}{8}sin(2\Delta\phi)~=\frac{1}{4}\Delta\phi                                     \approxquation
 \end{equation}
- 
+
 
 para valores pequenos de $\Delta\phi$. Este sinal estático entra no NCO e aumenta ou diminui a frequência do oscilador reduzindo por consequência o $\Delta f$, desde que a frequência da portadora se encontre na banda de captura do dispositivo descrito.
 
 Uma vez capturada a frequência da portadora (diferente da frequência central) o oscilador local encontra-se sincronizado à frequência da portadora ($f_1 = f_0+\Delta f$) e em fase com a mesma ($\Delta\phi=0$) tendo-se os sinais
 \begin{equation}
-	\frac{1}{2}d_ncos(\Delta\phi)\approx\dfrac{d_n}{2} \hspace{1mm}, \hspace{1mm} \frac{1}{2}d_nsin(\Delta\phi)\approx 0
+	\frac{1}{2}d_ncos(\Delta\phi)~= \dfrac{d_n}{2} \quad , \hspace{1mm} \frac{1}{2}d_nsin(\Delta\phi)~= 0
 \end{equation}
  à saída do filtro da componente em quadratura e do filtro da componente em fase, respetivamente, tornando-se o braço do primeiro num detetor coerente. Como já mencionado, o espetro do sinal BPSK é o espetro do sinal de informação centrado à frequência da portadora e quando se multiplica pelo sinal local sincronizado obtêm-se réplicas do espetro do sinal de informação a $f=0$ e $f=2f_1$, que ao passar no \textit{Data filter} filtra as componentes superiores a 1kHz obtendo o sinal de informação.
-
 
 \paragraph{5.Testes do \textit{Costas Loop} com onda sinusoidal} \hspace{0pt}
 
 \todo{joao}
+
 %ondas sinusoidais usadas no gerador do osciloscopio
 %bandas de captura e seguimento upper arm
 %frequencia central 4kHz
@@ -595,89 +591,24 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 
 \paragraph{7.Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt}
 
+ \todo{apenas um rascunho, falta meter as expressões dos apontamentos, mudar formatação das funções}
 O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos Data filters à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
 \begin{equation}
 H(z) = \gamma\frac{1-\alpha}{1-\beta}\dfrac{1-\beta z^{-1}}{1-\alpha z^{-1}}
 \end{equation}
-O ganho estático ($\gamma$) foi obtido igualando a função a 1 à frequência $\omega=0 => z=1$. O valor de $\alpha$ foi determinado na alínea P.3 e o valor de $\beta$ foi determinado igualando a função transferência a 0 à frequência $z=e^{j\omega T_s}|_{\omega=2\pi8000}$. Desta maneira insere-se um \textit{Notch} para os 8kHz obtendo-se um \textit{Lowpass Notch filter} com a frequência de corte de 1kHz na mesma contudo com uma atenuação muito maior à frequência do sinal ruído.
-A equação às diferenças toma então a forma:
-\begin{equation}
-y_n = \alpha y_{n-1}+\gamma\frac{1-\alpha}{1-\beta}(x_n-\beta x_{n-1}), 
-\end{equation}
-com $\beta=-1; \alpha=0.7180302; \gamma=1.$
+O ganho estático ($\gamma$) foi obtido igualando a função a 1 à frequência $\omega=0 => z=1$. O valor de $\alpha$ foi determinado na alínea P.3 e o valor de $\betmesfoi determinado igualapara se obterndo a funçãia a 0 à frequência $z=e^{j\omega T_s}|_{\omega=2\pi8000}$. Desta maneira insere-se um \textit{Notch} para os 8kHz obtendo-se um \textit{Lowpass Notch filter} com a frequência de corte de 1kHz na mesma contudo com uma atenuação muito maior à frequência do sinal ruído.
 
-No programa alterou-se apenas os valores dos coeficientes da equação às diferenças dos \textit{data filters}.
-
-\begin{lstlisting}
-y1= (((23528*y1)<<1)>>16)+(((4620*s1_0)<<1)>>16)+(((4620*s1_1)<<1)>>16);
-
-y2=(((23528*y2)<<1)>>16)+(((4620*s2_0)<<1)>>16)+(((4620*s2_1)<<1)>>16);
-\end{lstlisting}
-Observa-se na figura abaixo o sinal desmodulado sem o ruído e o sinal de informação.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./dn_y1}~\\
-	\caption{sinal de informação, $d_n$,(amarelo) e sinal desmodulado(verde).}
-	\label{demod}
-\end{figure}
-
-De seguida observa-se como previsto que, uma vez que nos encontramos em sincronismo com o transmissor os sinais resultantes dos detetores de fase, $s_1$ e $s_2$ são a onda de informação com uma componente de alta frequência somada e zero, respetivamente.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./s1_s2n}~\\
-	\caption{sinal de quadratura, $s_1$,(amarelo) e sinal de fase, $s_2$(verde).}
-	\label{s1_s2}
-\end{figure}
-
-Agora tem-se uma ilustração do sinal de erro com o sinal desmodulado. O primeiro como previsto, mais uma vez porque o \textit{Costas Loop} está sincronizado, é nulo pois não se tem $\Delta\phi$ e $\Delta f$.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./erro_y1n}~\\
-	\caption{sinal de erro, $\epsilon$,(amarelo) e sinal desmodulado (verde).}
-	\label{s1_s2}
-\end{figure}
-
-Por fim representa-se os outputs dos data filters e o espetro do sinal desmodulado.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./y1_y2n}~\\
-	\caption{saída do filtro de quadratura(amarelo) e saída do filtro de fase(verde).}
-	\label{espetro}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./espetro}~\\
-	\caption{Espetro do sinal desmodulado.}
-	\label{espetro}
-\end{figure}
-
-Como se pode observar, o espetro trata-se de um $sinc$, com zeros nos múltiplos pares da frequência de $d_n$, $f_d=\frac{f_bit}{2}$, com a escala horizontal com 1kHz/divisão.
-
+No programa alterou-se apenas os valores dos coeficientes da equação às diferenças dos \textit{data filters}.                                                                                                       d       -se na figura abaixo o sinal desmodulado sem o ruído a amarelo.
+                                                                                                                                     ,FIGURA COM demod sem ruido
 \paragraph{8.Transient} \hspace{0pt}
 
-De forma a se poder observar o transitório de aquisição do \textit{Costas Loop}, com a finalidade de poder analisar características adicionais do mesmo, nomeadamente o tempo para se obter sincronismo, fez-se uma análise \textit{transient}. Esta consiste em induzir no circuito um erro de fase elevado, uma vez que é mais simples a alterar a frequência do sinal BPSK, saturando a cada 4000 amostras o valor da variável do erro ( $\epsilon=$ 32767). Observa-se na figura seguinte os sinais de erro e a saìda desmodulada, para um \textit{Loop filter} com frequência de corte, $f_c = 10Hz$:
+\todo{falta inserir as imagens e se calhar melhorar a explicação do objetivo do teste}
+De forma a poder-se observar o transitório de aquisição do sinal desmodulado com a finalidade de poder analisar características adicionais do \textit{Costas Loop}, nomeadamente o tempo de sincronismo, fez-se uma análise \textit{transient}. Esta consiste em induzir no circuito um erro de fase elevado, uma vez que é mais simples a alterar a frequência do sinal BPSK, saturando a cada 4000 amostras o valor da variável do erro ( $\epsilon=$ 32767). 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./transient10Hz}~\\
-	\caption{sinal de erro, $\epsilon$, (amarelo) e sinal desmodulado(verde).}
-	\label{trans10}
-\end{figure}
-Observa-se o comportamento esperado do erro com algum overshoot, um curto tempo de estabelecimento e convergindo para 0. Ao mesmo tempo a forma de onda assemelha-se cada vez mais com o sinal de informação. Para este caso tem-se um tempo de sincronismo de $\sim$53ms, tendo em conta a escala horizontal ter 10ms/divisão.
+Observa-se o comportamento esperado do erro com algum overshoot, um curto tempo de estabelecimento e convergindo para 0. Ao mesmo tempo a forma de onda torna-se cada vez mais semelhante com o \textbf{funcionamento normal}.%melhorar linguagem
 
-Repetiu-se este teste para um \textit{Loop filter} com frequência de corte, $f_c = 100Hz$, e verificou-se que este circuito sincroniza mais rapidamente com um tempo de sincronismo de $\sim$10ms, tal como se observa na figura seguinte, com a mesma escala horizontal do caso anterior.
+Fez-se este teste para duas frequências de corte \textit{loop filters}, $f_c = 10Hz$ e $f_c = 100Hz$. Observa-se que para o segundo o circuito sincroniza mais rapidamente, com um tempo de sincronismo aproximadamente \textbf{OLHOMETRO DA IMAGEM}, superior aos \textbf{OLHOMETRO DA IMAGEM} do filtro com $f_c = 10Hz$.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./transient100Hz}~\\
-	\caption{sinal de erro, $\epsilon$, (amarelo) e sinal desmodulado(verde).}
-	\label{trans100}
-\end{figure}
 
 
 \section{Conclusão}
