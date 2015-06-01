@@ -25,8 +25,13 @@
 \contentsline {paragraph}{1.Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{15}
 \contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{17}
 \contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{19}
+<<<<<<< HEAD
 \contentsline {paragraph}{4.\textit {Loop} desmodulador:}{20}
 \contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{21}
+=======
+\contentsline {paragraph}{4.\textit {Loop} desmodulador:}{21}
+\contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{22}
+>>>>>>> origin/master
 \contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero nos filtros}{23}
 \contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero nos filtros}{24}
 \contentsline {paragraph}{8.Transient}{27}

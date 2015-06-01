@@ -520,8 +520,6 @@ Nas Figuras \ref{fig:en_bn} e \ref{fig:scr} é possível visualizar a variação
 
 Como se pode observar na Figura \ref{fig:en_bn}, é possível criar uma variável pseudo-aleatória a partir de uma variável periódica que varia entre '0' e '1'. As Figuras \ref{fig:en_bn} e \ref{fig:scr} permitem concluir que o \textit{Scrambler} funciona como esperado.
 
-\todo{Ainda tenho de ver o problema da pergunta}
-
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt} \label{para:P3-2}
 
 Para implementar o NCO controlado pelo erro, recorreu-se ao NCO implementado na secção \ref{NCO}, com a mesma rampa, LUT e indexação da mesma como se pode ver no código seguinte.
@@ -637,17 +635,19 @@ Falta apenas calcular a variável $ \alpha $, variável esta que depende da freq
 Devido à dificuldade do cálculo dos coeficientes caso não aceitássemos aproximações foi decidido utilizar métodos de aproximação. A Equação \ref{eq:alpha} demonstra a fórmula utilizada para calcular uma aproximação de $ \alpha $ em função da frequência de corte.
 
 \begin{equation}
-f_{c}=f_{s}\frac{1}{2 \pi}\frac{1-\alpha}{\alpha} \implies \alpha=\frac{f_{s} + 2 \pi f_{c}}{f_{c}}
+f_{c}=f_{s}\frac{1}{2 \pi}\frac{1-\alpha}{\alpha} \implies \alpha=\frac{f_{s}}{f_{s} + 2 \pi f_{c}}
 \label{eq:alpha}
 \end{equation}
+
+Utilizando a Equação \ref{eq:alpha} é possível preencher a Tabela \ref{tab:filter_coef} com os valores dos coeficientes.
 
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline Filtro & $ f_{c} $ & $ a_{01} $ &  $ b_{11} $ & $ a_{01}|_{Q_{15}} $& $ a_{01}|_{Q_{15}} $ \\ 
 			\hline
-			\hline Data Filter & $ 1kHz $ &  &  & & \\ 
-			\hline Loop Filter & $ 10Hz $ &  &  & & \\ 
+			\hline Data Filter & $ 1kHz $ & 0.28196980 & 0.71803020 & 9239 & 23528 \\ 
+			\hline Loop Filter & $ 10Hz $ & 0.00391163 & 0.99608837 & 128 & 32639 \\ 
 			\hline
 		\end{tabular}
 		\caption{Coeficientes dos filtros e as suas respectivas representações em $ Q_{15} $.}
@@ -656,8 +656,15 @@ f_{c}=f_{s}\frac{1}{2 \pi}\frac{1-\alpha}{\alpha} \implies \alpha=\frac{f_{s} + 
 	
 Os coeficientes da Tabela \ref{tab:filter_coef} podem ser representados em $ Q_{15} $ visto que o módulo de nenhum deles excede '1'.
 
-De seguida segue um excerto de pseudo código que exemplifica a implementação do Loop Filter, visto que a implementação dos Data Filter é igual apenas com valores de coeficientes diferentes.
+De seguida segue um excerto código que exemplifica a implementação do Loop Filter. Visto que a implementação dos Data Filter é igual apenas com valores de coeficientes diferentes, não é necessário demonstrar a sua implementação.
 
+\begin{lstlisting}
+aux1=(((32639*y)<<1)>>16)	//um shift left para retirar o bit de sinal extra
+aux2=(((128*x)<<1)>>16)		//16 shifts rights para se obter um valor de 16 bits em Q15
+y=aux1+aux2
+\end{lstlisting}
+
+Visto que os filtros têm apenas um polo e nenhum zero, não é necessário recorrer a mais variáveis para guardar valores de entrada ou saída atrasados. A implementação segue a Equação \ref{eq:dif_impl}.
 
 \paragraph{4.\textit{Loop} desmodulador:} \hspace{0pt}
   \todo{rever a linguagem} \label{para:P3-4}
