@@ -473,19 +473,52 @@ Para um bom funcionamento do Costas Loop é necessário um \textit{scrambler}. O
 	\label{fig:scrambler}
 \end{figure}
 
-A Figura \ref{fig:scrambler} representa o \textit{scrambler} a implementar, e como se pode observar é necessário criar um vector composto por oito variáveis, sendo que o tipo \texttt{char} é ideal.
+A Figura \ref{fig:scrambler} representa o \textit{scrambler} a implementar, nas Equações \ref{eq:scrambler_1}, \ref{eq:scrambler_2} e \ref{eq:scrambler_3} está apresentada uma possível maneira de implementar o \textit{Scrambler}.
+
+\begin{gather}
+e_n=scr(0) \oplus scr(1) \oplus b_n; \\
+\label{eq:scrambler_1}
+scr=[e_n, scr(7), scr(6), scr(5), scr(4), scr(3), scr(2), scr(1)];\\
+\label{eq:scrambler_2}
+b_n=b_n \oplus 1;\\
+\label{eq:scrambler_3}
+\end{gather}
+
+Sendo que scr representa um vector com 8 posições (variável do tipo \texttt{char}) com uma sequência de valores "aleatórios", a Equação \ref{eq:scrambler_2} simboliza a actualização dos valores do vector scr, à medida que o tempo avança a posição scr(0) é descartada e é inserida na posição scr(7) o valor de $ e_n $. No entanto a Equação \ref{eq:scrambler_1} representa a determinação de um valor "aleatório". A Equação \ref{eq:scrambler_3} cria uma variável $ b_n $ alterna periodicamente entre '1' e '0'.
+
+O \textit{Scramble} demonstrado representa um \textit{pseudo-scramble}, na verdade os valores não são aleatórios, mas sim construídos através de equações que não permitem uma sequência periódica de bits.
+
+De seguida está representado o código utilizado para a implementação do \textit{Scramble}.
+
 \begin{lstlisting}
 if(cont==16){
-	en=((scr & 1)^((scr & 2)>>1))^bn;
-	scr=(scr>>1)|(en<<7);
-	cn=bn^cn;
-	bn=bn^1;
-	cont=0;
+	en=((scr & 1)^((scr & 2)>>1))^bn;   //Criacao do novo valor de scr
+	scr=(scr>>1)|(en<<7);	//actualizacao do vector scramble
+	bn=bn^1;				//bn alterna entre '0' e '1'
+	cont=0;					//reinicializa a contador
 }
 cont=cont+1;
 \end{lstlisting}
 
-\todo{o guilherme tem de sem lembrar como fizemos esta trampa}
+Nas Figuras \ref{fig:en_bn} e \ref{fig:scr} é possível visualizar a variação das variáveis que pertencem ao \textit{Scrambler} em função do tempo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./en_bn}~\\
+	\caption{Visualização da variável en(amarelo) em conjunto com bn(verde).}
+	\label{fig:en_bn}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./scr}~\\
+	\caption{Visualização da variável scr.}
+	\label{fig:scr}
+\end{figure}
+
+Como se pode observar na Figura \ref{fig:en_bn}, é possível criar uma variável pseudo-aleatória a partir de uma variável periódica que varia entre '0' e '1'. As Figuras \ref{fig:en_bn} e \ref{fig:scr} permitem concluir que o \textit{Scrambler} funciona como esperado.
+
+\todo{Ainda tenho de ver o problema da pergunta}
 
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt} \label{para:P3-2}
 
