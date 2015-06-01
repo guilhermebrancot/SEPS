@@ -592,13 +592,45 @@ Uma vez capturada a frequência da portadora (diferente da frequência central) 
 
 \paragraph{5.Testes do \textit{Costas Loop} com onda sinusoidal} \hspace{0pt}
 
-\todo{joao}
-Depois de implementar o \textit{Costas Loop} procedeu-se à realização de testes para 
-%ondas sinusoidais usadas no gerador do osciloscopio
-%bandas de captura e seguimento upper arm
-%frequencia central 4kHz
+Depois de implementar o \textit{Costas Loop} procedeu-se à realização de testes para verificar o seu funcionamento. Primeiro testou-se com uma onda sinusoidal de entrada no \textit{Costas Loop} variando dois parâmetros, a  tensão de pico-a-pico do sinal sinusoidal, V\textsubscript{pp}, a 1V e 3V e a frequência de corte do filtro de \textit{loop}, a 10Hz e a 100Hz. Assim obteve-se quatro situações diferentes com esses parâmetros.
+
+ Estas situações foram criadas primeiro pra testar o braço superior do \textit{Costas Loop} e depois pra testá-lo todo. Para cada situação anotou-se as bandas de captura e de seguimento, observadas através do osciloscópio no sinal do coseno mencionado anteriormente. 
+ 
+ Ao observar o coseno de frequência central 4kHz, constata-se que há uma zona onde o sinal está em sincronismo (figura \ref{cap_segue}a), e para obter a banda de captura analisou-se quando o sinal entra em sincronismo, limite inferior e superior (figura \ref{cap_segue}a).
+ 
+Para a banda de seguimento analisou-se quando o sinal sai do sincronismo, também com os limites inferior e superior (figura \ref{cap_segue}b).
+\begin{figure}[h]
+	\centering
+	\subfloat[]{\includegraphics[width=0.4\textwidth]{./captura}}
+	\hspace{6 mm}
+	\subfloat[]{\includegraphics[width=0.4\textwidth]{./segue}}
+	\caption{Em sincronismo (a) e fora do sincronismo (b), coseno (verde) e onda sinusoidal (amarelo)}
+	\label{cap_segue}
+\end{figure}
+Ao observar o comportamento do sinal coseno nas figuras, a entrar e a sair do sincronismo, verifica-se que este tem o comportamento de um DPLL clássico.
+
+Antes de proceder aos resultados das bandas é necessário salientar que ao considerar um filtro de \textit{loop} de 100 Hz foi necessário calcular os coeficientes do filtro de novo. No código a seguir observa-se os dois filtros implementados e a diferença nos seus coeficientes. 
+\begin{lstlisting}
+	erro = (((32639*erro)<<1)>>16)+(((128*s)<<1)>>16); //10Hz
+	//erro= (((31529*erro)<<1)>>16)+(((1238*s)<<1)>>16);//100Hz
+\end{lstlisting}
+Assim, podem-se observar as bandas resultantes do braço superior nas tabelas seguintes.
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[width=0.45\textwidth]{./tabela_cap}}
+	\hspace{6 mm}
+	\subfloat[]{\includegraphics[width=0.45\textwidth]{./tabela_segue}}
+\end{figure}
+A tabela (a) corresponde às bandas de captura e a tabela (b) corresponde às bandas de seguimento. Como se pode ver, todas as bandas compreendem a frequência 4 kHz, oscilando sempre em relação à mesma.
+É possível também constatar que ao aumentar a amplitude da onda sinusoidal ou a frequência de corte do filtro \textit{loop} a banda de captura aumenta, principalmente com a frequência de corte do filtro. No caso da banda de seguimento só a amplitude é que aumenta a mesma.
+
+Passando ao teste do \textit{Costas Loop} inteiro, pode-se observar os resultados na tabela seguinte, desta vez considerou-se apenas uma situação. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{./tab_costa}~\\
+\end{figure}
+Comparativamente ao braço superior, ambas as bandas reduziram significativamente com a adição do braço inferior.
 %bandas de captura e seguimento Costas Loop
-%complementar com codigo relacionado
 
 \paragraph{6.Testes do \textit{Costas Loop} com BPSK sem zero}
 %sinal modulado na entrada
@@ -651,7 +683,7 @@ Agora tem-se uma ilustração do sinal de erro com o sinal desmodulado. O primei
 	\centering
 	\includegraphics[width=0.5\textwidth]{./erro_y1n}~\\
 	\caption{sinal de erro, $\epsilon$,(amarelo) e sinal desmodulado (verde).}
-	\label{s1_s2}
+	\label{erro_y1n}
 \end{figure}
 
 Por fim representa-se os outputs dos data filters e o espetro do sinal desmodulado.
@@ -660,7 +692,7 @@ Por fim representa-se os outputs dos data filters e o espetro do sinal desmodula
 	\centering
 	\includegraphics[width=0.5\textwidth]{./y1_y2n}~\\
 	\caption{saída do filtro de quadratura(amarelo) e saída do filtro de fase(verde).}
-	\label{espetro}
+	\label{y1_y2n}
 \end{figure}
 
 \begin{figure}[H]

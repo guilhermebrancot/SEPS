@@ -21,32 +21,16 @@
 \contentsline {paragraph}{4.Implementa\IeC {\c c}\IeC {\~a}o do Modulador}{12}
 \contentsline {paragraph}{5.Teste do Modulador BPSK}{13}
 \contentsline {paragraph}{6.Espectro do Sinal Modulado}{14}
-<<<<<<< d6dc2c70701ea293c96abe0379d5c6fb32470dc4
 \contentsline {subsubsection}{\numberline {2.2.3}Receptor \textit {Costas Loop}}{14}
 \contentsline {paragraph}{1.Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{14}
-\contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{14}
-\contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{16}
-\contentsline {paragraph}{4.\textit {Loop} desmodulador:}{16}
-\contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{18}
-\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{18}
-\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{18}
-\contentsline {paragraph}{8.Transient}{21}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{22}
-\contentsline {section}{\numberline {4}Anexos}{22}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{22}
-\contentsline {subsection}{\numberline {4.2}Anexo B}{24}
-=======
-\contentsline {subsection}{\numberline {2.3}\textit {Costas Loop}}{15}
-\contentsline {paragraph}{1.Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{15}
-\contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{16}
-\contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{18}
+\contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{15}
+\contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{17}
 \contentsline {paragraph}{4.\textit {Loop} desmodulador:}{18}
 \contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{19}
-\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{19}
-\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{19}
-\contentsline {paragraph}{8.Transient}{22}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{23}
-\contentsline {section}{\numberline {4}Anexos}{23}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{23}
+\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{20}
+\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{20}
+\contentsline {paragraph}{8.Transient}{23}
+\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{24}
+\contentsline {section}{\numberline {4}Anexos}{24}
+\contentsline {subsection}{\numberline {4.1}Anexo A}{24}
 \contentsline {subsection}{\numberline {4.2}Anexo B}{26}
->>>>>>> 9f0b73a7911b02c3173ec052fbbe65f2aadffa6d
