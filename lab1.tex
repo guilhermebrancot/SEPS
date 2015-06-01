@@ -855,11 +855,13 @@ Repetiu-se este teste para um \textit{Loop filter} com frequência de corte, $f_
 
 \section{Conclusão}
 
-\todo{alterar conclusao}
+\todo{conclusao alterada}
 
 No projeto do oscilador, aprendeu-se como controlar um oscilador a partir de vários parâmetros e o efeito de interpolação linear no mesmo. Como já foi afirmado, a interpolação criou um sinal com maior precisão embora não tenha sido possível observar essa melhoria devido às limitações do equipamento utilizado.
 
-No projeto do transmissor criou-se a primeira parte do modem BPSK, aproveitando o conhecimento adquirido no projeto do oscilador, e observou-se os efeitos da modulação de uma sequência de bits codificada e mapeada, tanto no tempo como na frequência, o que deu para observar pelas inversões de fase presentes no sinal modulado e nas harmónicas do espetro.
+Com o projeto do transmissor criou-se a primeira parte do modem BPSK, aproveitando o conhecimento adquirido no projeto do oscilador, e observou-se os efeitos da modulação de uma sequência de bits misturada, codificada e mapeada, tanto no tempo como na frequência, o que deu para observar pelas inversões de fase presentes no sinal modulado e na forma e características do espetro.
+
+No desmodulador foram aplicados os conhecimentos de projeto de filtros e de PLL. O sinal desmodulado ficou com a forma esperada, uma onda quadrada com flancos "arredondados" devido à frequência de amostragem escolhida e o espetro da onda de informação truncado pelos \textit{Data filters}. Observou-se o correto comportamento do circuito nos vários testes feitos, concluindo-se que funcionaria corretamente com desvios de frequência na ordem de 1$\%$ da frequência central.
 
 \section{Anexos}
 \todo{acrescentar codigo da parte 2}
