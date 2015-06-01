@@ -23,14 +23,14 @@
 \contentsline {paragraph}{6.Espectro do Sinal Modulado}{14}
 \contentsline {subsubsection}{\numberline {2.2.3}Receptor \textit {Costas Loop}}{15}
 \contentsline {paragraph}{1.Introdu\IeC {\c c}\IeC {\~a}o do \textit {Scrambler}:}{15}
-\contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{16}
-\contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{18}
-\contentsline {paragraph}{4.\textit {Loop} desmodulador:}{18}
-\contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{19}
-\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{21}
-\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{21}
-\contentsline {paragraph}{8.Transient}{23}
-\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{24}
-\contentsline {section}{\numberline {4}Anexos}{25}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{25}
-\contentsline {subsection}{\numberline {4.2}Anexo B}{27}
+\contentsline {paragraph}{2.Implementa\IeC {\c c}\IeC {\~a}o de NCO controlado pelo erro:}{17}
+\contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{19}
+\contentsline {paragraph}{4.\textit {Loop} desmodulador:}{19}
+\contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{21}
+\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{22}
+\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{22}
+\contentsline {paragraph}{8.Transient}{25}
+\contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{26}
+\contentsline {section}{\numberline {4}Anexos}{26}
+\contentsline {subsection}{\numberline {4.1}Anexo A}{26}
+\contentsline {subsection}{\numberline {4.2}Anexo B}{29}
