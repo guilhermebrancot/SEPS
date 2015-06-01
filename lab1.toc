@@ -27,10 +27,11 @@
 \contentsline {paragraph}{3.Implementa\IeC {\c c}\IeC {\~a}o dos Filtros:}{18}
 \contentsline {paragraph}{4.\textit {Loop} desmodulador:}{18}
 \contentsline {paragraph}{5.Testes do \textit {Costas Loop} com onda sinusoidal}{19}
-\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{21}
-\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{21}
+\contentsline {paragraph}{6.Testes do \textit {Costas Loop} com BPSK sem zero}{20}
+\contentsline {paragraph}{7.Testes do \textit {Costas Loop} com BPSK com zero}{20}
 \contentsline {paragraph}{8.Transient}{23}
 \contentsline {section}{\numberline {3}Conclus\IeC {\~a}o}{24}
-\contentsline {section}{\numberline {4}Anexos}{25}
-\contentsline {subsection}{\numberline {4.1}Anexo A}{25}
+\contentsline {section}{\numberline {4}Anexos}{24}
+\contentsline {subsection}{\numberline {4.1}Anexo A}{24}
 \contentsline {subsection}{\numberline {4.2}Anexo B}{27}
+\contentsline {subsection}{\numberline {4.3}Anexo C}{28}

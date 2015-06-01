@@ -458,7 +458,7 @@ consiste na convolução do espetro da primeira (impulsos nos múltiplos ímpare
 Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como se pode observar, as harmónicas de maior amplitude estão espaçadas 250 Hz em relação a $f_0$ indicando que a frequência fundamental da onda quadrada é 250 Hz, como esperado.
 
 \subsubsection{Receptor \textit{Costas Loop}}
-\todo{introdução teorica}
+Com o transmissor de BPSK e NCO completos, resta desenvolver o recetor com a capacidade de desmodular o sinal BPSK. Para tal, em vez de optar-mos por circuito do tipo phase-locked loop (PLL) e detetor coerente, desenvolveu-se um desmodulador com o circuito \textit{Costas Loop}. Este é baseado em PLL, contudo tem o dobro da sensibilidade pois tem um detetor de fase para a componente em fase e para a componente em quadratura sendo estes sinais multiplicados , na malha de retroação, resultando num sinal com o dobro do erro para usar no NCO. Tem a vantagem de desmodular sinais com \textit{Doppler shift}. Para este recetor ser utilizado com sucesso, em primeiro lugar o transmissor e o NCO têm que sofrer algumas alterações.
 
 \paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
 \label{para:P3-1}
