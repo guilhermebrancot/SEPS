@@ -72,13 +72,13 @@
 \pagenumbering{arabic}
 
 \section{Introdução}
-\todo{ja alterei a intro, ajustar a numeração dos anexos na ultima frase}
-
 O presente trabalho trata-se do projeto de laboratório da cadeira: desenvolvimento de um modem de $Binary$ $Phase$ $Shift$ $Keying$ (BPSK) usando um \textit{Costas Loop}. 
 
 Teve como objectivo a familiarização com o ambiente de desenvolvimento integrado de DSP que consiste nas placas de desenvolvimento DSK TMS320C6416 e DSK TMS320C6713 da $Texas$ $Instruments$ e no software de desenvolvimento $Code Composer Studio v5.5$, e na implementação de alguns dos blocos de um modem BPSK, nomeadamente o \textit{Scrambler},  \textit{Differential coder and mapper}, \textit{Modulator} e \textit{Demodulator(Costas Loop)}.
 
-No projeto foi utilizada a placa DSK TMS320C6713. Inicialmente, na primeira parte do projeto, foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. Na segunda parte do projeto foram incluídos os dois blocos mencionados no desenvolvimento dos restantes, dimensionaram-se filtros e testou-se e analisou-se o dispositivo desenvolvido. Os projetos desenvolvidos foram incorporados nos anexos A e B, podendo analisar os mesmos com maior detalhe nos anexos.
+No projeto foi utilizada a placa DSK TMS320C6713. Inicialmente, na primeira parte do projeto, foram estudados dois projetos exemplo (sine8\_buf e loop\_intr) e, usando as ferramentas de debug, alteraram-se certos parâmetros de forma a observar os efeitos nos sinais resultantes. Também se consolidaram os conhecimentos adquiridos desenvolvendo dois projetos: um oscilador sinusoidal controlado numericamente e um transmissor BPSK. 
+
+Na segunda parte do projeto foram incluídos os dois blocos mencionados no desenvolvimento dos restantes, dimensionaram-se filtros e testou-se e analisou-se o dispositivo desenvolvido. Os projetos desenvolvidos foram incorporados nos anexos A, B e C podendo analisar os mesmos com maior detalhe.
 
 \section{Projecto}
 
@@ -134,6 +134,7 @@ O projeto de construir o \textit{NCO} seguiu os seguintes passos que estão post
 
 \paragraph{1.Oscilador de Relaxação} \hspace{0pt}
 \label{p1-1}
+
 Para construir um Oscilador de Relaxação foi criada uma rotina que, em cada ciclo, incrementa a variável de amplitude do sinal de saída de modo a que este tenha o comportamento de uma rampa. Para que esta tenha precisão máxima e amplitude máxima de 1 V foi usado o formato Q15 para representar o sinal de saída, pois este formato tem amplitude máxima de $2^{15}-1 = 32767 $.
 
 Tendo em conta as frequências da tabela \ref{tab:NCO-car}, podemos chegar aos seguintes valores de incremento com as suas frequências correspondentes.                      
@@ -210,12 +211,12 @@ Como se pode observar na figura foi possível criar um sinal aproximadamente sin
 
 \paragraph{4.Criação de variáveis para controlo da frequência e amplitude do sinal sinusoidal} \hspace{0pt}
 \label{p1-4}
+
 Foram criadas duas variáveis para que fosse possível controlar a frequência e a amplitude do sinal à saída, \textit{delta} e \textit{ampl}, respectivamente.
 
 A primeira variável foi já antes referida, nas secções \ref{p1-1} e \ref{p1-3}. Esta variável, caso alterada iria alterar a frequência da rampa, e por consequência, a frequência do sinal de saída. Como se pode observar na tabela \ref{tab:incrementos}, esta variável terá como limite máximo o valor $ 24576 $ e como limite mínimo $ 8192 $ devido às frequências mínima e máxima. Podemos também concluir que quanto maior for esta variável, maior a frequência do sinal de saída e também se o seu valor diminuir, a frequência de saída irá diminuir.
 
 A segunda variável (\textit{ampl}) foi criada com o propósito de modelar a amplitude do sinal de saída. Esta causou mudanças mais significativas no código, tal como se pode verificar:
-
 \begin{lstlisting}
 	rampa=rampa+delta;
 	index=rampa>>10;
@@ -257,7 +258,6 @@ Pode-se observar a implementação da equação explicada anteriormente, no cód
 
 O duplo \textit{shift} para a direita é equivalente a dividir por 4 e mais eficiente pois, uma vez que o DSP não possui divisor, evita uma passagem do programa pela ALU, também representando o efeito de K.
 Embora na equação \ref{delta} se some o valor do \textit{inbuf}, no programa tem que se ter em conta o efeito do inversor na placa e por isso efectua-se uma subtração.
-
 \paragraph{6.Teste do oscilador com uma onda sinusoidal à entrada} \label{para:P1-6} \hspace{0pt}
 
 Para testar o funcionamento do NCO, pôs-se na entrada do DSP um sinal sinusoidal com frequência igual a 2 Hz, como sinal modulante, em vez da onda quadrada pedida no enunciado pois seria mais fácil observar a variação de frequência do sinal de saída se a variação de amplitude do sinal de entrada fosse gradual em vez de ser constante com descontinuidades. 
@@ -282,8 +282,10 @@ Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 	deltaX=deltaX<<5;      //Converter deltax em Q15
 
 	(...)
-	Y1=-((amplitude*LUT[index])<<1)>>16;	// Y1=LUT(i) convertido para Q15
-	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	// Y2=LUT(i+1) convertido para Q15
+	Y1=-((amplitude*LUT[index])<<1)>>16;	
+	// Y1=LUT(i) convertido para Q15
+	Y2=-((amplitude*LUT[(index+1) & 31])<<1)>>16;	
+	// Y2=LUT(i+1) convertido para Q15
 	aux=(Y2-Y1)*deltaX;		
 	aux=aux<<1;				//Retirar bit de sinal extra
 	Y=Y1+(aux>>16);			//interpolacao	
@@ -411,28 +413,28 @@ Neste caso os valores do seno são os valores das amostras discutidas anteriorme
 \paragraph{5.Teste do Modulador BPSK} \hspace{0pt}
 
 Após implementar o modulador, tem-se o transmissor BPSK completo e para testá-lo, pôs-se nos dois canais do osciloscópio a onda portadora e a onda modulada (Figura \ref{port_mod}).
-\todo{trocar imagem pela q tem mais transições}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./port_mod}~\\
 	\caption{Onda portadora (verde) e onda modulada (amarelo)}
 	\label{port_mod}
-\end{figure} 
+\end{figure}
  \vspace{2 mm}
  
  Como se pode observar pela imagem e considerando a expressão (8), a onda portadora começa em oposição de fase com a onda modulada. Isto ocorre quando $d_n=-1$, o que significa que quando $d_n=1$ a onda modulada é igual à portadora. É possível observar quando $d_n$ muda de valor pois é exatamente quando a onda modulada inverte a sua fase (Figura \ref{dn_mod}). 
- 
- 
- \begin{figure}[H]
+ \begin{figure}[h]
  	\centering
- 	\includegraphics[width=0.5\textwidth]{./dn_mod}~\\
- 	\caption{Formas de onda de $d_n$ (amarelo) e $s_n$ (verde).}
+ 	\subfloat[]{\includegraphics[width=0.4\textwidth]{./dn_mod2}}
+ 	\hspace{6 mm}
+ 	\subfloat[]{\includegraphics[width=0.4\textwidth]{./dn_mod}}
+ 	\caption{Formas de onda de $d_n$ (amarelo) e $s_n$ (verde), zoom em (b)}
  	\label{dn_mod}
  \end{figure}
  Este fenómeno acontece a cada 8 ciclos pois, como já foi explicado anteriormente, a frequência da onda correspondente à fonte de bits é o bit-rate dividido por dois e uma vez que a codificação divide esta frequência por dois, ou seja, a frequência de $d_n$ é 250 Hz e por isso cabem oito ciclos da portadora num meio ciclo de $d_n$.
  \vspace{2 mm}
 
 \paragraph{6.Espectro do Sinal Modulado} \hspace{0pt}
+
 Para compreender melhor o sinal modulado, observou-se o espetro do mesmo (Figura \ref{espetro}).
 \begin{figure}[H]
 	\centering
