@@ -290,9 +290,11 @@ Sendo que $ \Delta_{x} $ refere-se aos 10 bits menos significativos ignorados na
 	Y=Y1+(aux>>16);			//interpolacao	
 \end{lstlisting}
 
-Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão,  estes bits constituem a variável $ \Delta_{x} $ que será usada na equação da interpolação.
-\todo{completei este paragrafo a explicar a aritmetica, acho...}                                            
-Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15. De seguida multiplica-se $\Delta_x$ com a subtração de dois valores em Q15, que resultam em Q15, pois não ultrapassam 1. Feito isto faz-se um shift para a esquerda para retirar o sinal duplicado e shift 16 para a direita para converter o resultado do multiplicador, variável $aux$, no formato Q31 para Q15 para se somar de seguida com a variável $y1$ também em Q15 e guardar na variável $y$ que será o sinal de interpolação, também em Q15 pois a soma não excede 1.
+Como se pode observar nas linhas de código, a interpolação é realizada com dois valores que são retirados da tabela LUT, usando como índice $\textit{index}$ \hspace{0,1 mm} e $(\textit{index}+1)$ respectivamente. Neste método com interpolação estaremos a usar 10 bits, que no método anterior (sem interpolação) foram descartados fazendo um sacrifício na precisão. Estes bits constituem a variável $ \Delta_{x} $ que será usada na equação da interpolação.
+                                           
+Para isolar a mesma foi usada uma máscara primeiro para retirar os 10 bits que interessam e depois efetuaram-se 5 \textit{shifts} para a esquerda de modo a converter para Q15. De seguida multiplica-se $\Delta_x$ com a subtração de dois valores em Q15, que resultam em Q15, pois não ultrapassam 1. 
+
+Feito isto faz-se um shift para a esquerda para retirar o sinal duplicado e shift 16 para a direita para converter o resultado do multiplicador, variável $aux$, do formato Q31 para Q15 para se somar de seguida com a variável $y1$ também em Q15 e guardar na variável $y$ que será o sinal de interpolação, também em Q15 pois a soma não excede 1.
 
 Ambos os sinais (com e sem interpolação) podem ser observados na Figura \ref{fig:interp}, embora a sua comparação não possa ser efetuada por mera observação. Para estes sinais utilizou-se $\Delta_0=20479$ correspondente a $f_0=5kHz$.              
 \begin{figure}[H]
@@ -325,7 +327,7 @@ De novo não foi possível observar nas figuras diferenças visíveis entre os d
 A conclusão que se pode tirar com estas observações é que o método de interpolação, embora apresente uma melhor precisão dos valores, as melhorias não são observáveis pelos métodos e equipamentos usados.
 
 \subsubsection{P2. Transmissor BPSK}
-
+\label{p2}
 %Introdução Teórica
 O objectivo deste projeto é criar um transmissor BPSK com recurso a três elementos principais, uma fonte de bits, um codificador diferencial e mapeador, e um modulador.
 Neste projeto foi utilizada uma frequência de amostragem $f_s=16$ kHz e uma frequência da portadora $f_0=4$ kHz.
@@ -458,7 +460,7 @@ consiste na convolução do espetro da primeira (impulsos nos múltiplos ímpare
 Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como se pode observar, as harmónicas de maior amplitude estão espaçadas 250 Hz em relação a $f_0$ indicando que a frequência fundamental da onda quadrada é 250 Hz, como esperado.
 
 \subsubsection{Receptor \textit{Costas Loop}}
-Com o transmissor de BPSK e NCO completos, resta desenvolver o recetor com a capacidade de desmodular o sinal BPSK. Para tal, em vez de optar-mos por circuito do tipo phase-locked loop (PLL) e detetor coerente, desenvolveu-se um desmodulador com o circuito \textit{Costas Loop}. Este é baseado em PLL, contudo tem o dobro da sensibilidade pois tem um detetor de fase para a componente em fase e para a componente em quadratura sendo estes sinais multiplicados , na malha de retroação, resultando num sinal com o dobro do erro para usar no NCO. Tem a vantagem de desmodular sinais com \textit{Doppler shift}. Para este recetor ser utilizado com sucesso, em primeiro lugar o transmissor e o NCO têm que sofrer algumas alterações.
+Com o transmissor de BPSK e NCO completos, resta desenvolver o recetor com a capacidade de desmodular o sinal BPSK. Para tal, em vez de optarmos por um circuito do tipo phase-locked loop (PLL) e detetor coerente, desenvolveu-se um desmodulador com o circuito \textit{Costas Loop}. Este é baseado em PLL, contudo tem o dobro da sensibilidade pois tem um detetor de fase para a componente em fase e para a componente em quadratura sendo estes sinais multiplicados , na malha de retroação, resultando num sinal com o dobro do erro para usar no NCO. Tem a vantagem de desmodular sinais com \textit{Doppler shift}. Para este recetor ser utilizado com sucesso, em primeiro lugar o transmissor e o NCO têm que sofrer algumas alterações.
 
 \paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
 \label{para:P3-1}
@@ -504,14 +506,14 @@ Nas Figuras \ref{fig:en_bn} e \ref{fig:scr} é possível visualizar a variação
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./en_bn}~\\
+	\includegraphics[width=0.6\textwidth]{./en_bn}~\\
 	\caption{Visualização da variável en(amarelo) em conjunto com bn(verde).}
 	\label{fig:en_bn}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./scr}~\\
+	\includegraphics[width=0.6\textwidth]{./scr}~\\
 	\caption{Visualização da variável scr.}
 	\label{fig:scr}
 \end{figure}
@@ -522,7 +524,6 @@ Como se pode observar na Figura \ref{fig:en_bn}, é possível criar uma variáve
 
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt} \label{para:P3-2}
 
-\todo{joao}
 Para implementar o NCO controlado pelo erro, recorreu-se ao NCO implementado na secção \ref{NCO}, com a mesma rampa, LUT e indexação da mesma como se pode ver no código seguinte.
 \begin{lstlisting}
 	rampa=rampa+delta;
@@ -710,6 +711,13 @@ Para a banda de seguimento analisou-se quando o sinal sai do sincronismo, també
 
 Ao observar o comportamento do sinal coseno nas figuras, a entrar e a sair do sincronismo, verifica-se que este tem o comportamento de um DPLL clássico.
 
+Para analisar só o braço superior, fez-se com que a entrada do filtro de \textit{loop} fosse o sinal desmodulado, ou seja, ligou-se directamente a saída do filtro de dados à entrada do filtro de \textit{loop}, evidenciado no código seguinte.
+\begin{lstlisting}
+	s1=((inbuf*coseno)<<1)>>16;
+	y1=(((23528*y1)<<1)>>16)+(((9239*s1)<<1)>>16);
+	s=y1; //braco superior
+\end{lstlisting}
+
 Antes de proceder aos resultados das bandas é necessário salientar que ao considerar um filtro de \textit{loop} de 100 Hz foi necessário calcular os coeficientes do filtro de novo. No código a seguir observa-se os dois filtros implementados e a diferença nos seus coeficientes. 
 \begin{lstlisting}
 	erro = (((32639*erro)<<1)>>16)+(((128*s)<<1)>>16); //10Hz
@@ -727,25 +735,39 @@ Assim, podem-se observar as bandas resultantes do braço superior nas tabelas se
 A tabela (a) corresponde às bandas de captura e a tabela (b) corresponde às bandas de seguimento. Como se pode ver, todas as bandas compreendem a frequência 4 kHz, oscilando sempre em relação à mesma.
 É possível também constatar que ao aumentar a amplitude da onda sinusoidal ou a frequência de corte do filtro \textit{loop} a banda de captura aumenta, principalmente com a frequência de corte do filtro. No caso da banda de seguimento só a amplitude é que aumenta a mesma.
 
-Passando ao teste do \textit{Costas Loop} inteiro, pode-se observar os resultados na tabela seguinte, desta vez considerou-se apenas uma situação. 
+Passando ao teste do \textit{Costas Loop} inteiro, é necessário contabilizar o braço inferior na entrada do filtro de \textit{loop} através da linha de código a seguir.
+\begin{lstlisting}
+	s2=((inbuf*seno)<<1)>>16;
+	y2=(((23528*y2)<<1)>>16)+(((9239*s2)<<1)>>16);
+	s=((y1*y2)<<1)>>16; //y2 e o braco inferior
+\end{lstlisting}
+
+Pode-se observar os resultados na tabela seguinte, desta vez considerou-se apenas uma situação. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.65\textwidth]{./tab_costa}~\\
 \end{figure}
 
 Comparativamente ao braço superior, ambas as bandas reduziram significativamente com a adição do braço inferior.
-%bandas de captura e seguimento Costas Loop
 
-\paragraph{6.Testes do \textit{Costas Loop} com BPSK sem zero} \hspace{0pt} \label{para:P3-6}
-%sinal modulado na entrada
-%diferenças no codigo
-%resultado do sinal desmodulado, o q melhorar e como o fazer
-%comparaçao com dn, aleatoridade devido a en
-\todo{Joao}
+\paragraph{6.Testes do \textit{Costas Loop} com BPSK sem zero nos filtros} \hspace{0pt} \label{para:P3-6}
 
-\paragraph{7.Testes do \textit{Costas Loop} com BPSK com zero} \hspace{0pt} \label{para:P3-7}
+Depois de efetuados os testes com a onda sinusoidal passou-se ao objetivo deste projeto e testou-se o \textit{Costas Loop} usando como entrada o sinal modulado do transmissor BPSK desenvolvido na secção \ref{p2}. Como tal foi necessário alterar o código para as entradas dos filtros de dados.
+\begin{lstlisting}
+	s1=((sn*coseno)<<1)>>16; //sn e o sinal modulado
+	s2=((sn*seno)<<1)>>16;
+\end{lstlisting}
+Depois de feitas as alterações recorreu-se ao osciloscópio para analisar o sinal desmodulado, s, (figura \ref{demod_sz}) para poder comparar com o sinal $d_n$. O objetivo é o sinal desmodulado ser o mais próximo possível de $d_n$ pois este foi o sinal modulado no transmissor BPSK.
+\begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.6\textwidth]{./demod_semzero}~\\
+ 	\caption{Sinal desmodulado}
+ 	\label{demod_sz}
+\end{figure}
+É possível observar alguma semelhança a $d_n$ como uma onda quadrada, mas esta contém uma distorção substancial no sinal, distorção essa que teve de ser tratada para poder analisar e testar o \textit{Costas Loop} como deve ser. Este tratamento e a razão pela qual é necessário são explicados na secção seguinte.
+\paragraph{7.Testes do \textit{Costas Loop} com BPSK com zero nos filtros} \hspace{0pt} \label{para:P3-7}
 
-O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos Data filters à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
+O sinal obtido do \textit{Costas Loop} ainda apresenta um vestígio da multiplicação no detetor de fase, sendo possível observar-se uma oscilação de maior frequência somada ao sinal de informação. Tal é devido ao aliasing existente nos filtros discretos que, dadas as réplicas espectrais somarem o ganho no limite de Nyquist, $\frac{F_s}{2} = 8kHz$, o filtro  não é seletivo que chegue a essa frequência, resultando no observado na figura acima. Posto isto, optou-se por eliminar este ruído da maneira mais simples possível: inserir um zero na função de transferência dos filtros de dados à frequência do sinal de ruído. Para tal utilizou-se a equação às diferenças do enunciado, como na alínea P.3, e determinou-se a função de transferência:
 \begin{equation}
 H(z) = \gamma\frac{1-\alpha}{1-\beta}\dfrac{1-\beta z^{-1}}{1-\alpha z^{-1}}
 \end{equation}
