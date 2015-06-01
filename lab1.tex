@@ -450,17 +450,37 @@ Na imagem acima vê-se o espectro de $d_n$ centrado em 4kHz como esperado. Como 
 
 \subsubsection{Receptor \textit{Costas Loop}}
 \todo{introdução teorica}
-%Quem vai fazer o guilherme?
-Para um bom funcionamento do bloco total é necessário um \textit{scrambler} cuja função é
-
-%Nome melhor para bloco total teorica}
 
 \paragraph{1.Introdução do \textit{Scrambler}:} \hspace{0pt}
 
 \todo{guilherme}
-Para um bom funcionamento do bloco total é necessário um \textit{scrambler} cuja função é
 
-%Nome melhor para bloco total
+Para um bom funcionamento do Costas Loop é necessário um \textit{scrambler}. O \textit{Scrambler} tem como função não permitir que á entrada se verifique uma longa sequência de '1's ou de '0's, pois estas podem causar uma dessincronização momentânea do sistema. Outra causa para dessincronizações momentâneas do sistema é o aparecimento de sequências periódicas à entrada. A utilização de um \textit{Scrambler} é o  método utilizado para diminuir o riscos de dessincronização momentânea.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./Scrambler}~\\
+	\caption{Modelo do \textit{Scrambler} a contruir.}
+	\label{fig:scrambler}
+\end{figure}
+
+A Figura \ref{fig:scrambler} representa o \textit{scrambler} a implementar, e como se pode observar é necessário criar um vector composto por oito variáveis, sendo que o tipo \texttt{char} é ideal.
+
+
+\begin{lstlisting}
+if(cont==16){
+	en=((scr & 1)^((scr & 2)>>1))^bn;
+	scr=(scr>>1)|(en<<7);
+	cn=bn^cn;
+	bn=bn^1;
+	cont=0;
+}
+cont=cont+1;
+\end{lstlisting}
+
+\todo{o guilherme tem de sem lembrar como fizemos esta trampa}
+
+
 \paragraph{2.Implementação de NCO controlado pelo erro:} \hspace{0pt}
 
 \todo{joao}
